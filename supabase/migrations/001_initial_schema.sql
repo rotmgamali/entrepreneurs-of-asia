@@ -102,6 +102,13 @@ create policy "service role full access to event_attendees"
   using (true)
   with check (true);
 
+-- ── Helper RPC functions ─────────────────────────────────────
+-- Atomically increment rsvp_count on an event
+create or replace function increment_rsvp_count(event_id uuid)
+returns void language sql security definer as $$
+  update events set rsvp_count = rsvp_count + 1 where id = event_id;
+$$;
+
 -- ── Indexes ──────────────────────────────────────────────────
 create index if not exists contacts_email_idx    on contacts(email);
 create index if not exists contacts_status_idx   on contacts(status);
