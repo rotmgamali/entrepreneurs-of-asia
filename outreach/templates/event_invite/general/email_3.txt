@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last follow-up on the CM Founders invite — not going to keep nudging.
+
+If you're ever in Chiang Mai and want to connect with the founder and nomad community here, just reply anytime. Happy to get you in.

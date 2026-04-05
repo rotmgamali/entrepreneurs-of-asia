@@ -1,0 +1,20 @@
+# EOA scripts dependencies
+# Install with: pip install -r scripts/requirements.txt
+
+# Google APIs
+google-api-python-client>=2.100.0
+google-auth>=2.23.0
+
+# Apify Maps scraping
+apify-client>=1.6.0
+
+# Web crawling (website_crawler.py)
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+urllib3>=2.0.0
+
+# Email verification (email_verifier.py)
+dnspython>=2.4.0
+
+# Config
+python-dotenv>=1.0.0

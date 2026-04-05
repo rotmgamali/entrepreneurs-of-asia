@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last follow-up on the CM Founders invite — totally understand if the timing's not right.
+
+If you're ever in CM and want to connect with other creators and founders in the area, just reply and I'll get you in.

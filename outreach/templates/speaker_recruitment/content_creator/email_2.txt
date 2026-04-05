@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Following up on the speaker invite. We have a spot open and your content on {{ business_niche }} is exactly what the room needs to hear.
+
+20 minutes, no hard sell, just share what's actually working. You get a produced clip to use however you want afterward.
+
+Interested?

@@ -1,0 +1,82 @@
+{
+  "name": "EOA – Video Clip → Social Distribution",
+  "description": "Triggered when Lincoln video pipeline outputs a new clip. Calls the EOA social posting API to distribute via Blotato to TikTok, Instagram Reels, and YouTube Shorts.",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Lincoln Pipeline – Video Clip Ready",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-video-clip-ready",
+        "responseMode": "onReceived"
+      },
+      "notes": "Trigger from Lincoln video pipeline on clip export. Payload: { clip_id, title, description, video_url, thumbnail_url, duration_seconds, event_title, speaker_name, event_date, event_id }"
+    },
+    {
+      "id": "build-content",
+      "name": "Build Video Post Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "const clip = $input.first().json;\nconst BASE_URL = 'https://entrepreneursofasia.com';\n\nconst speakerLine = clip.speaker_name ? `${clip.speaker_name} at EOA` : 'Entrepreneurs of Asia';\nconst content = `${clip.title}\\n\\n${clip.description || ''}\\n\\n🎙 ${speakerLine}\\n📍 Chiang Mai\\n\\nJoin us every Thursday 6PM → ${BASE_URL}`;\n\nreturn [{\n  json: {\n    content,\n    hashtags: ['ChiangMai', 'DigitalNomad', 'Entrepreneur', 'ChiangMaiFounders', 'EOA'],\n    mediaUrls: [clip.video_url],\n    platforms: ['instagram', 'facebook'],\n    source: 'video-clip-pipeline',\n    eventId: clip.event_id || null\n  }\n}];"
+      },
+      "notes": "Platforms: instagram (auto-routes to Reels), facebook. TikTok/YouTube require account IDs configured in blotato.ts BLOTATO_ACCOUNT_IDS once Blotato supports those platforms."
+    },
+    {
+      "id": "post-social",
+      "name": "EOA API – Schedule Video Posts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.EOA_APP_URL}}/api/social/post",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "X-Admin-Secret", "value": "={{$env.ADMIN_SECRET}}" }
+          ]
+        },
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{JSON.stringify($node['build-content'].json)}}"
+      },
+      "notes": "Video URL must be a public URL at post time. Recommended: Supabase Storage public bucket."
+    },
+    {
+      "id": "check-result",
+      "name": "Log Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "parameters": {
+        "jsCode": "const result = $input.first().json;\nif (!result.success) {\n  console.error('[video-social] Partial failure:', JSON.stringify(result));\n}\nconsole.log(`[video-social] success=${result.successCount} failed=${result.failureCount}`);\nreturn [$input.first()];"
+      }
+    }
+  ],
+  "connections": {
+    "trigger": { "main": [[{ "node": "build-content", "type": "main", "index": 0 }]] },
+    "build-content": { "main": [[{ "node": "post-social", "type": "main", "index": 0 }]] },
+    "post-social": { "main": [[{ "node": "check-result", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "requiredEnvVars": [
+    "EOA_APP_URL",
+    "ADMIN_SECRET"
+  ],
+  "setupNotes": [
+    "1. Set EOA_APP_URL in N8N to the deployed app URL.",
+    "2. Set ADMIN_SECRET in N8N — must match ADMIN_SECRET in the Next.js app.",
+    "3. Configure Lincoln pipeline to POST to this workflow's webhook URL on clip export.",
+    "   Lincoln payload must include: clip_id, title, description, video_url, event_title, speaker_name, event_id.",
+    "4. Video files must be publicly accessible at the video_url at post time.",
+    "   Recommended: upload clips to Supabase Storage (public bucket) before triggering this workflow.",
+    "5. The Next.js app handles all Blotato credentials and formatting — no Blotato config needed in N8N.",
+    "6. To add TikTok/YouTube: extend BlotatoPlatform in src/lib/blotato.ts and add account IDs to BLOTATO_ACCOUNT_IDS in src/app/api/social/post/route.ts."
+  ]
+}

@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run CM Founders — a weekly Thursday event in Chiang Mai for founders and digital nomads. We do one 20-min talk per event from someone with genuine expertise to share.
+
+Your background in {{ business_niche }} is exactly the kind of thing our room would find useful. No slides needed — just honest insight from the trenches. You also get a fully produced content clip from the talk.
+
+Want to claim a Thursday? Just reply and I'll send the details.

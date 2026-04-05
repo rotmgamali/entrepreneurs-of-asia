@@ -1,0 +1,95 @@
+{
+  "name": "EOA – Event Announce (Telegram + Facebook)",
+  "description": "Triggered when a new event is published in the EOA database. Posts formatted announcements to the Telegram channel and Facebook Group.",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Supabase – New Event",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-new-event",
+        "responseMode": "onReceived"
+      },
+      "notes": "Call this webhook from Supabase database webhook or a Supabase Edge Function when event status changes to 'published'."
+    },
+    {
+      "id": "format-message",
+      "name": "Format Announcement",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "const event = $input.first().json;\nconst date = new Date(event.event_date).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });\nconst time = new Date(event.event_date).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Bangkok' });\n\nconst telegramText = `📅 <b>${event.title}</b>\\n\\n📆 ${date} at ${time} ICT\\n📍 ${event.venue || 'Secret venue in Nimman'}\\n\\n${event.description}\\n\\n🎟 RSVP: ${event.rsvp_url}`;\n\nconst facebookText = `📅 ${event.title}\\n\\n📆 ${date} at ${time}\\n📍 ${event.venue || 'Secret venue — revealed to approved attendees'}\\n\\n${event.description}\\n\\n🎟 RSVP: ${event.rsvp_url}`;\n\nreturn [{ json: { telegramText, facebookText, rsvpUrl: event.rsvp_url } }];"
+      }
+    },
+    {
+      "id": "telegram-post",
+      "name": "Telegram – Post to Channel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{$env.TELEGRAM_CHANNEL_ID}}" },
+            { "name": "text", "value": "={{$json.telegramText}}" },
+            { "name": "parse_mode", "value": "HTML" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "delay",
+      "name": "Wait 2s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [680, 340],
+      "parameters": {
+        "unit": "seconds",
+        "amount": 2
+      }
+    },
+    {
+      "id": "facebook-post",
+      "name": "Facebook – Post to Group",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 340],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$env.FACEBOOK_GROUP_ID}}/feed",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "message", "value": "={{$node['format-message'].json.facebookText}}" },
+            { "name": "link", "value": "={{$node['format-message'].json.rsvpUrl}}" },
+            { "name": "access_token", "value": "={{$env.FACEBOOK_PAGE_ACCESS_TOKEN}}" }
+          ]
+        }
+      }
+    }
+  ],
+  "connections": {
+    "trigger": { "main": [[{ "node": "format-message", "type": "main", "index": 0 }]] },
+    "format-message": {
+      "main": [
+        [{ "node": "telegram-post", "type": "main", "index": 0 }],
+        [{ "node": "delay", "type": "main", "index": 0 }]
+      ]
+    },
+    "delay": { "main": [[{ "node": "facebook-post", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "requiredEnvVars": [
+    "TELEGRAM_BOT_TOKEN",
+    "TELEGRAM_CHANNEL_ID",
+    "FACEBOOK_GROUP_ID",
+    "FACEBOOK_PAGE_ACCESS_TOKEN"
+  ]
+}

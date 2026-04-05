@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last nudge on the speaker invite — totally understand if the timing's off.
+
+If you'd ever want to present at a future event, just reply with "later" and I'll keep you on the list for when you're ready. Hope to see you at CM Founders either way.

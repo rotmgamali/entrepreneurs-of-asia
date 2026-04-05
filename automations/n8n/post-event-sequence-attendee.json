@@ -1,0 +1,410 @@
+{
+  "name": "EOA – Post-Event Attendee Follow-up Sequence",
+  "description": "Handles the post-event email sequence for new_attendee and returning_attendee segments. Triggered by the Next.js /api/events/[id]/followup route via N8N_FOLLOWUP_NEW_ATTENDEE_URL and N8N_FOLLOWUP_RETURNING_ATTENDEE_URL (both vars can point to this webhook — segment is detected from the payload). Loops over the attendees array using splitInBatches, generates a personalised D+0 thank-you email per attendee using OpenAI gpt-4o-mini, then sends a multi-step sequence. CRM is updated via Google Sheets after D+0. Adapted from Ivybound AI email personalisation and Google Sheets status-tracking patterns.",
+  "requiredEnvVars": [
+    "EMAIL_FROM",
+    "GOOGLE_SPREADSHEET_ID",
+    "RSVP_URL_BASE",
+    "WA_GROUP_MAIN_INVITE"
+  ],
+  "credentialsNeeded": [
+    "EOA SMTP (smtp, id: 1)",
+    "EOA OpenAI (openAiApi, id: 1)",
+    "EOA Google Sheets (googleSheetsOAuth2Api, id: 1)"
+  ],
+  "n8nEnvVarSetup": "N8N_FOLLOWUP_NEW_ATTENDEE_URL and N8N_FOLLOWUP_RETURNING_ATTENDEE_URL should both point to <n8n-base>/webhook/eoa-followup-attendee",
+  "payloadFormat": {
+    "event": { "id": "string", "title": "string", "event_date": "ISO string" },
+    "sequence": { "segment": "new_attendee|returning_attendee", "label": "string", "steps": "array" },
+    "attendees": [{ "id": "string", "name": "string", "email": "string" }],
+    "triggered_at": "ISO string"
+  },
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Attendee Sequence Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-followup-attendee",
+        "responseMode": "onReceived"
+      },
+      "notes": "Set N8N_FOLLOWUP_NEW_ATTENDEE_URL and N8N_FOLLOWUP_RETURNING_ATTENDEE_URL to this URL. Payload: { event, sequence, attendees: [{id, name, email}], triggered_at }"
+    },
+    {
+      "id": "extract-attendees",
+      "name": "Extract Attendees Array",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "// Pull attendees out of the incoming payload and attach event context to each.\n// Ivybound pattern: flatten batch data before routing into splitInBatches.\nconst d = $input.first().json;\nconst event = d.event || {};\nconst sequence = d.sequence || {};\nconst attendees = d.attendees || [];\n\nreturn attendees.map(a => ({\n  json: {\n    ...a,\n    segment: sequence.segment || 'new_attendee',\n    eventId: event.id,\n    eventTitle: event.title,\n    eventDate: event.event_date,\n    rsvpUrl: (process.env.RSVP_URL_BASE || 'https://eoa.cm') + '/events/' + event.id,\n    triggeredAt: d.triggered_at,\n  }\n}));"
+      }
+    },
+    {
+      "id": "loop-attendees",
+      "name": "Loop – One Attendee at a Time",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "batchSize": 1,
+        "options": { "reset": false }
+      },
+      "notes": "Ivybound pattern: batch size 1 for per-item processing with independent error handling."
+    },
+    {
+      "id": "ai-write-d0-email",
+      "name": "AI – Write Personalised D+0 Email",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [900, 300],
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4o-mini",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You are the voice of Entrepreneurs of Asia – Chiang Mai. You write warm, concise, and human follow-up emails from the EOA team to founders who attended a Thursday evening event. Tone: genuine, encouraging, peer-to-peer — like a message from a friend who runs the community. Avoid corporate language. Keep email body under 180 words. Output ONLY a valid JSON object: { \"subject\": \"...\", \"body\": \"...\" } where body is plain HTML for an email client."
+            },
+            {
+              "role": "user",
+              "content": "=Write a personalised post-event thank-you email for:\n\n- **Name:** {{ $json.name }}\n- **Event:** {{ $json.eventTitle }}\n- **Date:** {{ $json.eventDate }}\n- **Segment:** {{ $json.segment }} ({{ $json.segment === 'new_attendee' ? 'this was their first EOA event' : 'they have attended EOA events before' }})\n\nIf new attendee:\n- Thank them warmly for coming for the first time\n- Mention you hope they connected with interesting people\n- Invite them to join the WhatsApp community group\n- Mention next event is every Thursday at 6 PM\n\nIf returning attendee:\n- Reference being great to see them again (briefly, not sycophantically)\n- Ask if there's anyone they'd like to connect with from the community\n- Mention next Thursday\n\nSign off as 'The EOA Team' with link to https://eoa.cm\n\nOutput ONLY valid JSON: { \"subject\": \"...\", \"body\": \"<html>...\" }"
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "credentials": {
+        "openAiApi": { "id": "1", "name": "EOA OpenAI" }
+      },
+      "notes": "Ivybound pattern: gpt-4o-mini generates personalised outreach per attendee. Role 'user' carries dynamic prospect data; 'system' carries persona + rules."
+    },
+    {
+      "id": "parse-d0-email",
+      "name": "Parse AI Email Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300],
+      "parameters": {
+        "jsCode": "// Ivybound pattern: safely parse JSON from AI, fallback to plain text if malformed.\nconst d = $input.first().json;\nconst raw = d.message?.content || d.choices?.[0]?.message?.content || '';\n\nlet parsed = { subject: '', body: '' };\ntry {\n  const clean = raw.replace(/^```json\\n?/, '').replace(/\\n?```$/, '').trim();\n  parsed = JSON.parse(clean);\n} catch (e) {\n  const attendee = $('Loop – One Attendee at a Time').first().json;\n  parsed.subject = `Great to see you at ${attendee.eventTitle}`;\n  parsed.body = `<p>${raw}</p>`;\n}\n\nconst attendee = $('Loop – One Attendee at a Time').first().json;\nreturn [{ json: { ...attendee, emailSubject: parsed.subject, emailBody: parsed.body } }];"
+      }
+    },
+    {
+      "id": "send-d0-email",
+      "name": "D+0 – Personalised Thank-you Email",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [1340, 300],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "={{$json.emailSubject}}",
+        "emailType": "html",
+        "message": "={{$json.emailBody}}"
+      },
+      "credentials": {
+        "smtp": { "id": "1", "name": "EOA SMTP" }
+      }
+    },
+    {
+      "id": "update-crm-d0",
+      "name": "Google Sheets CRM – Log D+0 Send",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [1560, 300],
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{$env.GOOGLE_SPREADSHEET_ID}}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Contacts",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Last_Event_Date": "={{$json.eventDate}}",
+            "Last_Event_Title": "={{$json.eventTitle}}",
+            "Follow_Up_Status": "D0_Sent",
+            "Last_Updated": "={{$now.toISO()}}"
+          },
+          "matchingColumns": ["email"],
+          "schema": [
+            { "id": "email", "displayName": "email", "required": false, "defaultMatch": true, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "Last_Event_Date", "displayName": "Last_Event_Date", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Last_Event_Title", "displayName": "Last_Event_Title", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Follow_Up_Status", "displayName": "Follow_Up_Status", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Last_Updated", "displayName": "Last_Updated", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
+          ]
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": { "id": "1", "name": "EOA Google Sheets" }
+      },
+      "continueOnFail": true,
+      "notes": "Ivybound pattern: update CRM with email send status after each message. continueOnFail=true — sequence continues even if contact row not found in sheet yet."
+    },
+    {
+      "id": "wait-d1",
+      "name": "Wait 24h — D+0 → D+1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1780, 300],
+      "parameters": { "resume": "timeInterval", "amount": 24, "unit": "hours" }
+    },
+    {
+      "id": "send-d1-email",
+      "name": "D+1 – Feedback Survey",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [2000, 300],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "Quick question about last night",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">How was last night for you?</h2><p>Hi {{$json.name}},</p><p>We'd love your honest take on <strong>{{$json.eventTitle}}</strong> — it helps us keep EOA worth coming back to.</p><p>Three quick questions (2 minutes):</p><ol><li>What was the best part of the event?</li><li>What would make future events better?</li><li>Would you bring a founder friend next time?</li></ol><p>Just reply to this email with your thoughts — we read every response.</p><p style=\"margin-top:32px\">Thanks,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": {
+        "smtp": { "id": "1", "name": "EOA SMTP" }
+      }
+    },
+    {
+      "id": "branch-segment",
+      "name": "New or Returning Attendee?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [2220, 300],
+      "parameters": {
+        "conditions": {
+          "string": [
+            { "value1": "={{$json.segment}}", "operation": "equal", "value2": "new_attendee" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "wait-d2-new",
+      "name": "Wait 24h — D+1 → D+2 (New)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2440, 180],
+      "parameters": { "resume": "timeInterval", "amount": 24, "unit": "hours" }
+    },
+    {
+      "id": "send-d2-new",
+      "name": "D+2 – Resource Pack (New Attendee)",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [2660, 180],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "=Resources from {{$json.eventTitle}}",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">Resources from Thursday</h2><p>Hi {{$json.name}},</p><p>A few things worth bookmarking from <strong>{{$json.eventTitle}}</strong>:</p><ul><li><strong>EOA Website</strong> — <a href=\"https://eoa.cm\">eoa.cm</a> (event schedule, member directory)</li><li><strong>WhatsApp Community</strong> — <a href=\"{{$env.WA_GROUP_MAIN_INVITE}}\">Join EOA CM</a> — where the conversation continues between events</li><li><strong>Speaker recordings</strong> — shared in the WhatsApp group within 48h of each event</li></ul><p>If there's a specific resource or connection from Thursday night you'd like help tracking down, just reply to this email.</p><p style=\"margin-top:32px\">See you next Thursday,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d5-new",
+      "name": "Wait 72h — D+2 → D+5 (New)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2880, 180],
+      "parameters": { "resume": "timeInterval", "amount": 72, "unit": "hours" }
+    },
+    {
+      "id": "send-d5-new",
+      "name": "D+5 – Next Event Early Access (New)",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [3100, 180],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "You're on the early-access list for next Thursday",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">Next Thursday — spots are limited</h2><p>Hi {{$json.name}},</p><p>As an approved EOA member you get early access to RSVP before we open the waitlist. Capacity is intentionally kept small so every event stays high-quality.</p><p><a href=\"{{$json.rsvpUrl}}\" style=\"background:#1a1a2e;color:white;padding:12px 24px;text-decoration:none;border-radius:4px;display:inline-block;font-size:16px\">RSVP for Next Thursday →</a></p><p>Venue is revealed to confirmed attendees only — you know how it works.</p><p style=\"margin-top:32px\">See you then,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "update-crm-new-done",
+      "name": "Google Sheets CRM – New Attendee Sequence Done",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [3320, 180],
+      "parameters": {
+        "operation": "update",
+        "documentId": { "__rl": true, "value": "={{$env.GOOGLE_SPREADSHEET_ID}}", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Contacts", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Follow_Up_Status": "Sequence_Complete_new_attendee",
+            "Last_Updated": "={{$now.toISO()}}"
+          },
+          "matchingColumns": ["email"],
+          "schema": [
+            { "id": "email", "displayName": "email", "required": false, "defaultMatch": true, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "Follow_Up_Status", "displayName": "Follow_Up_Status", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Last_Updated", "displayName": "Last_Updated", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
+          ]
+        },
+        "options": {}
+      },
+      "credentials": { "googleSheetsOAuth2Api": { "id": "1", "name": "EOA Google Sheets" } },
+      "continueOnFail": true
+    },
+    {
+      "id": "wait-d3-returning",
+      "name": "Wait 48h — D+1 → D+3 (Returning)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2440, 420],
+      "parameters": { "resume": "timeInterval", "amount": 48, "unit": "hours" }
+    },
+    {
+      "id": "send-d3-returning",
+      "name": "D+3 – Referral + Next Event (Returning)",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [2660, 420],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "Next Thursday — bring someone",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">Is there someone you should bring?</h2><p>Hi {{$json.name}},</p><p>You've been to enough EOA events to know what the room feels like. Is there a founder in your network who should be in it?</p><p>EOA grows entirely through member referrals — no advertising, no paid promotion. If you know someone worth bringing, send them this link:</p><p><a href=\"{{$json.rsvpUrl}}\" style=\"background:#1a1a2e;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;display:inline-block\">Invite a Founder →</a></p><p>And you're on early access for next Thursday as always.</p><p style=\"margin-top:32px\">See you soon,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d7-returning",
+      "name": "Wait 96h — D+3 → D+7 (Returning)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2880, 420],
+      "parameters": { "resume": "timeInterval", "amount": 96, "unit": "hours" }
+    },
+    {
+      "id": "send-d7-returning",
+      "name": "D+7 – Monthly Digest Opt-in (Returning)",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [3100, 420],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "Want the monthly EOA digest?",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">The EOA Monthly Digest</h2><p>Hi {{$json.name}},</p><p>We're putting together a monthly digest for regular EOA members — curated wins, community updates, and early access to upcoming events.</p><p>Short, practical, once a month. Would you like to receive it?</p><p><a href=\"https://eoa.cm/digest-optin?email={{$json.email}}\" style=\"background:#1a1a2e;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;display:inline-block\">Yes, add me to the digest →</a></p><p>No pressure — Thursday events remain the main thing.</p><p style=\"margin-top:32px\">Thanks for being part of EOA,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "update-crm-returning-done",
+      "name": "Google Sheets CRM – Returning Attendee Sequence Done",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [3320, 420],
+      "parameters": {
+        "operation": "update",
+        "documentId": { "__rl": true, "value": "={{$env.GOOGLE_SPREADSHEET_ID}}", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Contacts", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Follow_Up_Status": "Sequence_Complete_returning_attendee",
+            "Last_Updated": "={{$now.toISO()}}"
+          },
+          "matchingColumns": ["email"],
+          "schema": [
+            { "id": "email", "displayName": "email", "required": false, "defaultMatch": true, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "Follow_Up_Status", "displayName": "Follow_Up_Status", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Last_Updated", "displayName": "Last_Updated", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
+          ]
+        },
+        "options": {}
+      },
+      "credentials": { "googleSheetsOAuth2Api": { "id": "1", "name": "EOA Google Sheets" } },
+      "continueOnFail": true
+    }
+  ],
+  "connections": {
+    "Attendee Sequence Webhook": {
+      "main": [[{ "node": "Extract Attendees Array", "type": "main", "index": 0 }]]
+    },
+    "Extract Attendees Array": {
+      "main": [[{ "node": "Loop – One Attendee at a Time", "type": "main", "index": 0 }]]
+    },
+    "Loop – One Attendee at a Time": {
+      "main": [[{ "node": "AI – Write Personalised D+0 Email", "type": "main", "index": 0 }]]
+    },
+    "AI – Write Personalised D+0 Email": {
+      "main": [[{ "node": "Parse AI Email Output", "type": "main", "index": 0 }]]
+    },
+    "Parse AI Email Output": {
+      "main": [[{ "node": "D+0 – Personalised Thank-you Email", "type": "main", "index": 0 }]]
+    },
+    "D+0 – Personalised Thank-you Email": {
+      "main": [[{ "node": "Google Sheets CRM – Log D+0 Send", "type": "main", "index": 0 }]]
+    },
+    "Google Sheets CRM – Log D+0 Send": {
+      "main": [[{ "node": "Wait 24h — D+0 → D+1", "type": "main", "index": 0 }]]
+    },
+    "Wait 24h — D+0 → D+1": {
+      "main": [[{ "node": "D+1 – Feedback Survey", "type": "main", "index": 0 }]]
+    },
+    "D+1 – Feedback Survey": {
+      "main": [[{ "node": "New or Returning Attendee?", "type": "main", "index": 0 }]]
+    },
+    "New or Returning Attendee?": {
+      "main": [
+        [{ "node": "Wait 24h — D+1 → D+2 (New)", "type": "main", "index": 0 }],
+        [{ "node": "Wait 48h — D+1 → D+3 (Returning)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Wait 24h — D+1 → D+2 (New)": {
+      "main": [[{ "node": "D+2 – Resource Pack (New Attendee)", "type": "main", "index": 0 }]]
+    },
+    "D+2 – Resource Pack (New Attendee)": {
+      "main": [[{ "node": "Wait 72h — D+2 → D+5 (New)", "type": "main", "index": 0 }]]
+    },
+    "Wait 72h — D+2 → D+5 (New)": {
+      "main": [[{ "node": "D+5 – Next Event Early Access (New)", "type": "main", "index": 0 }]]
+    },
+    "D+5 – Next Event Early Access (New)": {
+      "main": [[{ "node": "Google Sheets CRM – New Attendee Sequence Done", "type": "main", "index": 0 }]]
+    },
+    "Google Sheets CRM – New Attendee Sequence Done": {
+      "main": [[{ "node": "Loop – One Attendee at a Time", "type": "main", "index": 0 }]]
+    },
+    "Wait 48h — D+1 → D+3 (Returning)": {
+      "main": [[{ "node": "D+3 – Referral + Next Event (Returning)", "type": "main", "index": 0 }]]
+    },
+    "D+3 – Referral + Next Event (Returning)": {
+      "main": [[{ "node": "Wait 96h — D+3 → D+7 (Returning)", "type": "main", "index": 0 }]]
+    },
+    "Wait 96h — D+3 → D+7 (Returning)": {
+      "main": [[{ "node": "D+7 – Monthly Digest Opt-in (Returning)", "type": "main", "index": 0 }]]
+    },
+    "D+7 – Monthly Digest Opt-in (Returning)": {
+      "main": [[{ "node": "Google Sheets CRM – Returning Attendee Sequence Done", "type": "main", "index": 0 }]]
+    },
+    "Google Sheets CRM – Returning Attendee Sequence Done": {
+      "main": [[{ "node": "Loop – One Attendee at a Time", "type": "main", "index": 0 }]]
+    }
+  }
+}

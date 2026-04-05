@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Final follow-up on the CM Founders sponsorship. Totally understand if it's not the right fit right now.
+
+If the timing or budget changes, feel free to reach back out — we run year-round and always have room for partners who want direct access to Chiang Mai's founder community.
+
+Hope to have {{ company_name }} involved at some point.

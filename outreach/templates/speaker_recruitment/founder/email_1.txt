@@ -1,0 +1,11 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run a weekly founders event in Chiang Mai — CM Founders, every Thursday. About 40 vetted founders per event, 20-min talk format. The audience is the kind that actually implements what they hear.
+
+Your work in {{ business_niche }} is exactly what the room would want to hear about. No slides required — just honest insight from someone operating at your level.
+
+We also produce a short-form content clip of your talk, fully edited, ready to post.
+
+Want to claim a Thursday in the next few weeks? Just reply and I'll send over the details.

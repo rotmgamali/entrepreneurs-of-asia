@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Following up on the CM Founders invite. Last week's talk was from a technical founder on building and selling a SaaS product as a solo dev — acquisition to exit in 18 months. The room had a lot of questions.
+
+Worth coming once if you're in CM: [RSVP_URL]

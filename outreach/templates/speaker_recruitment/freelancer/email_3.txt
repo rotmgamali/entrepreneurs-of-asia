@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last follow-up on the speaker invite. Not going to keep pushing — just reply "later" if you'd ever want to present and I'll keep you on the list.
+
+Hope to see you at CM Founders either way.

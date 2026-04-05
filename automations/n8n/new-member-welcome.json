@@ -1,0 +1,135 @@
+{
+  "name": "EOA – New Member Welcome (Telegram)",
+  "description": "Triggered by Telegram webhook when a new member joins the EOA group. Sends a welcome DM, restricts the member for 24h, and upserts the contact into the CRM.",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Telegram – New Member Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "telegram-new-member",
+        "responseMode": "onReceived"
+      },
+      "notes": "Set this as your Telegram bot webhook. Only processes 'my_chat_member' or 'chat_member' updates where status changes to 'member'."
+    },
+    {
+      "id": "filter-new-member",
+      "name": "Filter – New Member Only",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "leftValue": "={{$json.body.chat_member.new_chat_member.status}}",
+              "rightValue": "member",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "extract-user",
+      "name": "Extract User Info",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [680, 220],
+      "parameters": {
+        "jsCode": "const update = $input.first().json.body;\nconst user = update.chat_member?.new_chat_member?.user || update.message?.new_chat_member?.[0];\nconst chat = update.chat_member?.chat || update.message?.chat;\n\nreturn [{\n  json: {\n    userId: user?.id,\n    firstName: user?.first_name || '',\n    lastName: user?.last_name || '',\n    username: user?.username || null,\n    chatId: chat?.id,\n    joinedAt: new Date().toISOString()\n  }\n}];"
+      }
+    },
+    {
+      "id": "restrict-member",
+      "name": "Telegram – Restrict for 24h",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 160],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/restrictChatMember",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{$json.chatId}}" },
+            { "name": "user_id", "value": "={{$json.userId}}" },
+            { "name": "until_date", "value": "={{Math.floor(Date.now() / 1000) + 86400}}" },
+            {
+              "name": "permissions",
+              "value": "{\"can_send_messages\":false,\"can_send_media_messages\":false,\"can_send_polls\":false,\"can_send_other_messages\":false}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "welcome-dm",
+      "name": "Telegram – Send Welcome DM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "continueOnFail": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{$json.userId}}" },
+            {
+              "name": "text",
+              "value": "Welcome to EOA Chiang Mai! 👋\n\nWe're a curated community of founders and digital nomads in Chiang Mai.\n\n📅 Events every Thursday @ 6 PM\n🌐 Website: https://eoa.cm\n\nIntroduce yourself — tell us what you're building!\n\nYou'll be able to post in the group after 24 hours (spam prevention). Thanks for understanding!"
+            },
+            { "name": "parse_mode", "value": "HTML" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "crm-upsert",
+      "name": "N8N – CRM Upsert via Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 440],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.N8N_WEBHOOK_URL}}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "source", "value": "telegram_group" },
+            { "name": "first_name", "value": "={{$node['extract-user'].json.firstName}}" },
+            { "name": "last_name", "value": "={{$node['extract-user'].json.lastName}}" },
+            { "name": "telegram_username", "value": "={{$node['extract-user'].json.username}}" },
+            { "name": "telegram_id", "value": "={{$node['extract-user'].json.userId}}" },
+            { "name": "tags", "value": "telegram_member,eoa_cm" },
+            { "name": "joined_at", "value": "={{$node['extract-user'].json.joinedAt}}" }
+          ]
+        }
+      }
+    }
+  ],
+  "connections": {
+    "trigger": { "main": [[{ "node": "filter-new-member", "type": "main", "index": 0 }]] },
+    "filter-new-member": { "main": [[{ "node": "extract-user", "type": "main", "index": 0 }]] },
+    "extract-user": {
+      "main": [
+        [{ "node": "restrict-member", "type": "main", "index": 0 }],
+        [{ "node": "welcome-dm", "type": "main", "index": 0 }],
+        [{ "node": "crm-upsert", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "requiredEnvVars": [
+    "TELEGRAM_BOT_TOKEN",
+    "TELEGRAM_GROUP_ID",
+    "N8N_WEBHOOK_URL"
+  ]
+}

@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run CM Founders — a weekly Thursday event in Chiang Mai for founders and freelancers building independently. About 40 people per event. One 20-min talk from someone with real numbers to share, then open networking.
+
+It's not a networking event full of business cards — it's a working session with people actually doing things. Free to attend, invite-only.
+
+Grab a spot here if you're in CM: [RSVP_URL]

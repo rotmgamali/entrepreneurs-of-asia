@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run CM Founders — a weekly event in Chiang Mai for founders, creators, and people building audience-driven businesses. Every Thursday in Nimman, about 40 people. One focused talk, then real networking.
+
+We get a lot of content creators in the room who are also building businesses around their audience — figured it might be your kind of crowd.
+
+It's free and invite-only: [RSVP_URL]

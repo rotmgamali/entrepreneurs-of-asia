@@ -1,0 +1,167 @@
+{
+  "name": "EOA – Post-Event Follow-up Dispatch (N8N-native fallback)",
+  "description": "N8N-native alternative to the Next.js /api/events/[id]/followup route. Accepts a simple { eventId } payload, fetches attendees from Supabase, segments them using the same logic as the Next.js route, and fires per-segment sequence webhooks with the canonical payload format. Use this for: manual triggers from N8N UI, testing sequences without the web app running, or scheduled post-event dispatch. The Next.js route is the primary trigger; this workflow is a fallback. Dispatch webhook: POST /eoa-post-event-dispatch with { eventId }.",
+  "requiredEnvVars": [
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "N8N_FOLLOWUP_NEW_ATTENDEE_URL",
+    "N8N_FOLLOWUP_RETURNING_ATTENDEE_URL",
+    "N8N_FOLLOWUP_SPEAKER_URL",
+    "N8N_FOLLOWUP_SPONSOR_URL"
+  ],
+  "notes": "Primary trigger is Next.js /api/events/[id]/followup (POST with x-admin-secret header). Use this workflow for manual/fallback dispatch only.",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Dispatch Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-post-event-dispatch",
+        "responseMode": "onReceived"
+      },
+      "notes": "Manual fallback trigger. Expects: { eventId: 'uuid' }. Primary trigger is the Next.js /api/events/[id]/followup route."
+    },
+    {
+      "id": "fetch-event",
+      "name": "Supabase – Fetch Event",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.NEXT_PUBLIC_SUPABASE_URL}}/rest/v1/events",
+        "sendQueryParameters": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "id", "value": "=eq.{{$json.eventId}}" },
+            { "name": "select", "value": "id,title,event_date,venue,speakers" },
+            { "name": "limit", "value": "1" }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Accept", "value": "application/json" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "fetch-attendees",
+      "name": "Supabase – Fetch Attended RSVPs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.NEXT_PUBLIC_SUPABASE_URL}}/rest/v1/rsvps",
+        "sendQueryParameters": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "event_id", "value": "=eq.{{$('Dispatch Webhook').first().json.eventId}}" },
+            { "name": "status", "value": "eq.attended" },
+            { "name": "select", "value": "id,contact_id,event_id" }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Accept", "value": "application/json" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "fetch-contacts",
+      "name": "Supabase – Fetch Contact Details",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.NEXT_PUBLIC_SUPABASE_URL}}/rest/v1/contacts",
+        "sendQueryParameters": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "select", "value": "id,name,email,type" }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Accept", "value": "application/json" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "segment-and-build-payloads",
+      "name": "Segment Attendees & Build Payloads",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 300],
+      "parameters": {
+        "jsCode": "// Replicate the segmentation logic from Next.js /api/events/[id]/followup\n// Output: 4 items, one per segment, each with { segment, webhookUrl, payload }\nconst eventArr = $('Supabase – Fetch Event').all().flatMap(i => Array.isArray(i.json) ? i.json : [i.json]);\nconst event = eventArr[0] || {};\nconst attendeeRsvps = $('Supabase – Fetch Attended RSVPs').all().flatMap(i => Array.isArray(i.json) ? i.json : [i.json]);\nconst contacts = $('Supabase – Fetch Contact Details').all().flatMap(i => Array.isArray(i.json) ? i.json : [i.json]);\n\nconst contactMap = new Map(contacts.map(c => [c.id, c]));\n\n// Segment rules matching Next.js route\nconst speakerTypes = new Set(['speaker']);\nconst sponsorTypes = new Set(['sponsor', 'partner']);\n\nconst allAttendedContactIds = attendeeRsvps.map(r => r.contact_id);\nconst eventId = event.id || $('Dispatch Webhook').first().json.eventId;\n\nconst groups = { new_attendee: [], returning_attendee: [], speaker: [], sponsor: [] };\n\nfor (const rsvp of attendeeRsvps) {\n  const contact = contactMap.get(rsvp.contact_id);\n  if (!contact || !contact.email) continue;\n\n  let segment;\n  if (sponsorTypes.has(contact.type)) segment = 'sponsor';\n  else if (speakerTypes.has(contact.type)) segment = 'speaker';\n  else segment = 'new_attendee'; // Supabase fallback: assume new (no attendance history here)\n\n  groups[segment].push({ id: contact.id, name: contact.name, email: contact.email });\n}\n\nconst segmentToEnvUrl = {\n  new_attendee: $env.N8N_FOLLOWUP_NEW_ATTENDEE_URL,\n  returning_attendee: $env.N8N_FOLLOWUP_RETURNING_ATTENDEE_URL,\n  speaker: $env.N8N_FOLLOWUP_SPEAKER_URL,\n  sponsor: $env.N8N_FOLLOWUP_SPONSOR_URL,\n};\n\nconst segmentLabels = {\n  new_attendee: 'New Attendee',\n  returning_attendee: 'Returning Attendee',\n  speaker: 'Speaker',\n  sponsor: 'Sponsor / Partner',\n};\n\n// Build one output item per segment that has attendees\nconst outputs = [];\nfor (const [segment, attendees] of Object.entries(groups)) {\n  if (attendees.length === 0) continue;\n  const webhookUrl = segmentToEnvUrl[segment];\n  if (!webhookUrl) continue;\n  outputs.push({\n    json: {\n      webhookUrl,\n      payload: {\n        event: { id: event.id, title: event.title, event_date: event.event_date },\n        sequence: { segment, label: segmentLabels[segment], steps: [] },\n        attendees,\n        triggered_at: new Date().toISOString(),\n      }\n    }\n  });\n}\n\nreturn outputs;"
+      }
+    },
+    {
+      "id": "loop-segments",
+      "name": "Loop – One Segment at a Time",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [1340, 300],
+      "parameters": {
+        "batchSize": 1,
+        "options": { "reset": false }
+      }
+    },
+    {
+      "id": "fire-sequence",
+      "name": "Fire Segment Sequence Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1560, 300],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$json.webhookUrl}}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={{JSON.stringify($json.payload)}}",
+        "options": { "response": { "response": { "responseFormat": "text" } } }
+      },
+      "continueOnFail": true
+    }
+  ],
+  "connections": {
+    "Dispatch Webhook": {
+      "main": [[{ "node": "Supabase – Fetch Event", "type": "main", "index": 0 }]]
+    },
+    "Supabase – Fetch Event": {
+      "main": [[{ "node": "Supabase – Fetch Attended RSVPs", "type": "main", "index": 0 }]]
+    },
+    "Supabase – Fetch Attended RSVPs": {
+      "main": [[{ "node": "Supabase – Fetch Contact Details", "type": "main", "index": 0 }]]
+    },
+    "Supabase – Fetch Contact Details": {
+      "main": [[{ "node": "Segment Attendees & Build Payloads", "type": "main", "index": 0 }]]
+    },
+    "Segment Attendees & Build Payloads": {
+      "main": [[{ "node": "Loop – One Segment at a Time", "type": "main", "index": 0 }]]
+    },
+    "Loop – One Segment at a Time": {
+      "main": [[{ "node": "Fire Segment Sequence Webhook", "type": "main", "index": 0 }]]
+    },
+    "Fire Segment Sequence Webhook": {
+      "main": [[{ "node": "Loop – One Segment at a Time", "type": "main", "index": 0 }]]
+    }
+  }
+}

@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last nudge on the CM Founders invite — totally understand if timing's off or you're not in Chiang Mai right now.
+
+If you want in whenever you're back in CM, just reply and I'll hold a spot. The community tends to stick around once people show up once.
+
+Either way, good luck with what you're building.

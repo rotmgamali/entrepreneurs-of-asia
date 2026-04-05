@@ -1,0 +1,212 @@
+{
+  "name": "EOA – DM Campaign Follow-up Scheduler",
+  "description": "Runs on a daily schedule. Queries Supabase for leads overdue for follow-up (day 3 and day 7) and either posts follow-up DMs via ManyChat (FB/IG) or flags LinkedIn leads for manual action. Updates lead status in Supabase after each action.",
+  "requiredEnvVars": [
+    "SUPABASE_URL",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "MANYCHAT_API_KEY",
+    "RSVP_URL",
+    "N8N_WEBHOOK_INTERNAL_URL"
+  ],
+  "nodes": [
+    {
+      "id": "schedule",
+      "name": "Daily Trigger – 9 AM ICT",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "hours", "minutesInterval": 24 }]
+        },
+        "triggerAtHour": 9,
+        "triggerAtMinute": 0,
+        "timezone": "Asia/Bangkok"
+      }
+    },
+    {
+      "id": "fetch-followups",
+      "name": "Supabase – Get Leads Due for Follow-up",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.SUPABASE_URL}}/rest/v1/leads_due_for_followup",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey",        "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Accept",        "value": "application/json" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "check-any-leads",
+      "name": "Any leads to follow up?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "leftValue": "={{$json.length}}",
+              "rightValue": 0,
+              "operator": { "type": "number", "operation": "gt" }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "split-by-platform",
+      "name": "Split by Platform",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [900, 220],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      }
+    },
+    {
+      "id": "route-platform",
+      "name": "Route: FB/IG vs LinkedIn",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [1120, 220],
+      "parameters": {
+        "mode": "expression",
+        "output": "={{['facebook','instagram'].includes($json.platform) ? 0 : 1}}",
+        "options": {}
+      }
+    },
+    {
+      "id": "build-followup-message",
+      "name": "Build Follow-up Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 160],
+      "parameters": {
+        "jsCode": "const lead = $input.first().json;\nconst firstName = lead.name.split(' ')[0];\nconst rsvpUrl = $env.RSVP_URL || 'https://eoa.cm/rsvp';\n\nlet message;\nif (lead.next_action === 'follow_up_1') {\n  message = `Hey ${firstName} — just following up on the event invite. We had a great room last Thursday.\\n\\nIf you're in CM and want in, grab a spot here: ${rsvpUrl}\\n\\nOr I can just add you to the WhatsApp group directly.`;\n} else {\n  message = `Hey ${firstName} — last nudge on this! If the timing works, we'd love to have you at CM Founders on Thursday.\\n\\nGrab a spot: ${rsvpUrl}\\n\\nIf not, no worries — happy to stay in touch regardless.`;\n}\n\nreturn [{ json: { ...lead, followUpMessage: message, firstName } }];"
+      }
+    },
+    {
+      "id": "manychat-send",
+      "name": "ManyChat – Send Follow-up DM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1560, 160],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.manychat.com/fb/sending/sendContent",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{$env.MANYCHAT_API_KEY}}" },
+            { "name": "Content-Type",  "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"subscriber_id\": \"{{$json.profile_url}}\",\n  \"data\": {\n    \"version\": \"v2\",\n    \"content\": {\n      \"messages\": [\n        { \"type\": \"text\", \"text\": \"{{$json.followUpMessage}}\" }\n      ]\n    }\n  }\n}",
+        "continueOnFail": true,
+        "notes": "ManyChat subscriber_id must be set on the lead record. For Instagram, use the IG-specific send endpoint."
+      }
+    },
+    {
+      "id": "linkedin-flag",
+      "name": "Flag LinkedIn Lead for Manual Follow-up",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1340, 300],
+      "parameters": {
+        "jsCode": "// LinkedIn does not allow API-based DMs — flag for manual action\nconst lead = $input.first().json;\nreturn [{ json: { ...lead, manualActionRequired: true, reason: 'LinkedIn requires manual DM — open profile and send follow-up template from community-acquisition-campaign.json' } }];"
+      }
+    },
+    {
+      "id": "update-status-fb",
+      "name": "Supabase – Update Lead Status (FB/IG)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1780, 160],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL}}/rest/v1/leads?id=eq.{{$json.id}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey",        "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Content-Type",  "value": "application/json" },
+            { "name": "Prefer",        "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"outreach_status\": \"{{$json.next_action === 'follow_up_1' ? 'follow_up_1_sent' : ($json.next_action === 'follow_up_2' ? 'follow_up_2_sent' : $json.outreach_status)}}\",\n  \"follow_up_1_at\": \"{{$json.next_action === 'follow_up_1' ? new Date().toISOString() : $json.follow_up_1_at}}\",\n  \"follow_up_2_at\": \"{{$json.next_action === 'follow_up_2' ? new Date().toISOString() : null}}\"\n}"
+      }
+    },
+    {
+      "id": "update-status-linkedin",
+      "name": "Supabase – Update Lead Status (LinkedIn)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1560, 300],
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{$env.SUPABASE_URL}}/rest/v1/leads?id=eq.{{$json.id}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey",        "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Content-Type",  "value": "application/json" },
+            { "name": "Prefer",        "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"notes\": \"{{$json.notes ? $json.notes + ' | ' : ''}}Manual LinkedIn follow-up required ({{$json.next_action}}) — flagged {{new Date().toISOString()}}\"\n}"
+      }
+    },
+    {
+      "id": "no-op",
+      "name": "No leads due — exit",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [900, 380],
+      "parameters": {}
+    }
+  ],
+  "connections": {
+    "schedule":            { "main": [[{ "node": "fetch-followups",      "type": "main", "index": 0 }]] },
+    "fetch-followups":     { "main": [[{ "node": "check-any-leads",      "type": "main", "index": 0 }]] },
+    "check-any-leads": {
+      "main": [
+        [{ "node": "split-by-platform", "type": "main", "index": 0 }],
+        [{ "node": "no-op",             "type": "main", "index": 0 }]
+      ]
+    },
+    "split-by-platform":   { "main": [[{ "node": "route-platform",       "type": "main", "index": 0 }]] },
+    "route-platform": {
+      "main": [
+        [{ "node": "build-followup-message", "type": "main", "index": 0 }],
+        [{ "node": "linkedin-flag",          "type": "main", "index": 0 }]
+      ]
+    },
+    "build-followup-message": { "main": [[{ "node": "manychat-send",          "type": "main", "index": 0 }]] },
+    "manychat-send":           { "main": [[{ "node": "update-status-fb",       "type": "main", "index": 0 }]] },
+    "linkedin-flag":           { "main": [[{ "node": "update-status-linkedin", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "notes": {
+    "manychat": "ManyChat handles FB Messenger and Instagram DMs. The subscriber_id on each lead record must be the ManyChat subscriber ID (obtainable via ManyChat API search by name/email after the lead opt-in).",
+    "linkedin": "LinkedIn blocks API-based messaging. LinkedIn leads flagged here must be actioned manually each morning — open the leads_due_for_followup view and send follow-up templates from outreach/community-acquisition-campaign.json.",
+    "cold-marking": "Add a separate daily workflow or cron to mark leads as 'cold' after follow_up_2_sent + 4 days with no reply.",
+    "rsvp-conversion": "When a lead submits the RSVP form, the /api/rsvp endpoint should cross-reference the leads table by name+platform and update outreach_status to 'rsvp_submitted' and set contact_id."
+  }
+}

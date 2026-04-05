@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
-import { supabaseAdmin, type Partner } from "@/lib/supabase";
+import { SHEET, getRows } from "@/lib/sheets";
+import type { Partner } from "@/lib/supabase";
 import Link from "next/link";
 
 const TYPE_LABELS: Record<string, string> = {
@@ -24,23 +25,40 @@ function daysUntilRenewal(renewalDate: string | null): number | null {
 }
 
 export default async function RelationshipsPage() {
-  const { data: partners, error } = await supabaseAdmin
-    .from("partners")
-    .select("*")
-    .order("updated_at", { ascending: false });
+  let partners: Partner[] = [];
+  let loadError: string | null = null;
 
-  if (error) {
+  try {
+    const rows = await getRows(SHEET.partners);
+    partners = rows.map(({ row }) => ({
+      id: row.id,
+      name: row.name,
+      type: row.type as Partner["type"],
+      company: row.company || null,
+      email: row.email || null,
+      phone: row.phone || null,
+      status: row.status as Partner["status"],
+      notes: row.notes || null,
+      renewal_date: row.renewal_date || null,
+      created_at: row.created_at,
+      updated_at: row.updated_at,
+    }));
+    partners.sort((a, b) => (b.updated_at ?? "").localeCompare(a.updated_at ?? ""));
+  } catch (err) {
+    loadError = String(err);
+  }
+
+  if (loadError) {
     return (
       <div className="p-8 text-red-400">
-        Failed to load partners: {error.message}
+        Failed to load partners: {loadError}
       </div>
     );
   }
 
-  const byType = (type: string) =>
-    (partners ?? []).filter((p: Partner) => p.type === type);
+  const byType = (type: string) => partners.filter((p) => p.type === type);
 
-  const renewalAlerts = (partners ?? []).filter((p: Partner) => {
+  const renewalAlerts = partners.filter((p) => {
     const days = daysUntilRenewal(p.renewal_date);
     return days !== null && days <= 30 && days >= 0;
   });
@@ -64,7 +82,7 @@ export default async function RelationshipsPage() {
         <div className="mb-6 p-4 bg-yellow-400/10 border border-yellow-400/30 rounded-xl">
           <p className="text-yellow-400 font-semibold mb-2">Renewal Alerts</p>
           <ul className="space-y-1">
-            {renewalAlerts.map((p: Partner) => {
+            {renewalAlerts.map((p) => {
               const days = daysUntilRenewal(p.renewal_date)!;
               return (
                 <li key={p.id} className="text-sm text-yellow-300">
@@ -93,7 +111,7 @@ export default async function RelationshipsPage() {
                 <p className="text-sm text-gray-600 italic">No {TYPE_LABELS[type].toLowerCase()}s yet.</p>
               ) : (
                 <ul className="space-y-2">
-                  {group.map((p: Partner) => (
+                  {group.map((p) => (
                     <li key={p.id}>
                       <Link
                         href={`/admin/relationships/${p.id}`}

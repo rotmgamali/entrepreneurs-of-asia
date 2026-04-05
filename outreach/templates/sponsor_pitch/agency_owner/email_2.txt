@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Following up on the CM Founders sponsorship note. We had another full room last Thursday — founders running ecom brands, agencies, SaaS products, and service businesses. Exactly the kind of people who buy and recommend products like yours.
+
+Happy to share a recent attendee breakdown if that would be useful. Or if sponsorship isn't the right angle, I'm open to other ideas.
+
+Worth a quick chat?

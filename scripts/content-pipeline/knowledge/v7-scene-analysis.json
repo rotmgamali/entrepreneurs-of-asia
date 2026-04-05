@@ -1,0 +1,2112 @@
+[
+  {
+    "sceneNumber": 1,
+    "startTime": 0,
+    "endTime": 4.5,
+    "VISUAL": {
+      "shotType": "wide",
+      "cameraMovement": "static",
+      "cameraSpeed": "normal",
+      "subject": "demons and deities battling",
+      "action": "A cosmic battle scene split between fiery red (demons) and icy blue (deities) sides, with a central glowing portal. Figures below are worshipping/observing. Title text appears.",
+      "background": "A swirling galaxy with stars and nebulae, split into warm and cool tones.",
+      "foreground": "Silhouetted figures on platforms below the main battle.",
+      "vfx": [
+        "particles",
+        "fire",
+        "glow",
+        "energy waves",
+        "magic"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 8,
+        "colorTemp": "warm / cool",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#1a0a4e",
+          "#ff6600",
+          "#0a0a1a"
+        ],
+        "accent": [
+          "#00ffff",
+          "#ff0000"
+        ],
+        "mood": "epic / saturated / dark"
+      },
+      "composition": "symmetrical / centered",
+      "depthOfField": "deep",
+      "visualComplexity": 9,
+      "motionIntensity": 8,
+      "hasText": true,
+      "textContent": "DEMONS & DEITIES",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 7,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "swell",
+      "sfxPresent": [
+        "whoosh",
+        "deep rumble"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 0,
+          "type": "deep rumble",
+          "description": "heavy bass impact"
+        },
+        {
+          "time": 0.5,
+          "type": "whoosh",
+          "description": "ethereal whoosh"
+        }
+      ],
+      "dialogue": "Before the first stars ignited, there was war.",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "epic / mysterious / awe",
+      "energy": 8,
+      "tension": 6,
+      "narrativeFunction": "establishing / hook",
+      "emotionalImpact": 9,
+      "audienceReaction": "Intrigued, overwhelmed by scale, excited for the story."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "hook / atmosphere / reveal",
+      "optimalClipStart": 0,
+      "optimalClipEnd": 4,
+      "suggestedShotstack": {
+        "effect": "zoomInSlow",
+        "filter": "boost",
+        "speed": 0.8,
+        "transition": "fade"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "The Ultimate Cosmic Conflict",
+      "suggestedSfx": "epic-intro-hit"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "music / dialogue / sfx",
+      "audioDescription": "opening orchestral swell with deep bass and voiceover",
+      "audioUsableFor": "trailer intro, dramatic reveal"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The split-screen cosmic battle concept with contrasting colors and the central energy core is visually striking.",
+      "repurposeIdeas": [
+        "Use as a background for title sequences",
+        "Animate the figures below for more dynamic interaction"
+      ],
+      "transitionInto": "Hard cut from black",
+      "transitionOutOf": "Fade to black or quick pan to a dark scene",
+      "pairsWellWith": "Close-ups of individual characters or battle scenes"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Split composition, high contrast lighting",
+      "whyItWorks": "Immediately establishes the core conflict and scale, drawing the viewer in with grand visuals and a compelling voiceover.",
+      "whatToAvoid": "Overly busy foreground elements that distract from the main subject.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 2,
+    "startTime": 4.5,
+    "endTime": 8.5,
+    "VISUAL": {
+      "shotType": "extreme close-up",
+      "cameraMovement": "static",
+      "cameraSpeed": "normal",
+      "subject": "monstrous tentacles and bodies",
+      "action": "A dark, chaotic scene of intertwined monstrous forms and bodies, with a red glow emanating from the background. Text appears.",
+      "background": "Blazing red, out-of-focus fires and destruction.",
+      "foreground": "Dark, shadowy tendrils and limbs.",
+      "vfx": [
+        "glow",
+        "smoke"
+      ],
+      "lighting": {
+        "direction": "back",
+        "contrast": 9,
+        "colorTemp": "warm",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#1a0a0a",
+          "#800000"
+        ],
+        "accent": [
+          "#ff0000"
+        ],
+        "mood": "dark / aggressive"
+      },
+      "composition": "centered",
+      "depthOfField": "shallow",
+      "visualComplexity": 7,
+      "motionIntensity": 5,
+      "hasText": true,
+      "textContent": "BETWEEN DIMENSIONS",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 6,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "none",
+      "sfxPresent": [
+        "growl",
+        "rumble"
+      ],
+      "sfxTimestamps": [],
+      "dialogue": "Not between nations, between dimensions.",
+      "silenceMoment": false,
+      "audioBuildUp": false,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "ominous / tense / dark",
+      "energy": 6,
+      "tension": 7,
+      "narrativeFunction": "building / setting mood",
+      "emotionalImpact": 7,
+      "audienceReaction": "Feeling of dread, curiosity about the nature of the conflict."
+    },
+    "QUALITY": {
+      "visualQuality": 8,
+      "motionSmoothness": 7,
+      "colorGradingQuality": 8,
+      "productionValue": 8,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 7,
+      "bestTrailerUse": "atmosphere / reveal",
+      "optimalClipStart": 5,
+      "optimalClipEnd": 8,
+      "suggestedShotstack": {
+        "effect": "zoomOutSlow",
+        "filter": "darken",
+        "speed": 0.9,
+        "transition": "cut"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "A War Beyond Worlds",
+      "suggestedSfx": "creature-growl"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": false,
+      "audioType": "dialogue",
+      "audioDescription": "voiceover describing the war's scale",
+      "audioUsableFor": "narrative setup"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The abstract, dark imagery with hints of monstrous forms creates a sense of unknown horror.",
+      "repurposeIdeas": [
+        "Use as a background for horror-themed content",
+        "Apply a glitch effect for a digital horror aesthetic"
+      ],
+      "transitionInto": "Hard cut from previous scene",
+      "transitionOutOf": "Quick cut to action",
+      "pairsWellWith": "Fast-paced action sequences or character reveals"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Shallow depth of field, high contrast lighting",
+      "whyItWorks": "Emphasizes the grotesque nature of the conflict without revealing too much, building suspense.",
+      "whatToAvoid": "Too much detail in the background, which could distract from the main subject.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 7
+    }
+  },
+  {
+    "sceneNumber": 3,
+    "startTime": 8.5,
+    "endTime": 12.5,
+    "VISUAL": {
+      "shotType": "medium",
+      "cameraMovement": "tracking",
+      "cameraSpeed": "normal",
+      "subject": "armored warriors fighting",
+      "action": "Armored figures clash in a dark, desolate landscape. A glowing sword is seen. Text appears.",
+      "background": "Dark, ruined structures and a stormy sky.",
+      "foreground": "None",
+      "vfx": [
+        "sparks",
+        "glow",
+        "smoke"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 7,
+        "colorTemp": "cool",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#333333",
+          "#666666"
+        ],
+        "accent": [
+          "#00ffff",
+          "#ffcc00"
+        ],
+        "mood": "dark / gritty"
+      },
+      "composition": "diagonal",
+      "depthOfField": "deep",
+      "visualComplexity": 8,
+      "motionIntensity": 9,
+      "hasText": true,
+      "textContent": "LIGHT AGAINST SHADOW\nCREATION AGAINST DESTRUCTION",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 8,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "swell",
+      "sfxPresent": [
+        "sword clash",
+        "impact",
+        "whoosh"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 9,
+          "type": "sword clash",
+          "description": "metal on metal impact"
+        },
+        {
+          "time": 10.5,
+          "type": "impact",
+          "description": "heavy hit"
+        },
+        {
+          "time": 11.5,
+          "type": "whoosh",
+          "description": "fast movement"
+        }
+      ],
+      "dialogue": "Light against shadow, creation against destruction,",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "aggressive / tense / epic",
+      "energy": 9,
+      "tension": 8,
+      "narrativeFunction": "rising action / action",
+      "emotionalImpact": 8,
+      "audienceReaction": "Excited, feeling the intensity of battle."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 9,
+      "colorGradingQuality": 8,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 8,
+      "bestTrailerUse": "action / atmosphere",
+      "optimalClipStart": 8.7,
+      "optimalClipEnd": 12,
+      "suggestedShotstack": {
+        "effect": "shake",
+        "filter": "contrast",
+        "speed": 0.7,
+        "transition": "cut"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "The Eternal Conflict",
+      "suggestedSfx": "battle-clash"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "intense sword clashes and impacts",
+      "audioUsableFor": "action sequences, fight scenes"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "Dynamic camera movement combined with detailed character models and impactful SFX creates a visceral battle experience.",
+      "repurposeIdeas": [
+        "Slow-motion for dramatic effect",
+        "Focus on individual combatants for character spotlights"
+      ],
+      "transitionInto": "Quick cut from previous scene",
+      "transitionOutOf": "Explosion or sudden light flash",
+      "pairsWellWith": "Establishing shots of the battlefield or close-ups of character expressions"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Tracking shot, dynamic editing",
+      "whyItWorks": "Keeps the viewer immersed in the action, conveying the chaos and intensity of the fight.",
+      "whatToAvoid": "Overly shaky camera, which can make the action hard to follow.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 8
+    }
+  },
+  {
+    "sceneNumber": 4,
+    "startTime": 12.5,
+    "endTime": 14.5,
+    "VISUAL": {
+      "shotType": "wide",
+      "cameraMovement": "dolly out",
+      "cameraSpeed": "normal",
+      "subject": "glowing sword and explosion",
+      "action": "A glowing sword stands upright in a desolate, rocky landscape. An explosion erupts around it, shattering the ground.",
+      "background": "Dark, ruined landscape with distant structures.",
+      "foreground": "Debris and dust from the explosion.",
+      "vfx": [
+        "glow",
+        "explosion",
+        "sparks",
+        "particles"
+      ],
+      "lighting": {
+        "direction": "front",
+        "contrast": 8,
+        "colorTemp": "warm",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#333333",
+          "#666666"
+        ],
+        "accent": [
+          "#ffcc00",
+          "#ff6600"
+        ],
+        "mood": "dark / destructive"
+      },
+      "composition": "centered",
+      "depthOfField": "deep",
+      "visualComplexity": 7,
+      "motionIntensity": 9,
+      "hasText": false,
+      "textContent": null,
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 9,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "beat drop",
+      "sfxPresent": [
+        "explosion",
+        "rumble"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 12.5,
+          "type": "explosion",
+          "description": "massive explosion sound"
+        }
+      ],
+      "dialogue": "and it never ended.",
+      "silenceMoment": false,
+      "audioBuildUp": false,
+      "audioClimax": true
+    },
+    "EMOTION": {
+      "mood": "destructive / epic / impactful",
+      "energy": 9,
+      "tension": 8,
+      "narrativeFunction": "climax / transition",
+      "emotionalImpact": 9,
+      "audienceReaction": "Shocked, feeling the power and finality of the destruction."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 8,
+      "bestTrailerUse": "climax / action / transition",
+      "optimalClipStart": 12.3,
+      "optimalClipEnd": 14.3,
+      "suggestedShotstack": {
+        "effect": "shake",
+        "filter": "boost",
+        "speed": 0.5,
+        "transition": "flash"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "The Endless War",
+      "suggestedSfx": "epic-explosion"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "powerful explosion with deep rumble",
+      "audioUsableFor": "trailer climax, dramatic transition"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The sudden, powerful explosion around a symbolic glowing sword creates a strong visual metaphor for ongoing conflict.",
+      "repurposeIdeas": [
+        "Use as a dramatic scene break",
+        "Combine with slow-motion for emphasis on destruction"
+      ],
+      "transitionInto": "Hard cut from previous action",
+      "transitionOutOf": "Fade to white or quick cut to a contrasting scene",
+      "pairsWellWith": "Scenes of creation or peace to highlight contrast"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Explosion VFX, centered composition",
+      "whyItWorks": "Provides a powerful visual punctuation to the narrative, emphasizing the never-ending nature of the war.",
+      "whatToAvoid": "Poorly integrated VFX that look artificial.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 5,
+    "startTime": 14.5,
+    "endTime": 17.5,
+    "VISUAL": {
+      "shotType": "wide",
+      "cameraMovement": "static",
+      "cameraSpeed": "normal",
+      "subject": "Pleiadian celestial being",
+      "action": "A complex, multi-ringed celestial eye floats above a small figure on a cliff, surrounded by clouds. Text appears.",
+      "background": "Fluffy white clouds, bright sky.",
+      "foreground": "A small figure on a rocky outcrop.",
+      "vfx": [
+        "glow",
+        "particles"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 6,
+        "colorTemp": "neutral",
+        "style": "reverent"
+      },
+      "colors": {
+        "dominant": [
+          "#f0f0f0",
+          "#c0c0c0"
+        ],
+        "accent": [
+          "#87ceeb",
+          "#daa520"
+        ],
+        "mood": "bright / ethereal"
+      },
+      "composition": "centered / rule of thirds",
+      "depthOfField": "deep",
+      "visualComplexity": 8,
+      "motionIntensity": 3,
+      "hasText": true,
+      "textContent": "PLEIADIANS",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 5,
+      "musicGenre": "ambient orchestral",
+      "musicBeat": "none",
+      "sfxPresent": [
+        "chime",
+        "whoosh"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 14.5,
+          "type": "chime",
+          "description": "ethereal chime"
+        }
+      ],
+      "dialogue": "The Pleiadians carry healing codes across the cosmos.",
+      "silenceMoment": false,
+      "audioBuildUp": false,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "awe / mysterious / reverent",
+      "energy": 5,
+      "tension": 4,
+      "narrativeFunction": "reveal / exposition",
+      "emotionalImpact": 8,
+      "audienceReaction": "Fascination, wonder, sense of ancient wisdom."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "reveal / atmosphere / emotional",
+      "optimalClipStart": 14.7,
+      "optimalClipEnd": 17.3,
+      "suggestedShotstack": {
+        "effect": "zoomInSlow",
+        "filter": "lighten",
+        "speed": 1,
+        "transition": "fade"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "Cosmic Healers",
+      "suggestedSfx": "ethereal-chime"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "ethereal chime sound",
+      "audioUsableFor": "magical reveals, peaceful transitions"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The intricate design of the celestial eye, reminiscent of biblical angels, combined with the vast cloudscape, creates a powerful sense of divinity.",
+      "repurposeIdeas": [
+        "Use as a symbolic representation of cosmic knowledge",
+        "Animate the rings for a more dynamic effect"
+      ],
+      "transitionInto": "Fade from previous dark scene",
+      "transitionOutOf": "Quick cut to next deity",
+      "pairsWellWith": "Other celestial or ancient beings"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Symbolic imagery, high detail rendering",
+      "whyItWorks": "Visually represents a powerful, ancient, and benevolent force, contrasting with the earlier dark scenes.",
+      "whatToAvoid": "Making the small figure too prominent, which could distract from the main subject.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 6,
+    "startTime": 17.5,
+    "endTime": 20.5,
+    "VISUAL": {
+      "shotType": "medium",
+      "cameraMovement": "static",
+      "cameraSpeed": "normal",
+      "subject": "Sirian Anubis-like figure",
+      "action": "An Anubis-like figure, adorned with Egyptian regalia and holding scales, stands in a desert under a bright sun. Text appears.",
+      "background": "Desert landscape with a bright, hazy sky.",
+      "foreground": "None",
+      "vfx": [
+        "lens flare",
+        "glow"
+      ],
+      "lighting": {
+        "direction": "back",
+        "contrast": 7,
+        "colorTemp": "warm",
+        "style": "rim-lit"
+      },
+      "colors": {
+        "dominant": [
+          "#a0522d",
+          "#d2b48c"
+        ],
+        "accent": [
+          "#ffd700",
+          "#4682b4"
+        ],
+        "mood": "warm / ancient"
+      },
+      "composition": "centered",
+      "depthOfField": "shallow",
+      "visualComplexity": 7,
+      "motionIntensity": 2,
+      "hasText": true,
+      "textContent": "SIRIANS",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 5,
+      "musicGenre": "ambient orchestral",
+      "musicBeat": "none",
+      "sfxPresent": [
+        "chime"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 17.5,
+          "type": "chime",
+          "description": "subtle chime"
+        }
+      ],
+      "dialogue": "The Sirians encoded the pyramids with cosmic math.",
+      "silenceMoment": false,
+      "audioBuildUp": false,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "ancient / wise / mysterious",
+      "energy": 4,
+      "tension": 3,
+      "narrativeFunction": "reveal / exposition",
+      "emotionalImpact": 7,
+      "audienceReaction": "Curiosity about ancient civilizations and cosmic connections."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 8,
+      "bestTrailerUse": "reveal / atmosphere",
+      "optimalClipStart": 17.7,
+      "optimalClipEnd": 20.3,
+      "suggestedShotstack": {
+        "effect": "zoomInSlow",
+        "filter": "warm",
+        "speed": 1,
+        "transition": "cut"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "Guardians of Ancient Knowledge",
+      "suggestedSfx": "desert-wind"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": false,
+      "audioType": "dialogue",
+      "audioDescription": "voiceover about Sirians and pyramids",
+      "audioUsableFor": "narrative exposition"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The blend of Egyptian mythology with a cosmic narrative through the Anubis figure and scales.",
+      "repurposeIdeas": [
+        "Use for historical or mythological content",
+        "Highlight the intricate details of the regalia"
+      ],
+      "transitionInto": "Quick cut from previous scene",
+      "transitionOutOf": "Quick cut to next deity",
+      "pairsWellWith": "Other ancient or wise figures"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Cultural fusion, symbolic props",
+      "whyItWorks": "Connects cosmic themes to recognizable ancient cultures, grounding the fantastical elements.",
+      "whatToAvoid": "Anachronisms that break immersion.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 8
+    }
+  },
+  {
+    "sceneNumber": 7,
+    "startTime": 20.5,
+    "endTime": 23.5,
+    "VISUAL": {
+      "shotType": "close-up",
+      "cameraMovement": "static",
+      "cameraSpeed": "normal",
+      "subject": "Arcturian ethereal woman",
+      "action": "A beautiful, ethereal woman with flowing, smoke-like hair and glowing green eyes looks directly at the viewer. Text appears.",
+      "background": "Swirling white and grey ethereal energy.",
+      "foreground": "None",
+      "vfx": [
+        "glow",
+        "smoke",
+        "energy waves"
+      ],
+      "lighting": {
+        "direction": "front",
+        "contrast": 6,
+        "colorTemp": "cool",
+        "style": "ethereal"
+      },
+      "colors": {
+        "dominant": [
+          "#c0c0c0",
+          "#e0e0e0"
+        ],
+        "accent": [
+          "#00ff00"
+        ],
+        "mood": "cool / ethereal"
+      },
+      "composition": "centered",
+      "depthOfField": "shallow",
+      "visualComplexity": 7,
+      "motionIntensity": 4,
+      "hasText": true,
+      "textContent": "ARCTURIANS",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 5,
+      "musicGenre": "ambient electronic",
+      "musicBeat": "none",
+      "sfxPresent": [
+        "chime",
+        "whoosh"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 20.5,
+          "type": "chime",
+          "description": "soft, high-pitched chime"
+        }
+      ],
+      "dialogue": "The Arcturians bend space itself.",
+      "silenceMoment": false,
+      "audioBuildUp": false,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "mysterious / serene / powerful",
+      "energy": 4,
+      "tension": 3,
+      "narrativeFunction": "reveal / exposition",
+      "emotionalImpact": 7,
+      "audienceReaction": "Awe, wonder, sense of otherworldly beauty."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 9,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "reveal / atmosphere / emotional",
+      "optimalClipStart": 20.7,
+      "optimalClipEnd": 23.3,
+      "suggestedShotstack": {
+        "effect": "zoomInSlow",
+        "filter": "soften",
+        "speed": 1,
+        "transition": "fade"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "Masters of Reality",
+      "suggestedSfx": "ethereal-whoosh"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "soft, high-pitched chime",
+      "audioUsableFor": "magical reveals, peaceful moments"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The blend of human beauty with ethereal, flowing energy for hair creates a distinct and captivating visual.",
+      "repurposeIdeas": [
+        "Use for character introduction",
+        "Apply slow-motion to emphasize the flowing hair"
+      ],
+      "transitionInto": "Quick cut from previous scene",
+      "transitionOutOf": "Quick cut to next scene",
+      "pairsWellWith": "Scenes depicting cosmic power or wisdom"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Ethereal VFX, close-up portrait",
+      "whyItWorks": "Highlights the unique, otherworldly nature of the Arcturians through their appearance and glowing eyes.",
+      "whatToAvoid": "Over-reliance on static shots for too long.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 8,
+    "startTime": 23.5,
+    "endTime": 29.5,
+    "VISUAL": {
+      "shotType": "wide",
+      "cameraMovement": "dolly out",
+      "cameraSpeed": "normal",
+      "subject": "The Ascended army and celestial eye",
+      "action": "An army of horned, demonic-looking figures with bows stands in a dusty landscape, then transitions to the Pleiadian celestial eye floating in clouds. Text appears.",
+      "background": "Stormy, dusty sky for the army; white clouds for the eye.",
+      "foreground": "Dust kicked up by the army.",
+      "vfx": [
+        "particles",
+        "glow"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 7,
+        "colorTemp": "neutral",
+        "style": "dramatic / reverent"
+      },
+      "colors": {
+        "dominant": [
+          "#666666",
+          "#f0f0f0"
+        ],
+        "accent": [
+          "#ff0000",
+          "#87ceeb"
+        ],
+        "mood": "gritty / ethereal"
+      },
+      "composition": "centered",
+      "depthOfField": "deep",
+      "visualComplexity": 8,
+      "motionIntensity": 6,
+      "hasText": true,
+      "textContent": "THE ASCENDED",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 6,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "transition",
+      "sfxPresent": [
+        "whoosh",
+        "chime"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 26,
+          "type": "whoosh",
+          "description": "transition sound"
+        },
+        {
+          "time": 26.5,
+          "type": "chime",
+          "description": "ethereal chime"
+        }
+      ],
+      "dialogue": "Behind them, the golden light. Buddha, Yeshua, Metatron. They conquered death.",
+      "silenceMoment": false,
+      "audioBuildUp": false,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "powerful / reverent / mysterious",
+      "energy": 7,
+      "tension": 5,
+      "narrativeFunction": "reveal / exposition",
+      "emotionalImpact": 8,
+      "audienceReaction": "Intrigued by the duality, sense of ancient power and wisdom."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 8,
+      "bestTrailerUse": "reveal / atmosphere / transition",
+      "optimalClipStart": 23.7,
+      "optimalClipEnd": 29.3,
+      "suggestedShotstack": {
+        "effect": "crossFade",
+        "filter": "boost",
+        "speed": 0.9,
+        "transition": "fade"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "Conquerors of Death",
+      "suggestedSfx": "ethereal-transition"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "dialogue / sfx",
+      "audioDescription": "voiceover listing spiritual figures with ethereal chimes",
+      "audioUsableFor": "narrative exposition, spiritual themes"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The juxtaposition of a seemingly dark army with the concept of 'The Ascended' and spiritual figures, then transitioning to the ethereal eye, creates a powerful thematic contrast.",
+      "repurposeIdeas": [
+        "Use the army shot for conflict, the eye for wisdom",
+        "Create a split-screen effect with both images"
+      ],
+      "transitionInto": "Quick cut from previous scene",
+      "transitionOutOf": "Fade to dark",
+      "pairsWellWith": "Scenes of spiritual awakening or cosmic events"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Juxtaposition, symbolic imagery",
+      "whyItWorks": "Highlights the complex nature of 'good' and 'evil' in the narrative, suggesting that even seemingly dark forces can be 'ascended'.",
+      "whatToAvoid": "Confusing imagery that doesn't clearly convey the intended message.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 8
+    }
+  },
+  {
+    "sceneNumber": 9,
+    "startTime": 29.5,
+    "endTime": 32.5,
+    "VISUAL": {
+      "shotType": "wide",
+      "cameraMovement": "crane up",
+      "cameraSpeed": "normal",
+      "subject": "ancient castle with winged figure",
+      "action": "A grand, ruined castle is illuminated by a beam of light, revealing a massive winged figure at its entrance. Lightning strikes.",
+      "background": "Dark, stormy clouds and other ruined structures.",
+      "foreground": "Debris on the ground.",
+      "vfx": [
+        "lightning",
+        "glow",
+        "particles"
+      ],
+      "lighting": {
+        "direction": "top",
+        "contrast": 9,
+        "colorTemp": "neutral",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#333333",
+          "#666666"
+        ],
+        "accent": [
+          "#ffd700",
+          "#87ceeb"
+        ],
+        "mood": "dark / epic"
+      },
+      "composition": "centered / leading lines",
+      "depthOfField": "deep",
+      "visualComplexity": 8,
+      "motionIntensity": 6,
+      "hasText": false,
+      "textContent": null,
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 7,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "swell",
+      "sfxPresent": [
+        "lightning",
+        "thunder"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 30.5,
+          "type": "lightning",
+          "description": "sharp lightning strike"
+        }
+      ],
+      "dialogue": "But from the shadows, ancient powers stir.",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "ominous / epic / mysterious",
+      "energy": 8,
+      "tension": 7,
+      "narrativeFunction": "rising action / reveal",
+      "emotionalImpact": 9,
+      "audienceReaction": "Awe, sense of impending doom, excitement for new threats."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "reveal / atmosphere / action",
+      "optimalClipStart": 29.7,
+      "optimalClipEnd": 32.3,
+      "suggestedShotstack": {
+        "effect": "zoomInSlow",
+        "filter": "darken",
+        "speed": 0.8,
+        "transition": "cut"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "Ancient Powers Awaken",
+      "suggestedSfx": "thunder-strike"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "dramatic lightning strike and thunder",
+      "audioUsableFor": "dramatic reveals, intense moments"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The dramatic lighting revealing the massive winged figure on the castle creates a powerful and ominous visual.",
+      "repurposeIdeas": [
+        "Use as a backdrop for villain introductions",
+        "Animate the wings for a more dynamic effect"
+      ],
+      "transitionInto": "Fade from previous scene",
+      "transitionOutOf": "Hard cut to next scene",
+      "pairsWellWith": "Scenes of dark armies or powerful antagonists"
+    },
+    "LEARNING": {
+      "techniqueUsed": "God rays, silhouette, crane shot",
+      "whyItWorks": "Builds anticipation and reveals a formidable new threat, emphasizing its ancient and powerful nature.",
+      "whatToAvoid": "Making the lighting too flat, which would diminish the drama.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 10,
+    "startTime": 32.5,
+    "endTime": 38.5,
+    "VISUAL": {
+      "shotType": "medium / close-up",
+      "cameraMovement": "pan right / handheld",
+      "cameraSpeed": "normal / fast",
+      "subject": "Anunnaki and Reptilians",
+      "action": "A group of armored, winged figures (anime style) then transitions to monstrous, reptilian creatures fighting in a bloody battle. Text appears.",
+      "background": "Purple-hued alien landscape; dark, stormy battlefield.",
+      "foreground": "Blood splatters, debris.",
+      "vfx": [
+        "blood",
+        "sparks",
+        "glow"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 8,
+        "colorTemp": "cool",
+        "style": "dramatic / gritty"
+      },
+      "colors": {
+        "dominant": [
+          "#4b0082",
+          "#800000"
+        ],
+        "accent": [
+          "#ff0000",
+          "#00ff00"
+        ],
+        "mood": "dark / aggressive / violent"
+      },
+      "composition": "diagonal / rule of thirds",
+      "depthOfField": "shallow / deep",
+      "visualComplexity": 9,
+      "motionIntensity": 9,
+      "hasText": true,
+      "textContent": "ANUNNAKI\nREPTILIANS",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 8,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "swell",
+      "sfxPresent": [
+        "growl",
+        "impact",
+        "sword clash",
+        "squish"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 33.5,
+          "type": "growl",
+          "description": "monstrous growl"
+        },
+        {
+          "time": 35.5,
+          "type": "impact",
+          "description": "heavy impact"
+        },
+        {
+          "time": 36.5,
+          "type": "squish",
+          "description": "bloody hit"
+        }
+      ],
+      "dialogue": "The Anunnaki return. Gods who once ruled Earth. The Reptilians. Apex predators older than man.",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "aggressive / violent / primal",
+      "energy": 9,
+      "tension": 9,
+      "narrativeFunction": "rising action / action / reveal",
+      "emotionalImpact": 9,
+      "audienceReaction": "Shocked, horrified, excited by the brutal action."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "action / reveal / atmosphere",
+      "optimalClipStart": 32.7,
+      "optimalClipEnd": 38.3,
+      "suggestedShotstack": {
+        "effect": "shake",
+        "filter": "boost",
+        "speed": 0.6,
+        "transition": "cut"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "Ancient Rulers. Apex Predators.",
+      "suggestedSfx": "monster-battle"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "intense battle sounds, growls, impacts, squishes",
+      "audioUsableFor": "action sequences, creature combat"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The rapid cuts between different monstrous entities and the visceral depiction of combat create a sense of overwhelming threat.",
+      "repurposeIdeas": [
+        "Use for character introductions of villains",
+        "Highlight specific combat moves in slow-motion"
+      ],
+      "transitionInto": "Hard cut from previous scene",
+      "transitionOutOf": "Quick cut to a contrasting, ethereal scene",
+      "pairsWellWith": "Scenes of heroes fighting against overwhelming odds"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Rapid editing, visceral VFX",
+      "whyItWorks": "Conveys the brutality and ancient nature of these new threats, increasing the stakes of the conflict.",
+      "whatToAvoid": "Overuse of gore that might alienate some audiences.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 11,
+    "startTime": 38.5,
+    "endTime": 41.5,
+    "VISUAL": {
+      "shotType": "medium",
+      "cameraMovement": "dolly out",
+      "cameraSpeed": "normal",
+      "subject": "Luciferian being",
+      "action": "A glowing, nude human-like figure floats in a cosmic nebula, arms outstretched. Text appears.",
+      "background": "Swirling purple and pink nebula with distant stars.",
+      "foreground": "None",
+      "vfx": [
+        "glow",
+        "energy waves",
+        "particles"
+      ],
+      "lighting": {
+        "direction": "top",
+        "contrast": 7,
+        "colorTemp": "warm / cool",
+        "style": "ethereal"
+      },
+      "colors": {
+        "dominant": [
+          "#4b0082",
+          "#800080"
+        ],
+        "accent": [
+          "#ffc0cb",
+          "#ffffff"
+        ],
+        "mood": "ethereal / mysterious"
+      },
+      "composition": "centered",
+      "depthOfField": "deep",
+      "visualComplexity": 7,
+      "motionIntensity": 3,
+      "hasText": true,
+      "textContent": "LUCIFERIAN",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 6,
+      "musicGenre": "ambient electronic",
+      "musicBeat": "none",
+      "sfxPresent": [
+        "whoosh",
+        "chime"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 38.5,
+          "type": "whoosh",
+          "description": "ethereal whoosh"
+        }
+      ],
+      "dialogue": "And Lucifer's rebellion. Beings who traded everything for power.",
+      "silenceMoment": false,
+      "audioBuildUp": false,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "mysterious / powerful / serene",
+      "energy": 5,
+      "tension": 5,
+      "narrativeFunction": "reveal / exposition",
+      "emotionalImpact": 7,
+      "audienceReaction": "Intrigued, sense of cosmic betrayal and ambition."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 9,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 8,
+      "bestTrailerUse": "reveal / atmosphere",
+      "optimalClipStart": 38.7,
+      "optimalClipEnd": 41.3,
+      "suggestedShotstack": {
+        "effect": "zoomInSlow",
+        "filter": "soften",
+        "speed": 1,
+        "transition": "fade"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "The Price of Power",
+      "suggestedSfx": "cosmic-hum"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": false,
+      "audioType": "dialogue",
+      "audioDescription": "voiceover about Lucifer's rebellion",
+      "audioUsableFor": "narrative exposition"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The serene yet powerful image of a glowing figure in a nebula contrasts with the destructive nature of the 'rebellion' it represents.",
+      "repurposeIdeas": [
+        "Use for character origin stories",
+        "Apply a subtle pulse effect to the glow"
+      ],
+      "transitionInto": "Hard cut from previous scene",
+      "transitionOutOf": "Fade to dark",
+      "pairsWellWith": "Scenes depicting cosmic events or spiritual journeys"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Ethereal lighting, symbolic figure",
+      "whyItWorks": "Visually represents a powerful, almost divine being, hinting at the profound consequences of their choices.",
+      "whatToAvoid": "Making the figure too static, which could reduce visual interest.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 8
+    }
+  },
+  {
+    "sceneNumber": 12,
+    "startTime": 44.5,
+    "endTime": 47.5,
+    "VISUAL": {
+      "shotType": "wide",
+      "cameraMovement": "dolly out",
+      "cameraSpeed": "normal",
+      "subject": "fiery creature and burning landscape",
+      "action": "A large, fiery creature stands amidst a landscape engulfed in flames and glowing particles. Text appears.",
+      "background": "Burning trees and structures, hazy orange sky.",
+      "foreground": "Falling embers and sparks.",
+      "vfx": [
+        "fire",
+        "glow",
+        "sparks",
+        "particles"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 8,
+        "colorTemp": "warm",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#ff6600",
+          "#cc3300"
+        ],
+        "accent": [
+          "#ffff00",
+          "#ffffff"
+        ],
+        "mood": "fiery / destructive"
+      },
+      "composition": "centered",
+      "depthOfField": "deep",
+      "visualComplexity": 8,
+      "motionIntensity": 9,
+      "hasText": true,
+      "textContent": "ATLANTIS LEMURIA AGARTHA MARS",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 8,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "swell",
+      "sfxPresent": [
+        "fire roar",
+        "explosion"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 44.5,
+          "type": "fire roar",
+          "description": "loud fire roar"
+        },
+        {
+          "time": 45.5,
+          "type": "explosion",
+          "description": "distant explosion"
+        }
+      ],
+      "dialogue": "Civilizations that fell.",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "destructive / epic / tragic",
+      "energy": 9,
+      "tension": 8,
+      "narrativeFunction": "exposition / rising action",
+      "emotionalImpact": 9,
+      "audienceReaction": "Awe at the destruction, sense of loss and ancient catastrophes."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 8,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "atmosphere / action / reveal",
+      "optimalClipStart": 44.7,
+      "optimalClipEnd": 47.3,
+      "suggestedShotstack": {
+        "effect": "shake",
+        "filter": "boost",
+        "speed": 0.7,
+        "transition": "flash"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "The Fall of Worlds",
+      "suggestedSfx": "massive-fire"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "intense fire sounds and roars",
+      "audioUsableFor": "destructive scenes, monster attacks"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The vivid depiction of a world consumed by fire, with a monstrous creature at its heart, creates a powerful image of apocalyptic destruction.",
+      "repurposeIdeas": [
+        "Use for disaster sequences",
+        "Apply a slow-motion effect to the falling embers"
+      ],
+      "transitionInto": "Hard cut from previous scene",
+      "transitionOutOf": "Fade to dark or quick cut to a contrasting scene",
+      "pairsWellWith": "Scenes of creation or rebirth to highlight contrast"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Fire VFX, wide establishing shot",
+      "whyItWorks": "Visually represents the catastrophic end of ancient civilizations, emphasizing the scale of the conflict.",
+      "whatToAvoid": "Making the fire look artificial or repetitive.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 13,
+    "startTime": 50.5,
+    "endTime": 56.5,
+    "VISUAL": {
+      "shotType": "close-up / wide",
+      "cameraMovement": "static / zoom out",
+      "cameraSpeed": "normal",
+      "subject": "Egyptian statues and planet destruction",
+      "action": "Close-up of ancient Egyptian statues, then a cosmic scene with planets and a powerful energy beam destroying a planet. Text appears.",
+      "background": "Dark, ancient temple; swirling nebula and stars.",
+      "foreground": "None for statues; asteroids for cosmic scene.",
+      "vfx": [
+        "energy waves",
+        "explosion",
+        "particles",
+        "glow"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 8,
+        "colorTemp": "neutral / cool",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#333333",
+          "#4b0082"
+        ],
+        "accent": [
+          "#ffd700",
+          "#00ffff"
+        ],
+        "mood": "ancient / cosmic / destructive"
+      },
+      "composition": "centered",
+      "depthOfField": "shallow / deep",
+      "visualComplexity": 8,
+      "motionIntensity": 9,
+      "hasText": true,
+      "textContent": "YOUR WAR",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 8,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "swell",
+      "sfxPresent": [
+        "energy beam",
+        "explosion",
+        "rumble"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 53.5,
+          "type": "energy beam",
+          "description": "powerful energy beam sound"
+        },
+        {
+          "time": 54.5,
+          "type": "explosion",
+          "description": "planet exploding"
+        }
+      ],
+      "dialogue": "Each carrying wisdom from their own apocalypse. Now their war becomes yours.",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": true
+    },
+    "EMOTION": {
+      "mood": "epic / destructive / empowering",
+      "energy": 9,
+      "tension": 9,
+      "narrativeFunction": "climax / call to action",
+      "emotionalImpact": 9,
+      "audienceReaction": "Excited, feeling the immense scale and personal connection to the conflict."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 9,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "climax / action / hook",
+      "optimalClipStart": 50.7,
+      "optimalClipEnd": 56.3,
+      "suggestedShotstack": {
+        "effect": "zoomInFast",
+        "filter": "boost",
+        "speed": 0.6,
+        "transition": "flash"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "The Fate of Worlds is Yours",
+      "suggestedSfx": "cosmic-destruction"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "sfx",
+      "audioDescription": "planet destruction with energy beam and explosion",
+      "audioUsableFor": "trailer climax, sci-fi action"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The rapid transition from ancient earthly wisdom to cosmic destruction effectively conveys the universal scale of the conflict and its personal relevance.",
+      "repurposeIdeas": [
+        "Use the planet destruction for a dramatic scene break",
+        "Combine with text overlays about choice and destiny"
+      ],
+      "transitionInto": "Hard cut from previous scene",
+      "transitionOutOf": "Quick cut to a character-focused scene",
+      "pairsWellWith": "Scenes of heroes making difficult choices"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Match cut (thematic), scale contrast",
+      "whyItWorks": "Elevates the stakes by showing the destruction of a planet, directly linking it to the viewer's 'war'.",
+      "whatToAvoid": "Making the transition too jarring or unrelated.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 14,
+    "startTime": 59.5,
+    "endTime": 105.5,
+    "VISUAL": {
+      "shotType": "close-up / wide / split screen",
+      "cameraMovement": "static / pan",
+      "cameraSpeed": "normal",
+      "subject": "injured face, space, warrior with dragon, elemental golem",
+      "action": "Close-up of an injured, blood-splattered face. Then a dark cosmic scene with asteroids. Then a warrior standing on water with a dragon, followed by a split screen showing a red dragon and a rock golem. Text appears.",
+      "background": "Dark, empty space; stormy sea and mountains.",
+      "foreground": "Blood on face; water splashes.",
+      "vfx": [
+        "blood",
+        "particles",
+        "water effects",
+        "glow"
+      ],
+      "lighting": {
+        "direction": "ambient",
+        "contrast": 7,
+        "colorTemp": "dark / cool",
+        "style": "dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#333333",
+          "#000000"
+        ],
+        "accent": [
+          "#ff0000",
+          "#00ffff"
+        ],
+        "mood": "dark / gritty / adventurous"
+      },
+      "composition": "centered / rule of thirds",
+      "depthOfField": "shallow / deep",
+      "visualComplexity": 8,
+      "motionIntensity": 7,
+      "hasText": true,
+      "textContent": "NFT ON POLYGON\nYOURS TO OWN, YOURS TO TRADE",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 7,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "swell",
+      "sfxPresent": [
+        "whoosh",
+        "water splash",
+        "roar"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 59.5,
+          "type": "whoosh",
+          "description": "transition whoosh"
+        },
+        {
+          "time": 102.5,
+          "type": "water splash",
+          "description": "waves crashing"
+        },
+        {
+          "time": 103.5,
+          "type": "roar",
+          "description": "dragon roar"
+        }
+      ],
+      "dialogue": "Draft your champions, forge impossible alliances and watch the cosmos burn. Every champion is an NFT on Polygon. Yours to own, yours to trade.",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": false
+    },
+    "EMOTION": {
+      "mood": "intense / adventurous / empowering",
+      "energy": 8,
+      "tension": 7,
+      "narrativeFunction": "call to action / feature highlight",
+      "emotionalImpact": 8,
+      "audienceReaction": "Excited, feeling a sense of ownership and strategic possibility."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 9,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 9,
+      "bestTrailerUse": "feature highlight / call to action / action",
+      "optimalClipStart": 59.7,
+      "optimalClipEnd": 105.3,
+      "suggestedShotstack": {
+        "effect": "zoomInSlow",
+        "filter": "boost",
+        "speed": 0.8,
+        "transition": "cut"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "Collect Your Champions",
+      "suggestedSfx": "dragon-roar"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "dialogue / sfx",
+      "audioDescription": "voiceover about NFTs and champions with dragon roar",
+      "audioUsableFor": "marketing, character reveals"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "The blend of character art, action, and explicit NFT integration, using a split-screen to showcase diverse champions.",
+      "repurposeIdeas": [
+        "Use individual champion shots for character profiles",
+        "Animate the split-screen transition for more dynamism"
+      ],
+      "transitionInto": "Hard cut from previous scene",
+      "transitionOutOf": "Quick cut to next feature highlight",
+      "pairsWellWith": "Gameplay footage or character customization screens"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Split screen, character showcase",
+      "whyItWorks": "Clearly communicates the game's core mechanic (NFT champions) and the variety of characters available.",
+      "whatToAvoid": "Making the text too small or hard to read against the background.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 9
+    }
+  },
+  {
+    "sceneNumber": 15,
+    "startTime": 105.5,
+    "endTime": 129.5,
+    "VISUAL": {
+      "shotType": "close-up / wide",
+      "cameraMovement": "zoom in / static",
+      "cameraSpeed": "normal",
+      "subject": "Om symbol, anime character, ominous figures, stained glass, army, celestial eye",
+      "action": "A glowing Om symbol with geometric patterns, then an anime character and golden dragon, then three ominous figures, a grand hall, a stained glass window, an army marching, and finally the celestial eye above a figure on a cliff. Text appears.",
+      "background": "Starry nebula; dark hall; clouds.",
+      "foreground": "None.",
+      "vfx": [
+        "glow",
+        "particles",
+        "fire",
+        "energy waves"
+      ],
+      "lighting": {
+        "direction": "ambient / top",
+        "contrast": 8,
+        "colorTemp": "cool / warm",
+        "style": "ethereal / dramatic"
+      },
+      "colors": {
+        "dominant": [
+          "#4b0082",
+          "#000000",
+          "#f0f0f0"
+        ],
+        "accent": [
+          "#00ffff",
+          "#ffd700",
+          "#ff0000"
+        ],
+        "mood": "mysterious / dark / epic"
+      },
+      "composition": "centered / symmetrical",
+      "depthOfField": "deep",
+      "visualComplexity": 9,
+      "motionIntensity": 7,
+      "hasText": true,
+      "textContent": "FOUNDER'S PASS\n25,000 TOKENS\nZERO FEES\nPOWER\nDEMONS AND DEITIES\nCHOOSE YOUR SIDE\nDEMONSANDDEITIES.COM",
+      "hasWatermark": true,
+      "hasUI": false
+    },
+    "AUDIO_AT_THIS_MOMENT": {
+      "musicEnergy": 9,
+      "musicGenre": "orchestral hybrid",
+      "musicBeat": "climax",
+      "sfxPresent": [
+        "chime",
+        "roar",
+        "impact",
+        "whoosh",
+        "thunder"
+      ],
+      "sfxTimestamps": [
+        {
+          "time": 105.5,
+          "type": "chime",
+          "description": "ethereal chime"
+        },
+        {
+          "time": 109.5,
+          "type": "roar",
+          "description": "dragon roar"
+        },
+        {
+          "time": 112.5,
+          "type": "impact",
+          "description": "heavy impact"
+        },
+        {
+          "time": 118.5,
+          "type": "thunder",
+          "description": "distant thunder"
+        },
+        {
+          "time": 120.5,
+          "type": "whoosh",
+          "description": "final whoosh"
+        }
+      ],
+      "dialogue": "The Founder's Pass. 200 patrons of cosmic. 25,000 tokens. Zero fees. They do not profit from war. They profit from it. This is not a story about good and evil. It's about power. And what you are willing to pay for it. Demons and Deities. Choose your side. Demonsanddeities.com",
+      "silenceMoment": false,
+      "audioBuildUp": true,
+      "audioClimax": true
+    },
+    "EMOTION": {
+      "mood": "epic / empowering / decisive / mysterious",
+      "energy": 9,
+      "tension": 8,
+      "narrativeFunction": "climax / call to action / resolution",
+      "emotionalImpact": 10,
+      "audienceReaction": "Excited, motivated, feeling a sense of grand choice and opportunity."
+    },
+    "QUALITY": {
+      "visualQuality": 9,
+      "motionSmoothness": 9,
+      "colorGradingQuality": 9,
+      "productionValue": 9,
+      "wouldStopAScroll": true
+    },
+    "CLIP_EXTRACTION": {
+      "standaloneValue": 10,
+      "bestTrailerUse": "climax / call to action / reveal",
+      "optimalClipStart": 105.5,
+      "optimalClipEnd": 129.5,
+      "suggestedShotstack": {
+        "effect": "zoomInFast",
+        "filter": "boost",
+        "speed": 0.5,
+        "transition": "fade"
+      },
+      "textOverlayFriendly": true,
+      "suggestedTextOverlay": "The Ultimate Choice Awaits",
+      "suggestedSfx": "epic-climax"
+    },
+    "AUDIO_EXTRACTION": {
+      "worthExtractingAudio": true,
+      "audioType": "dialogue / music / sfx",
+      "audioDescription": "final voiceover with climactic music and various SFX",
+      "audioUsableFor": "trailer outro, call to action"
+    },
+    "CREATIVE": {
+      "whatMakesThisUnique": "This segment combines all the marketing elements and narrative themes into a powerful, climactic sequence, ending with a direct call to action.",
+      "repurposeIdeas": [
+        "Use individual shots for social media posts about specific features",
+        "Create a shorter version focusing only on the 'Choose Your Side' message"
+      ],
+      "transitionInto": "Hard cut from previous scene",
+      "transitionOutOf": "Fade to black",
+      "pairsWellWith": "Any preceding scene, as it acts as a grand finale"
+    },
+    "LEARNING": {
+      "techniqueUsed": "Rapid montage, thematic repetition, direct call to action",
+      "whyItWorks": "Effectively summarizes the project's scope, highlights key features, and provides a clear directive to the audience, ending on a high emotional note.",
+      "whatToAvoid": "Overloading with too much information in a short time, which could confuse the viewer.",
+      "applicableToOurBrand": true,
+      "brandFitScore": 10
+    }
+  },
+  {
+    "type": "summary",
+    "totalScenes": 15,
+    "totalDuration": 89.5,
+    "overallQuality": 9,
+    "overallEnergy": {
+      "average": 7.5,
+      "peak": 10,
+      "peakTimestamp": 129.5
+    },
+    "dominantMoods": [
+      "epic",
+      "mysterious",
+      "dramatic",
+      "aggressive",
+      "awe"
+    ],
+    "dominantColors": [
+      "#1a0a4e",
+      "#ff6600",
+      "#0a0a1a",
+      "#f0f0f0",
+      "#4b0082"
+    ],
+    "musicAnalysis": {
+      "genre": "orchestral hybrid",
+      "bpm_estimate": 120,
+      "beatDropTimestamps": [
+        12.5,
+        54.5,
+        120.5
+      ],
+      "buildUpTimestamps": [
+        0,
+        8.5,
+        29.5,
+        44.5,
+        53.5,
+        105.5
+      ],
+      "quietMoments": []
+    },
+    "topClipMoments": [
+      {
+        "start": 0,
+        "end": 4.5,
+        "reason": "Strong opening hook, establishes theme",
+        "score": 9.5
+      },
+      {
+        "start": 12.3,
+        "end": 14.3,
+        "reason": "Visually impactful explosion with audio sync",
+        "score": 9
+      },
+      {
+        "start": 14.7,
+        "end": 17.3,
+        "reason": "Unique and ethereal visual reveal",
+        "score": 9
+      },
+      {
+        "start": 35.5,
+        "end": 38.3,
+        "reason": "Visceral action and creature reveal",
+        "score": 9
+      },
+      {
+        "start": 53.5,
+        "end": 56.3,
+        "reason": "Climactic planet destruction, high stakes",
+        "score": 9.5
+      },
+      {
+        "start": 105.5,
+        "end": 129.5,
+        "reason": "Comprehensive and powerful call to action",
+        "score": 10
+      }
+    ],
+    "techniquesIdentified": [
+      {
+        "name": "Split composition",
+        "timestamp": 0,
+        "effectiveness": 9
+      },
+      {
+        "name": "High contrast lighting",
+        "timestamp": 4.5,
+        "effectiveness": 8
+      },
+      {
+        "name": "Dynamic camera movement (tracking)",
+        "timestamp": 8.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Beat-synced VFX (explosion)",
+        "timestamp": 12.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Symbolic imagery (celestial eye)",
+        "timestamp": 14.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Cultural fusion (Anubis)",
+        "timestamp": 17.5,
+        "effectiveness": 8
+      },
+      {
+        "name": "Ethereal VFX",
+        "timestamp": 20.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Juxtaposition (Ascended army vs. eye)",
+        "timestamp": 23.5,
+        "effectiveness": 8
+      },
+      {
+        "name": "God rays / Silhouette",
+        "timestamp": 29.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Rapid editing / Visceral VFX",
+        "timestamp": 32.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Ethereal lighting",
+        "timestamp": 38.5,
+        "effectiveness": 8
+      },
+      {
+        "name": "Fire VFX",
+        "timestamp": 44.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Match cut (thematic)",
+        "timestamp": 50.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Character showcase / Split screen",
+        "timestamp": 102.5,
+        "effectiveness": 9
+      },
+      {
+        "name": "Montage with direct call to action",
+        "timestamp": 105.5,
+        "effectiveness": 10
+      }
+    ],
+    "sfxTimeline": [
+      {
+        "time": 0,
+        "type": "deep rumble"
+      },
+      {
+        "time": 0.5,
+        "type": "whoosh"
+      },
+      {
+        "time": 9,
+        "type": "sword clash"
+      },
+      {
+        "time": 10.5,
+        "type": "impact"
+      },
+      {
+        "time": 11.5,
+        "type": "whoosh"
+      },
+      {
+        "time": 12.5,
+        "type": "explosion"
+      },
+      {
+        "time": 14.5,
+        "type": "chime"
+      },
+      {
+        "time": 17.5,
+        "type": "chime"
+      },
+      {
+        "time": 20.5,
+        "type": "chime"
+      },
+      {
+        "time": 26,
+        "type": "whoosh"
+      },
+      {
+        "time": 26.5,
+        "type": "chime"
+      },
+      {
+        "time": 30.5,
+        "type": "lightning"
+      },
+      {
+        "time": 33.5,
+        "type": "growl"
+      },
+      {
+        "time": 35.5,
+        "type": "impact"
+      },
+      {
+        "time": 36.5,
+        "type": "squish"
+      },
+      {
+        "time": 38.5,
+        "type": "whoosh"
+      },
+      {
+        "time": 44.5,
+        "type": "fire roar"
+      },
+      {
+        "time": 45.5,
+        "type": "explosion"
+      },
+      {
+        "time": 53.5,
+        "type": "energy beam"
+      },
+      {
+        "time": 54.5,
+        "type": "explosion"
+      },
+      {
+        "time": 59.5,
+        "type": "whoosh"
+      },
+      {
+        "time": 102.5,
+        "type": "water splash"
+      },
+      {
+        "time": 103.5,
+        "type": "roar"
+      },
+      {
+        "time": 105.5,
+        "type": "chime"
+      },
+      {
+        "time": 109.5,
+        "type": "roar"
+      },
+      {
+        "time": 112.5,
+        "type": "impact"
+      },
+      {
+        "time": 118.5,
+        "type": "thunder"
+      },
+      {
+        "time": 120.5,
+        "type": "whoosh"
+      }
+    ],
+    "overallAssessment": "This video is a high-quality, action-packed trailer effectively showcasing a rich, cosmic fantasy world. It uses a diverse range of visual styles, from grand establishing shots to intense close-up action, and integrates clear text overlays to convey narrative and marketing points. The orchestral hybrid music perfectly complements the visuals, building tension and excitement. The voiceover is clear and compelling, guiding the viewer through the lore and features. The video successfully creates a sense of epic scale, ancient powers, and personal involvement, culminating in a strong call to action for its NFT-based game.",
+    "topLessonsLearned": [
+      "Effective use of split-screen and contrasting color palettes to represent opposing forces.",
+      "Strategic placement of text overlays to convey key information without distracting from visuals.",
+      "Synchronization of music swells, beat drops, and SFX with visual climaxes enhances emotional impact.",
+      "Blending diverse art styles (realistic CGI, anime, stylized fantasy) can create a unique and expansive world feel.",
+      "A strong voiceover can effectively narrate complex lore and guide the viewer through a fast-paced trailer."
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Final follow-up on the CM Founders invite. If the timing's off, no worries — just reply when you're back in CM and I'll get you in.
+
+Hope to cross paths at an event sometime.

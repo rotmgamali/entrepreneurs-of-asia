@@ -1,0 +1,127 @@
+{
+  "name": "EOA – Welcome Email Sequence",
+  "description": "Triggered by the RSVP Intake workflow for auto-approved leads. Sends a 3-touch email sequence: Day 0 approval email, Day 1 invite links (WhatsApp + Telegram + niche subgroups), Day 7 feedback + referral prompt.",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Welcome Sequence Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-welcome-sequence",
+        "responseMode": "onReceived"
+      },
+      "notes": "Called by rsvp-intake.json. Set this URL as N8N_WELCOME_SEQUENCE_URL. Expects: name, email, whatsapp, businessNiche, website, socials, matchedSubgroups, approvedAt."
+    },
+    {
+      "id": "build-subgroup-links",
+      "name": "Build Niche Subgroup Links",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "const d = $input.first().json;\nconst subgroupEnvMap = {\n  tech:       $env.WA_GROUP_TECH_INVITE,\n  marketing:  $env.WA_GROUP_MARKETING_INVITE,\n  ecommerce:  $env.WA_GROUP_ECOMMERCE_INVITE,\n  media:      $env.WA_GROUP_MEDIA_INVITE,\n  agency:     $env.WA_GROUP_AGENCY_INVITE,\n  finance:    $env.WA_GROUP_FINANCE_INVITE,\n};\nconst subgroupNameMap = {\n  tech:       'EOA CM – Tech & SaaS',\n  marketing:  'EOA CM – Marketing & Growth',\n  ecommerce:  'EOA CM – E-commerce',\n  media:      'EOA CM – Media & Content',\n  agency:     'EOA CM – Agency & Services',\n  finance:    'EOA CM – Investors & Finance',\n};\n\n// Build HTML list of subgroup invites for Day 1 email\nconst matched = (d.matchedSubgroups || []);\nlet subgroupHtml = '';\nif (matched.length > 0) {\n  const items = matched\n    .filter(g => subgroupEnvMap[g.key])\n    .map(g => `<li><a href=\"${subgroupEnvMap[g.key]}\">${subgroupNameMap[g.key]}</a></li>`)\n    .join('');\n  if (items) {\n    subgroupHtml = `<p><strong>Based on your niche (${d.businessNiche}), we also recommend joining:</strong></p><ul>${items}</ul>`;\n  }\n}\n\nreturn [{ json: { ...d, subgroupHtml } }];"
+      }
+    },
+    {
+      "id": "day0-email",
+      "name": "Day 0 – Approval Email",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "=You're in! Welcome to EOA Chiang Mai 🎉",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">You're approved for Chiang Mai Founders! 🎉</h2><p>Hi {{$json.name}},</p><p>Welcome to <strong>Entrepreneurs of Asia – Chiang Mai</strong>. You've been approved as a community member.</p><h3>What to expect</h3><ul><li><strong>Weekly events</strong> every Thursday at 6 PM — curated founder meetups with speakers, lightning talks, and networking</li><li><strong>Private venues</strong> revealed to approved members only (check your invite email Day 1)</li><li><strong>WhatsApp community</strong> — direct access to 100+ founders and nomads based in Chiang Mai</li><li><strong>Telegram channel</strong> for announcements, event updates, and community news</li></ul><p>Tomorrow you'll receive your invite links for our WhatsApp and Telegram groups.</p><p>Keep an eye on your inbox!</p><p style=\"margin-top:32px\">See you Thursday,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": {
+        "smtp": { "id": "1", "name": "EOA SMTP" }
+      }
+    },
+    {
+      "id": "wait-24h",
+      "name": "Wait 24 Hours",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [900, 300],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 24,
+        "unit": "hours"
+      }
+    },
+    {
+      "id": "day1-email",
+      "name": "Day 1 – Invite Links Email",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [1100, 300],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "=Your EOA invite links — WhatsApp & Telegram",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">Your community invite links</h2><p>Hi {{$json.name}},</p><p>Here are your links to join the EOA Chiang Mai community groups:</p><h3>WhatsApp Community</h3><p><a href=\"{{$env.WA_GROUP_MAIN_INVITE}}\" style=\"background:#25D366;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;display:inline-block\">Join EOA WhatsApp Community</a></p><h3>Telegram Channel & Group</h3><ul><li><a href=\"{{$env.TELEGRAM_GROUP_INVITE_LINK}}\">EOA Chiang Mai Chat (Telegram)</a> — member discussions</li><li><a href=\"https://t.me/EOAChiangMai\">@EOAChiangMai</a> — event announcements channel</li></ul>{{$json.subgroupHtml}}<h3>Next Event</h3><p>Our next event is <strong>this Thursday at 6 PM</strong>. Check <a href=\"https://eoa.cm\">eoa.cm</a> for the venue (revealed to approved members).</p><p style=\"margin-top:32px\">See you soon,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": {
+        "smtp": { "id": "1", "name": "EOA SMTP" }
+      }
+    },
+    {
+      "id": "wait-6days",
+      "name": "Wait 6 More Days",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1300, 300],
+      "parameters": {
+        "resume": "timeInterval",
+        "amount": 6,
+        "unit": "days"
+      },
+      "notes": "Total elapsed: 7 days from approval (1 day + 6 days)."
+    },
+    {
+      "id": "day7-email",
+      "name": "Day 7 – Feedback + Referral Email",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [1500, 300],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "=Quick check-in from the EOA team 🙏",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">How are you settling in?</h2><p>Hi {{$json.name}},</p><p>It's been a week since you joined EOA Chiang Mai. We'd love to hear from you.</p><h3>Quick feedback (2 questions)</h3><ol><li>Have you attended an EOA event yet? If so, what was your highlight?</li><li>What would make EOA more valuable for you?</li></ol><p><a href=\"{{$env.FEEDBACK_FORM_URL}}\" style=\"background:#1a1a2e;color:white;padding:10px 20px;text-decoration:none;border-radius:4px;display:inline-block\">Share your feedback →</a></p><hr style=\"margin:24px 0\"><h3>Know a great founder?</h3><p>EOA stays valuable because of the calibre of our members. If you know a founder or entrepreneur in Chiang Mai who'd benefit from the community — or is heading here soon — send them your personal invite:</p><p><a href=\"https://eoa.cm/rsvp\">https://eoa.cm/rsvp</a></p><p>The more builders we bring together, the better the conversations.</p><p style=\"margin-top:32px\">Thanks for being part of it,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": {
+        "smtp": { "id": "1", "name": "EOA SMTP" }
+      }
+    }
+  ],
+  "connections": {
+    "trigger": { "main": [[{ "node": "build-subgroup-links", "type": "main", "index": 0 }]] },
+    "build-subgroup-links": { "main": [[{ "node": "day0-email", "type": "main", "index": 0 }]] },
+    "day0-email": { "main": [[{ "node": "wait-24h", "type": "main", "index": 0 }]] },
+    "wait-24h": { "main": [[{ "node": "day1-email", "type": "main", "index": 0 }]] },
+    "day1-email": { "main": [[{ "node": "wait-6days", "type": "main", "index": 0 }]] },
+    "wait-6days": { "main": [[{ "node": "day7-email", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "requiredEnvVars": [
+    "EMAIL_FROM",
+    "WA_GROUP_MAIN_INVITE",
+    "WA_GROUP_TECH_INVITE",
+    "WA_GROUP_MARKETING_INVITE",
+    "WA_GROUP_ECOMMERCE_INVITE",
+    "WA_GROUP_MEDIA_INVITE",
+    "WA_GROUP_AGENCY_INVITE",
+    "WA_GROUP_FINANCE_INVITE",
+    "TELEGRAM_GROUP_INVITE_LINK",
+    "FEEDBACK_FORM_URL"
+  ],
+  "notes": "Set webhook path to 'eoa-welcome-sequence'. The webhook URL becomes N8N_WELCOME_SEQUENCE_URL in rsvp-intake.json. Requires SMTP credential named 'EOA SMTP' configured in N8N credentials. TELEGRAM_GROUP_INVITE_LINK must be set once the Telegram group is created (pending ENT-14)."
+}

@@ -1,0 +1,42 @@
+{
+  "title": "Speaker Spotlight — Short Form",
+  "duration": 20,
+  "theme": "professional-focused",
+  "angle": "speaker-spotlight",
+  "sections": {
+    "hook": { "start": 0, "end": 3, "mood": "attention-grab", "note": "Speaker's most quotable moment" },
+    "intro": { "start": 3, "end": 7, "mood": "professional", "note": "Speaker name + title overlay" },
+    "content": { "start": 7, "end": 16, "mood": "inspiring", "note": "Key insight or advice clip" },
+    "cta": { "start": 16, "end": 20, "mood": "warm", "note": "Follow speaker + event info" }
+  },
+  "textCards": [
+    {
+      "text": "[SPEAKER NAME]",
+      "timing": "intro",
+      "style": "modern-bold",
+      "size": "x-large",
+      "color": "#ffffff"
+    },
+    {
+      "text": "[SPEAKER TITLE / COMPANY]",
+      "timing": "intro",
+      "style": "modern",
+      "size": "medium",
+      "color": "#cccccc"
+    },
+    {
+      "text": "Entrepreneurs of Asia | Chiang Mai",
+      "timing": "cta",
+      "style": "modern",
+      "size": "medium",
+      "color": "#ff6b35"
+    }
+  ],
+  "audioMix": {
+    "voiceover": { "volume": 0, "note": "No VO — speaker's own audio" },
+    "music": { "volume": 0.15, "note": "Barely there, just presence" },
+    "sfx": { "volume": 0.2, "note": "Minimal — one transition" },
+    "clipAudio": { "volume": 1.0, "note": "Speaker audio is THE content" }
+  },
+  "targetScore": 80
+}

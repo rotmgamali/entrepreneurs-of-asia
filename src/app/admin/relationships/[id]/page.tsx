@@ -1,6 +1,7 @@
 export const dynamic = "force-dynamic";
 
-import { supabaseAdmin, type Partner, type Touchpoint, type Commitment } from "@/lib/supabase";
+import { SHEET, findRowBy, getRows } from "@/lib/sheets";
+import type { Partner, Touchpoint, Commitment } from "@/lib/supabase";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -24,25 +25,55 @@ type Params = { params: Promise<{ id: string }> };
 export default async function PartnerDetailPage({ params }: Params) {
   const { id } = await params;
 
-  const [partnerRes, touchpointsRes, commitmentsRes] = await Promise.all([
-    supabaseAdmin.from("partners").select("*").eq("id", id).single(),
-    supabaseAdmin
-      .from("touchpoints")
-      .select("*")
-      .eq("partner_id", id)
-      .order("occurred_at", { ascending: false }),
-    supabaseAdmin
-      .from("commitments")
-      .select("*")
-      .eq("partner_id", id)
-      .order("due_date", { ascending: true }),
+  const [partnerRes, allTouchpoints, allCommitments] = await Promise.all([
+    findRowBy(SHEET.partners, "id", id),
+    getRows(SHEET.touchpoints),
+    getRows(SHEET.commitments),
   ]);
 
-  if (partnerRes.error) notFound();
+  if (!partnerRes) notFound();
 
-  const partner = partnerRes.data as Partner;
-  const touchpoints = (touchpointsRes.data ?? []) as Touchpoint[];
-  const commitments = (commitmentsRes.data ?? []) as Commitment[];
+  const partner: Partner = {
+    id: partnerRes.row.id,
+    name: partnerRes.row.name,
+    type: partnerRes.row.type as Partner["type"],
+    company: partnerRes.row.company || null,
+    email: partnerRes.row.email || null,
+    phone: partnerRes.row.phone || null,
+    status: partnerRes.row.status as Partner["status"],
+    notes: partnerRes.row.notes || null,
+    renewal_date: partnerRes.row.renewal_date || null,
+    created_at: partnerRes.row.created_at,
+    updated_at: partnerRes.row.updated_at,
+  };
+
+  const touchpoints: Touchpoint[] = allTouchpoints
+    .filter(({ row }) => row.partner_id === id)
+    .sort((a, b) => b.row.occurred_at.localeCompare(a.row.occurred_at))
+    .map(({ row }) => ({
+      id: row.id,
+      partner_id: row.partner_id,
+      type: row.type as Touchpoint["type"],
+      summary: row.summary,
+      occurred_at: row.occurred_at,
+      created_by: row.created_by || null,
+      created_at: row.created_at,
+    }));
+
+  const commitments: Commitment[] = allCommitments
+    .filter(({ row }) => row.partner_id === id)
+    .sort((a, b) => (a.row.due_date || "").localeCompare(b.row.due_date || ""))
+    .map(({ row }) => ({
+      id: row.id,
+      partner_id: row.partner_id,
+      title: row.title,
+      description: row.description || null,
+      due_date: row.due_date || null,
+      status: row.status as Commitment["status"],
+      deliverable_url: row.deliverable_url || null,
+      created_at: row.created_at,
+      updated_at: row.updated_at,
+    }));
 
   return (
     <div className="min-h-screen p-8 max-w-4xl mx-auto">

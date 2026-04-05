@@ -1,0 +1,409 @@
+{
+  "name": "EOA – Post-Event VIP Follow-up Sequence (Speaker & Sponsor)",
+  "description": "Handles the post-event email sequence for speaker and sponsor segments. Triggered by the Next.js /api/events/[id]/followup route via N8N_FOLLOWUP_SPEAKER_URL and N8N_FOLLOWUP_SPONSOR_URL (both can point to this webhook — segment detected from payload). Loops over the attendees array, branches on segment (speaker vs sponsor), and sends the appropriate multi-step sequence. Speakers get: D+0 thank-you, D+1 AI-generated LinkedIn post draft, D+3 testimonial request, D+14 internal task. Sponsors get: D+0 metrics email, D+1 full recap, D+3 deliverables check, D+30 internal renewal task. Adapted from Ivybound AI personalisation pattern.",
+  "requiredEnvVars": [
+    "EMAIL_FROM",
+    "GOOGLE_SPREADSHEET_ID",
+    "N8N_INTERNAL_TASK_URL"
+  ],
+  "credentialsNeeded": [
+    "EOA SMTP (smtp, id: 1)",
+    "EOA OpenAI (openAiApi, id: 1)",
+    "EOA Google Sheets (googleSheetsOAuth2Api, id: 1)"
+  ],
+  "n8nEnvVarSetup": "N8N_FOLLOWUP_SPEAKER_URL and N8N_FOLLOWUP_SPONSOR_URL should both point to <n8n-base>/webhook/eoa-followup-vip",
+  "payloadFormat": {
+    "event": { "id": "string", "title": "string", "event_date": "ISO string" },
+    "sequence": { "segment": "speaker|sponsor", "label": "string", "steps": "array" },
+    "attendees": [{ "id": "string", "name": "string", "email": "string" }],
+    "triggered_at": "ISO string"
+  },
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "VIP Sequence Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-followup-vip",
+        "responseMode": "onReceived"
+      },
+      "notes": "Set N8N_FOLLOWUP_SPEAKER_URL and N8N_FOLLOWUP_SPONSOR_URL to this URL. Payload: { event, sequence, attendees: [{id, name, email}], triggered_at }"
+    },
+    {
+      "id": "extract-vips",
+      "name": "Extract VIPs Array",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "// Ivybound pattern: flatten payload before splitInBatches.\nconst d = $input.first().json;\nconst event = d.event || {};\nconst sequence = d.sequence || {};\nconst attendees = d.attendees || [];\n\nreturn attendees.map(a => ({\n  json: {\n    ...a,\n    segment: sequence.segment || 'speaker',\n    eventId: event.id,\n    eventTitle: event.title,\n    eventDate: event.event_date,\n    triggeredAt: d.triggered_at,\n  }\n}));"
+      }
+    },
+    {
+      "id": "loop-vips",
+      "name": "Loop – One VIP at a Time",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "batchSize": 1,
+        "options": { "reset": false }
+      }
+    },
+    {
+      "id": "branch-vip-type",
+      "name": "Speaker or Sponsor?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "parameters": {
+        "conditions": {
+          "string": [
+            { "value1": "={{$json.segment}}", "operation": "equal", "value2": "speaker" }
+          ]
+        }
+      }
+    },
+
+    {
+      "id": "send-d0-speaker",
+      "name": "Speaker D+0 – Thank-you + Recording Note",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [1120, 160],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "=Your talk was brilliant — here's what happens next",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">Thank you for speaking at EOA</h2><p>Hi {{$json.name}},</p><p>Your talk at <strong>{{$json.eventTitle}}</strong> was one of the highlights of the evening. The room was engaged and we had several attendees ask for your contact details afterwards.</p><h3>Recording</h3><p>Your raw video will be ready within 48 hours. We'll share it in the WhatsApp community and tag you directly. If you'd like the full unedited file, just reply to this email.</p><h3>What's coming</h3><ul><li><strong>Tomorrow:</strong> A pre-written LinkedIn post you can use to amplify your talk</li><li><strong>Day 3:</strong> A short testimonial request (entirely optional)</li></ul><p>Thanks again for sharing your knowledge. The community is stronger because you showed up.</p><p style=\"margin-top:32px\">With gratitude,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d1-speaker",
+      "name": "Speaker – Wait 24h → D+1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1340, 160],
+      "parameters": { "resume": "timeInterval", "amount": 24, "unit": "hours" }
+    },
+    {
+      "id": "ai-linkedin-post",
+      "name": "AI – Draft LinkedIn Post for Speaker",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [1560, 160],
+      "parameters": {
+        "resource": "chat",
+        "model": "gpt-4o-mini",
+        "prompt": {
+          "messages": [
+            {
+              "role": "system",
+              "content": "You write concise, authentic LinkedIn posts for founders who just spoke at a community event. The post should sound like the speaker wrote it themselves — genuine and peer-level, not PR. Keep it under 200 words. Max 3 hashtags. Output ONLY valid JSON: { \"linkedinPost\": \"...\" }"
+            },
+            {
+              "role": "user",
+              "content": "=Write a LinkedIn post for {{$json.name}} who just spoke at {{$json.eventTitle}} on {{$json.eventDate}}.\n\nThe post should:\n- Sound like the speaker wrote it (first person)\n- Mention speaking at an Entrepreneurs of Asia event in Chiang Mai\n- Use [YOUR TALK TOPIC] as a placeholder for the specific topic (they will fill it in)\n- Share one insight or reflection from the experience\n- Tag @EOAChiangMai\n- Feel human and specific, not generic\n\nOutput ONLY valid JSON: { \"linkedinPost\": \"...\" }"
+            }
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "credentials": { "openAiApi": { "id": "1", "name": "EOA OpenAI" } },
+      "notes": "Ivybound pattern: AI generates personalised draft content per VIP. Adapted for LinkedIn post instead of cold sales email."
+    },
+    {
+      "id": "parse-linkedin",
+      "name": "Parse LinkedIn Post",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1780, 160],
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.message?.content || '';\nlet parsed = { linkedinPost: raw };\ntry {\n  const clean = raw.replace(/^```json\\n?/, '').replace(/\\n?```$/, '').trim();\n  parsed = JSON.parse(clean);\n} catch (e) {}\nconst d = $('Loop – One VIP at a Time').first().json;\nreturn [{ json: { ...d, linkedinPost: parsed.linkedinPost || raw } }];"
+      }
+    },
+    {
+      "id": "send-d1-speaker",
+      "name": "Speaker D+1 – LinkedIn Post Draft",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [2000, 160],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "Pre-written LinkedIn post — ready for you to post",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">Your LinkedIn draft — edit and post whenever you're ready</h2><p>Hi {{$json.name}},</p><p>We put together a LinkedIn post based on your talk. It's just a starting point — edit it however you like before posting.</p><p>If you do post it, tagging <strong>@EOAChiangMai</strong> helps us reach other Chiang Mai founders.</p><hr style=\"margin:24px 0\"><blockquote style=\"background:#f8f8f8;padding:16px 20px;border-left:4px solid #1a1a2e;font-style:normal;white-space:pre-wrap;line-height:1.6\">{{$json.linkedinPost}}</blockquote><hr style=\"margin:24px 0\"><p>Just copy and paste into LinkedIn. Reply to this email if you'd like us to tweak the tone.</p><p style=\"margin-top:32px\">The EOA Team<br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d3-speaker",
+      "name": "Speaker – Wait 48h → D+3",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2220, 160],
+      "parameters": { "resume": "timeInterval", "amount": 48, "unit": "hours" }
+    },
+    {
+      "id": "send-d3-speaker",
+      "name": "Speaker D+3 – Testimonial Request",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [2440, 160],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "Would you leave us a quick testimonial?",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">A small favour</h2><p>Hi {{$json.name}},</p><p>We're building out a speaker showcase on <a href=\"https://eoa.cm\">eoa.cm</a> and would love to include a short quote from you about your experience at EOA.</p><p>Two or three sentences is perfect — just reply to this email with something honest. We'll always send you a preview before publishing anything.</p><p>Entirely optional — no pressure either way.</p><p style=\"margin-top:32px\">Thanks again,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d14-speaker",
+      "name": "Speaker – Wait 11 Days → D+14",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2660, 160],
+      "parameters": { "resume": "timeInterval", "amount": 264, "unit": "hours" }
+    },
+    {
+      "id": "internal-task-speaker",
+      "name": "Speaker D+14 – Internal Follow-up Task",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2880, 160],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.N8N_INTERNAL_TASK_URL}}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\"type\": \"speaker_next_opportunity\", \"name\": \"{{$json.name}}\", \"email\": \"{{$json.email}}\", \"eventTitle\": \"{{$json.eventTitle}}\", \"notes\": \"Reach out to discuss next speaking slot or referral. Spoke at {{$json.eventTitle}} on {{$json.eventDate}}.\", \"dueDate\": \"{{$now.plus({days: 7}).toISO()}}\"}"
+      },
+      "continueOnFail": true
+    },
+    {
+      "id": "update-crm-speaker-done",
+      "name": "Google Sheets CRM – Speaker Sequence Done",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [3100, 160],
+      "parameters": {
+        "operation": "update",
+        "documentId": { "__rl": true, "value": "={{$env.GOOGLE_SPREADSHEET_ID}}", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Contacts", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Last_Event_Date": "={{$json.eventDate}}",
+            "Follow_Up_Status": "Sequence_Complete_speaker",
+            "Last_Updated": "={{$now.toISO()}}"
+          },
+          "matchingColumns": ["email"],
+          "schema": [
+            { "id": "email", "displayName": "email", "required": false, "defaultMatch": true, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "Last_Event_Date", "displayName": "Last_Event_Date", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Follow_Up_Status", "displayName": "Follow_Up_Status", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Last_Updated", "displayName": "Last_Updated", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
+          ]
+        },
+        "options": {}
+      },
+      "credentials": { "googleSheetsOAuth2Api": { "id": "1", "name": "EOA Google Sheets" } },
+      "continueOnFail": true
+    },
+
+    {
+      "id": "send-d0-sponsor",
+      "name": "Sponsor D+0 – Thank-you + Metrics",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [1120, 440],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "=Thank you — here are last night's numbers",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">{{$json.eventTitle}} — Event Summary</h2><p>Hi {{$json.name}},</p><p>Thank you for supporting <strong>{{$json.eventTitle}}</strong>. Here's a quick snapshot of the evening:</p><table style=\"width:100%;border-collapse:collapse;margin:16px 0\"><tr style=\"background:#f0f0f0\"><th style=\"text-align:left;padding:8px;border:1px solid #ddd\">Metric</th><th style=\"text-align:left;padding:8px;border:1px solid #ddd\">Result</th></tr><tr><td style=\"padding:8px;border:1px solid #ddd\">Community reach</td><td style=\"padding:8px;border:1px solid #ddd\">Telegram + WhatsApp — 500+ active members</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\">Event attendance</td><td style=\"padding:8px;border:1px solid #ddd\">Confirmed in full recap (sent tomorrow)</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\">Audience profile</td><td style=\"padding:8px;border:1px solid #ddd\">Founders, operators, and digital nomads in Chiang Mai</td></tr></table><p>Full recap with photos and audience breakdown follows tomorrow.</p><p style=\"margin-top:32px\">With thanks,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d1-sponsor",
+      "name": "Sponsor – Wait 24h → D+1",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1340, 440],
+      "parameters": { "resume": "timeInterval", "amount": 24, "unit": "hours" }
+    },
+    {
+      "id": "send-d1-sponsor",
+      "name": "Sponsor D+1 – Full Event Recap",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [1560, 440],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "=Full event recap for your records",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">{{$json.eventTitle}} — Full Recap</h2><p>Hi {{$json.name}},</p><h3>Deliverables completed</h3><ul><li>Logo placement on event materials ✓</li><li>Verbal acknowledgment at the event ✓</li><li>Announcement in EOA Telegram channel ✓</li><li>WhatsApp community announcement ✓</li></ul><h3>Photos & Content</h3><p>Event photos and highlight clips will be shared across community channels within 48 hours. Your brand will be tagged where appropriate.</p><h3>Questions?</h3><p>If anything was missed or needs adjustment, please reply to this email. We check in again in a couple of days to confirm everything was delivered.</p><p style=\"margin-top:32px\">Thank you for your partnership,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d3-sponsor",
+      "name": "Sponsor – Wait 48h → D+3",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1780, 440],
+      "parameters": { "resume": "timeInterval", "amount": 48, "unit": "hours" }
+    },
+    {
+      "id": "send-d3-sponsor",
+      "name": "Sponsor D+3 – Deliverables Check",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [2000, 440],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$json.email}}",
+        "subject": "Checking in on your deliverables",
+        "emailType": "html",
+        "message": "=<!DOCTYPE html><html><body style=\"font-family:sans-serif;max-width:600px;margin:0 auto;color:#333\"><h2 style=\"color:#1a1a2e\">A quick check-in</h2><p>Hi {{$json.name}},</p><p>We wanted to confirm that all agreed deliverables from <strong>{{$json.eventTitle}}</strong> have been fulfilled on our end.</p><p>If anything was missed or you'd like any content adjusted or re-shared, reply to this email and we'll sort it immediately.</p><p>We'd also love your honest feedback on the event — what worked, what you'd like to see differently for future sponsorships.</p><p style=\"margin-top:32px\">Thanks again,<br><strong>The EOA Team</strong><br><a href=\"https://eoa.cm\">eoa.cm</a></p></body></html>"
+      },
+      "credentials": { "smtp": { "id": "1", "name": "EOA SMTP" } }
+    },
+    {
+      "id": "wait-d30-sponsor",
+      "name": "Sponsor – Wait 27 Days → D+30",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [2220, 440],
+      "parameters": { "resume": "timeInterval", "amount": 648, "unit": "hours" }
+    },
+    {
+      "id": "internal-task-sponsor",
+      "name": "Sponsor D+30 – Internal Renewal Task",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [2440, 440],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.N8N_INTERNAL_TASK_URL}}",
+        "sendBody": true,
+        "bodyContentType": "json",
+        "jsonBody": "={\"type\": \"sponsor_renewal_conversation\", \"name\": \"{{$json.name}}\", \"email\": \"{{$json.email}}\", \"eventTitle\": \"{{$json.eventTitle}}\", \"notes\": \"Initiate renewal conversation for next event. Sponsored {{$json.eventTitle}} on {{$json.eventDate}}.\", \"dueDate\": \"{{$now.plus({days: 7}).toISO()}}\"}"
+      },
+      "continueOnFail": true
+    },
+    {
+      "id": "update-crm-sponsor-done",
+      "name": "Google Sheets CRM – Sponsor Sequence Done",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [2660, 440],
+      "parameters": {
+        "operation": "update",
+        "documentId": { "__rl": true, "value": "={{$env.GOOGLE_SPREADSHEET_ID}}", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Contacts", "mode": "name" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Last_Event_Date": "={{$json.eventDate}}",
+            "Follow_Up_Status": "Sequence_Complete_sponsor",
+            "Last_Updated": "={{$now.toISO()}}"
+          },
+          "matchingColumns": ["email"],
+          "schema": [
+            { "id": "email", "displayName": "email", "required": false, "defaultMatch": true, "display": true, "type": "string", "canBeUsedToMatch": true, "removed": false },
+            { "id": "Last_Event_Date", "displayName": "Last_Event_Date", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Follow_Up_Status", "displayName": "Follow_Up_Status", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false },
+            { "id": "Last_Updated", "displayName": "Last_Updated", "required": false, "defaultMatch": false, "display": true, "type": "string", "canBeUsedToMatch": false, "removed": false }
+          ]
+        },
+        "options": {}
+      },
+      "credentials": { "googleSheetsOAuth2Api": { "id": "1", "name": "EOA Google Sheets" } },
+      "continueOnFail": true
+    }
+  ],
+  "connections": {
+    "VIP Sequence Webhook": {
+      "main": [[{ "node": "Extract VIPs Array", "type": "main", "index": 0 }]]
+    },
+    "Extract VIPs Array": {
+      "main": [[{ "node": "Loop – One VIP at a Time", "type": "main", "index": 0 }]]
+    },
+    "Loop – One VIP at a Time": {
+      "main": [[{ "node": "Speaker or Sponsor?", "type": "main", "index": 0 }]]
+    },
+    "Speaker or Sponsor?": {
+      "main": [
+        [{ "node": "Speaker D+0 – Thank-you + Recording Note", "type": "main", "index": 0 }],
+        [{ "node": "Sponsor D+0 – Thank-you + Metrics", "type": "main", "index": 0 }]
+      ]
+    },
+    "Speaker D+0 – Thank-you + Recording Note": {
+      "main": [[{ "node": "Speaker – Wait 24h → D+1", "type": "main", "index": 0 }]]
+    },
+    "Speaker – Wait 24h → D+1": {
+      "main": [[{ "node": "AI – Draft LinkedIn Post for Speaker", "type": "main", "index": 0 }]]
+    },
+    "AI – Draft LinkedIn Post for Speaker": {
+      "main": [[{ "node": "Parse LinkedIn Post", "type": "main", "index": 0 }]]
+    },
+    "Parse LinkedIn Post": {
+      "main": [[{ "node": "Speaker D+1 – LinkedIn Post Draft", "type": "main", "index": 0 }]]
+    },
+    "Speaker D+1 – LinkedIn Post Draft": {
+      "main": [[{ "node": "Speaker – Wait 48h → D+3", "type": "main", "index": 0 }]]
+    },
+    "Speaker – Wait 48h → D+3": {
+      "main": [[{ "node": "Speaker D+3 – Testimonial Request", "type": "main", "index": 0 }]]
+    },
+    "Speaker D+3 – Testimonial Request": {
+      "main": [[{ "node": "Speaker – Wait 11 Days → D+14", "type": "main", "index": 0 }]]
+    },
+    "Speaker – Wait 11 Days → D+14": {
+      "main": [[{ "node": "Speaker D+14 – Internal Follow-up Task", "type": "main", "index": 0 }]]
+    },
+    "Speaker D+14 – Internal Follow-up Task": {
+      "main": [[{ "node": "Google Sheets CRM – Speaker Sequence Done", "type": "main", "index": 0 }]]
+    },
+    "Google Sheets CRM – Speaker Sequence Done": {
+      "main": [[{ "node": "Loop – One VIP at a Time", "type": "main", "index": 0 }]]
+    },
+    "Sponsor D+0 – Thank-you + Metrics": {
+      "main": [[{ "node": "Sponsor – Wait 24h → D+1", "type": "main", "index": 0 }]]
+    },
+    "Sponsor – Wait 24h → D+1": {
+      "main": [[{ "node": "Sponsor D+1 – Full Event Recap", "type": "main", "index": 0 }]]
+    },
+    "Sponsor D+1 – Full Event Recap": {
+      "main": [[{ "node": "Sponsor – Wait 48h → D+3", "type": "main", "index": 0 }]]
+    },
+    "Sponsor – Wait 48h → D+3": {
+      "main": [[{ "node": "Sponsor D+3 – Deliverables Check", "type": "main", "index": 0 }]]
+    },
+    "Sponsor D+3 – Deliverables Check": {
+      "main": [[{ "node": "Sponsor – Wait 27 Days → D+30", "type": "main", "index": 0 }]]
+    },
+    "Sponsor – Wait 27 Days → D+30": {
+      "main": [[{ "node": "Sponsor D+30 – Internal Renewal Task", "type": "main", "index": 0 }]]
+    },
+    "Sponsor D+30 – Internal Renewal Task": {
+      "main": [[{ "node": "Google Sheets CRM – Sponsor Sequence Done", "type": "main", "index": 0 }]]
+    },
+    "Google Sheets CRM – Sponsor Sequence Done": {
+      "main": [[{ "node": "Loop – One VIP at a Time", "type": "main", "index": 0 }]]
+    }
+  }
+}

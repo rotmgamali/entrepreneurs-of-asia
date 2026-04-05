@@ -1,0 +1,11 @@
+# EOA Outreach Engine dependencies
+# pip install -r outreach/requirements.txt
+
+openai>=1.0.0
+apscheduler>=3.10.0
+pytz
+python-dotenv
+gspread>=5.0.0
+google-auth>=2.0.0
+requests
+beautifulsoup4

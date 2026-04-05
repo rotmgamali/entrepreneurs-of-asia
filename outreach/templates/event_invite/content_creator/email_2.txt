@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Just following up on the CM Founders invite. Last week's talk was from a creator who's turned an audience into a $500k/year info product business — the monetization breakdown was genuinely useful.
+
+If you're in Chiang Mai, come check it out: [RSVP_URL]

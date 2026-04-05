@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Following up on the CM Founders invite. Last week's talk was from an agency owner running a remote team across Southeast Asia — the bit on client acquisition without paid ads went down well.
+
+If you're based in CM or passing through, it's worth coming once. It's free: [RSVP_URL]

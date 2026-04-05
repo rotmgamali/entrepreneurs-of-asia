@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Following up on the speaker invite. We have a spot open in the next few weeks — 20 minutes, curated audience of 40 founders, and you get a produced clip afterward.
+
+If the timing works, I'd love to have you on the lineup.

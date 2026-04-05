@@ -1,0 +1,11 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run CM Founders — a weekly Thursday event in Chiang Mai for founders and creators. We do one 20-min talk per event from someone with real experience to share.
+
+The audience would love to hear how you've built and monetized your work in {{ business_niche }}. The format is honest and tactical — no stage fright required.
+
+We produce a fully edited content clip from your talk, ready to post on your channels.
+
+Want in? Reply and I'll send the details.

@@ -1,0 +1,231 @@
+{
+  "name": "EOA – Blotato Social Posting Pipeline",
+  "description": "Triggered by the video clip pipeline (Lincoln) or manually. Generates platform-specific captions via AI, then schedules posts across Facebook, Instagram, LinkedIn, and Twitter via the EOA social posting API (which calls Blotato).",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "Webhook – Video Clip Ready",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-social-post",
+        "responseMode": "onReceived"
+      },
+      "notes": "Call this webhook from Lincoln (video pipeline) when a clip is ready, or from any manual trigger. Expected payload: { videoUrl, transcript, eventTitle, eventId, scheduledAt (ISO8601, optional), platforms (optional array) }"
+    },
+    {
+      "id": "validate",
+      "name": "Validate Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nif (!input.videoUrl && !input.transcript) {\n  throw new Error('Payload must include at least videoUrl or transcript');\n}\nreturn [{ json: input }];"
+      }
+    },
+    {
+      "id": "generate-captions",
+      "name": "AI – Generate Platform Captions",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [680, 300],
+      "parameters": {
+        "operation": "text",
+        "model": "gpt-4o",
+        "prompt": "=You are a social media content writer for Entrepreneurs of Asia, a community for founders and digital nomads in Chiang Mai, Thailand.\n\nEvent: {{ $json.eventTitle }}\n{% if $json.transcript %}Transcript excerpt: {{ $json.transcript.slice(0, 1000) }}{% endif %}\n\nWrite platform-specific social media captions for this video clip. Return ONLY valid JSON with this exact structure:\n{\n  \"facebook\": \"[engaging post, 2-3 paragraphs, question at end, minimal hashtags]\",\n  \"instagram\": \"[punchy hook, visual language, 5-7 hashtag slugs in hashtags field]\",\n  \"linkedin\": \"[professional insight, 3 takeaways, thought leadership tone]\",\n  \"twitter\": \"[max 220 chars, punchy, 1-2 hashtags inline]\",\n  \"hashtags\": [\"EntrepreneursOfAsia\", \"ChiangMai\", \"DigitalNomad\", \"EOAChiangMai\", \"NomadCommunity\"]\n}\n\nBrand voice: authentic, community-first, entrepreneurial. Never cringe or salesy.",
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 1200
+        }
+      },
+      "notes": "Uses OpenAI to generate all 4 platform captions from the event transcript. Replace with your preferred LLM if needed."
+    },
+    {
+      "id": "parse-captions",
+      "name": "Parse AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [900, 300],
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.text || $input.first().json.choices?.[0]?.message?.content || '';\nlet captions;\ntry {\n  // Strip markdown code fences if present\n  const cleaned = raw.replace(/^```json\\n?/, '').replace(/\\n?```$/, '');\n  captions = JSON.parse(cleaned);\n} catch (e) {\n  throw new Error('AI returned non-JSON: ' + raw.slice(0, 200));\n}\n\nconst input = $('Validate Input').first().json;\nreturn [{ json: { ...input, captions } }];"
+      }
+    },
+    {
+      "id": "post-facebook",
+      "name": "Post – Facebook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 120],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.EOA_SITE_URL}}/api/social/post",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-admin-secret", "value": "={{$env.ADMIN_SECRET}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "content", "value": "={{$json.captions.facebook}}" },
+            { "name": "hashtags", "value": "={{JSON.stringify($json.captions.hashtags)}}" },
+            { "name": "mediaUrls", "value": "={{JSON.stringify($json.videoUrl ? [$json.videoUrl] : [])}}" },
+            { "name": "scheduledAt", "value": "={{$json.scheduledAt || ''}}" },
+            { "name": "platforms", "value": "[\"facebook\"]" },
+            { "name": "source", "value": "video-clip-pipeline" },
+            { "name": "eventId", "value": "={{$json.eventId || ''}}" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "post-instagram",
+      "name": "Post – Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 260],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.EOA_SITE_URL}}/api/social/post",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-admin-secret", "value": "={{$env.ADMIN_SECRET}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "content", "value": "={{$json.captions.instagram}}" },
+            { "name": "hashtags", "value": "={{JSON.stringify($json.captions.hashtags)}}" },
+            { "name": "mediaUrls", "value": "={{JSON.stringify($json.videoUrl ? [$json.videoUrl] : [])}}" },
+            { "name": "scheduledAt", "value": "={{$json.scheduledAt || ''}}" },
+            { "name": "platforms", "value": "[\"instagram\"]" },
+            { "name": "source", "value": "video-clip-pipeline" },
+            { "name": "eventId", "value": "={{$json.eventId || ''}}" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "post-linkedin",
+      "name": "Post – LinkedIn",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 400],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.EOA_SITE_URL}}/api/social/post",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-admin-secret", "value": "={{$env.ADMIN_SECRET}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "content", "value": "={{$json.captions.linkedin}}" },
+            { "name": "hashtags", "value": "={{JSON.stringify($json.captions.hashtags)}}" },
+            { "name": "mediaUrls", "value": "={{JSON.stringify($json.videoUrl ? [$json.videoUrl] : [])}}" },
+            { "name": "scheduledAt", "value": "={{$json.scheduledAt || ''}}" },
+            { "name": "platforms", "value": "[\"linkedin\"]" },
+            { "name": "source", "value": "video-clip-pipeline" },
+            { "name": "eventId", "value": "={{$json.eventId || ''}}" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "post-twitter",
+      "name": "Post – Twitter/X",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 540],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.EOA_SITE_URL}}/api/social/post",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-admin-secret", "value": "={{$env.ADMIN_SECRET}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "content", "value": "={{$json.captions.twitter}}" },
+            { "name": "hashtags", "value": "={{JSON.stringify($json.captions.hashtags.slice(0, 2))}}" },
+            { "name": "mediaUrls", "value": "={{JSON.stringify($json.videoUrl ? [$json.videoUrl] : [])}}" },
+            { "name": "scheduledAt", "value": "={{$json.scheduledAt || ''}}" },
+            { "name": "platforms", "value": "[\"twitter\"]" },
+            { "name": "source", "value": "video-clip-pipeline" },
+            { "name": "eventId", "value": "={{$json.eventId || ''}}" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "merge-results",
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 2,
+      "position": [1360, 330],
+      "parameters": {
+        "mode": "combine",
+        "combinationMode": "mergeByPosition"
+      }
+    },
+    {
+      "id": "log-to-telegram",
+      "name": "Notify – Telegram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1580, 330],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.telegram.org/bot{{$env.TELEGRAM_BOT_TOKEN}}/sendMessage",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "chat_id", "value": "={{$env.TELEGRAM_GROUP_ID}}" },
+            { "name": "text", "value": "=✅ Social posts scheduled via Blotato\\n\\nEvent: {{ $('Validate Input').first().json.eventTitle }}\\n4 platforms queued" },
+            { "name": "parse_mode", "value": "HTML" }
+          ]
+        }
+      },
+      "notes": "Optional — notify the EOA ops Telegram group when posts are scheduled. Remove if not needed."
+    }
+  ],
+  "connections": {
+    "Webhook – Video Clip Ready": { "main": [[ { "node": "Validate Input", "type": "main", "index": 0 } ]] },
+    "Validate Input": { "main": [[ { "node": "AI – Generate Platform Captions", "type": "main", "index": 0 } ]] },
+    "AI – Generate Platform Captions": { "main": [[ { "node": "Parse AI Response", "type": "main", "index": 0 } ]] },
+    "Parse AI Response": {
+      "main": [
+        [
+          { "node": "Post – Facebook", "type": "main", "index": 0 },
+          { "node": "Post – Instagram", "type": "main", "index": 0 },
+          { "node": "Post – LinkedIn", "type": "main", "index": 0 },
+          { "node": "Post – Twitter/X", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Post – Facebook": { "main": [[ { "node": "Merge Results", "type": "main", "index": 0 } ]] },
+    "Post – Instagram": { "main": [[ { "node": "Merge Results", "type": "main", "index": 1 } ]] },
+    "Post – LinkedIn": { "main": [[ { "node": "Merge Results", "type": "main", "index": 2 } ]] },
+    "Post – Twitter/X": { "main": [[ { "node": "Merge Results", "type": "main", "index": 3 } ]] },
+    "Merge Results": { "main": [[ { "node": "Notify – Telegram", "type": "main", "index": 0 } ]] }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "notes": "ENV VARS REQUIRED (set in N8N environment):\n  EOA_SITE_URL       — e.g. https://eoa.cm or http://localhost:3000 for local dev\n  ADMIN_SECRET       — must match ADMIN_SECRET in Next.js .env.local\n  OPENAI_API_KEY     — for the AI caption generation node\n  TELEGRAM_BOT_TOKEN — for completion notifications (optional)\n  TELEGRAM_GROUP_ID  — EOA ops group ID (optional)\n\nBLOTATO SETUP (in Next.js .env.local):\n  BLOTATO_API_KEY                — from Blotato Settings → API Keys\n  BLOTATO_ACCOUNT_ID_FACEBOOK    — from Blotato Settings → Connected Accounts\n  BLOTATO_ACCOUNT_ID_INSTAGRAM   — from Blotato Settings → Connected Accounts\n  BLOTATO_ACCOUNT_ID_LINKEDIN    — from Blotato Settings → Connected Accounts\n  BLOTATO_ACCOUNT_ID_TWITTER     — from Blotato Settings → Connected Accounts\n\nINTEGRATION WITH VIDEO PIPELINE (Lincoln):\n  After Lincoln generates a video clip, call this webhook:\n  POST https://your-n8n.com/webhook/eoa-social-post\n  Body: { videoUrl, transcript, eventTitle, eventId, scheduledAt? }"
+}

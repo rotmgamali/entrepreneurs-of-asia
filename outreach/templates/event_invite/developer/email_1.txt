@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run CM Founders — a weekly Thursday event in Chiang Mai for builders and technical founders. About 40 people per event. Talks tend to be practical: how people are actually building and shipping, what's working, what's not.
+
+We get a good mix of solo devs, CTOs, and technical founders in the room. It's free and invite-only.
+
+Grab a spot here: [RSVP_URL] — or reply and I'll add you to the WhatsApp group directly.

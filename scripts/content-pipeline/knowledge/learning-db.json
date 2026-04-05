@@ -1,0 +1,1895 @@
+{
+  "videosAnalyzed": 28,
+  "techniquesDiscovered": [
+    "Stylized purple outline",
+    "Pixelated text",
+    "Grid-based combat",
+    "Card-based gameplay",
+    "Dialogue interaction",
+    "establishing shot",
+    "the combination of card game visuals with epic cinematic effects",
+    "visual metaphor",
+    "the visual metaphor of breaking chains",
+    "minimalist design",
+    "the presentation of cards as floating objects",
+    "transition shot",
+    "nothing particularly unique",
+    "text overlay",
+    "Strong branding and impactful audio-visual synchronization.",
+    "The combination of a strong logo, gritty UI, and background action creates an immediate sense of the game's theme.",
+    "Top-down strategic view.",
+    "Clearly demonstrates the unit placement mechanic from an overhead perspective.",
+    "Repetitive action to reinforce core mechanic.",
+    "Shows unit placement on a different map, indicating variety.",
+    "Wide shot for scale, dynamic camera movement.",
+    "The sheer number of units and explosions creates a sense of overwhelming power.",
+    "UI integration for immediate feedback.",
+    "Directly shows the impact of attacks on the player's objective with clear UI feedback.",
+    "Highlighting unique unit abilities.",
+    "Highlights specific unit abilities like shields and showcases dynamic laser combat.",
+    "Wide shot for scale, dynamic action.",
+    "Showcases the game's ability to handle massive numbers of units and effects simultaneously.",
+    "Explosive climax, direct visual feedback.",
+    "The sudden, powerful destruction of a large structure provides a strong visual and auditory climax.",
+    "Panning shot to reveal scale.",
+    "The panning camera reveals the vastness of the battlefield and the sheer number of units involved.",
+    "Multi-point destruction, glitch transition.",
+    "The simultaneous destruction of multiple objectives provides a powerful and decisive climax.",
+    "Split composition, high contrast lighting",
+    "The split-screen cosmic battle concept with contrasting colors and the central energy core is visually striking.",
+    "Shallow depth of field, high contrast lighting",
+    "The abstract, dark imagery with hints of monstrous forms creates a sense of unknown horror.",
+    "Tracking shot, dynamic editing",
+    "Dynamic camera movement combined with detailed character models and impactful SFX creates a visceral battle experience.",
+    "Explosion VFX, centered composition",
+    "The sudden, powerful explosion around a symbolic glowing sword creates a strong visual metaphor for ongoing conflict.",
+    "Symbolic imagery, high detail rendering",
+    "The intricate design of the celestial eye, reminiscent of biblical angels, combined with the vast cloudscape, creates a powerful sense of divinity.",
+    "Cultural fusion, symbolic props",
+    "The blend of Egyptian mythology with a cosmic narrative through the Anubis figure and scales.",
+    "Ethereal VFX, close-up portrait",
+    "The blend of human beauty with ethereal, flowing energy for hair creates a distinct and captivating visual.",
+    "Juxtaposition, symbolic imagery",
+    "The juxtaposition of a seemingly dark army with the concept of 'The Ascended' and spiritual figures, then transitioning to the ethereal eye, creates a powerful thematic contrast.",
+    "God rays, silhouette, crane shot",
+    "The dramatic lighting revealing the massive winged figure on the castle creates a powerful and ominous visual.",
+    "Rapid editing, visceral VFX",
+    "The rapid cuts between different monstrous entities and the visceral depiction of combat create a sense of overwhelming threat.",
+    "establishing shot, symmetrical composition",
+    "The symmetrical composition of opposing forces and the cosmic background create a grand, mythological feel.",
+    "shallow depth of field, dramatic lighting",
+    "The dark, fiery aesthetic combined with the mysterious creature's movement creates a strong sense of danger.",
+    "impact shot, dynamic lighting",
+    "The sudden, bright explosion from a single sword creates a dramatic and impactful visual.",
+    "symbolic imagery, scale contrast",
+    "The biblical 'Ophanim' angel design is visually striking and unique, contrasting with typical angel depictions.",
+    "juxtaposition (visual/audio), army shot",
+    "The visual of a demonic army paired with dialogue about spiritual masters creates an intriguing paradox, hinting at complex lore.",
+    "ethereal lighting, symbolic character design",
+    "The glowing, ethereal nature of the figures and their large wings create a powerful, divine presence.",
+    "handheld camera, fast cuts, gore effects",
+    "The dynamic camera work and visceral effects create a highly engaging and brutal combat sequence.",
+    "symbolic character, text overlay",
+    "The combination of a powerful, angelic figure with names of ancient, mythical places creates a strong sense of deep lore.",
+    "top-down perspective, UI integration",
+    "Clearly demonstrates the core gameplay loop and visual style of the auto-battler genre.",
+    "gameplay showcase, text overlay",
+    "Showcases a different game board environment and explicitly highlights the NFT integration.",
+    "split composition, thematic color grading",
+    "Strong visual dichotomy representing the game's theme.",
+    "quick cuts, handheld camera simulation",
+    "Quick cuts between different perspectives of conflict.",
+    "impact framing, large-scale VFX",
+    "The scale of destruction and the glowing sword as a focal point.",
+    "symbolic imagery, text overlay",
+    "Depiction of a Biblically accurate angel as a cosmic entity.",
+    "slow pan, close-up for detail",
+    "Blend of Egyptian mythology with cosmic themes.",
+    "soft focus, glowing effects",
+    "Ethereal and organic design, conveying ancient power and wisdom.",
+    "detailed CGI, halo effect",
+    "Rich golden textures and powerful, ancient design.",
+    "tracking shot, crowd simulation",
+    "Massive scale of the demon army, creating a sense of overwhelming force.",
+    "crane shot, volumetric lighting",
+    "The sheer scale of the angelic figure and the destruction it causes.",
+    "anime style animation, dynamic camera",
+    "Dynamic anime-style action, contrasting with the CGI scenes.",
+    "Stunning particle effects and color palette (gold/purple)",
+    "Strong brand fit with dark cosmic fantasy and divine beings",
+    "Dramatic reveal of a powerful entity",
+    "Stunning particle effects and glowing trails",
+    "Dynamic camera movement and character pose",
+    "Excellent color palette (purple, blue, gold) that matches brand",
+    "Stunning particle effects",
+    "Dynamic camera movement",
+    "Stunning particle effects and visual spectacle",
+    "Dynamic and professional camera work",
+    "Excellent brand fit with the described 'Demons & Deities' theme and color palette",
+    "Stunning particle effects and environmental destruction",
+    "Dynamic camera movement and epic scale",
+    "Strong thematic alignment with dark cosmic fantasy",
+    "Strong thematic alignment",
+    "Excellent brand alignment with dark cosmic fantasy",
+    "Excellent thematic and color palette alignment",
+    "Stunning particle effects and lighting",
+    "Dynamic camera movement and action sequences",
+    "Excellent brand alignment with color palette and theme",
+    "Clean and professional logo animation (for its own brand)",
+    "Epic scale and dramatic composition",
+    "Strong brand alignment"
+  ],
+  "patternsFound": [
+    "avg_energy:5.4",
+    "avg_quality:8.0",
+    "scenes:16",
+    "standalone_ratio:0.06",
+    "avg_energy:4.8",
+    "avg_quality:8.2",
+    "scenes:9",
+    "standalone_ratio:0.22",
+    "avg_energy:7.5",
+    "avg_quality:8.9",
+    "scenes:23",
+    "standalone_ratio:1.00",
+    "music_genre:hybrid",
+    "bpm:130",
+    "dominant_moods:epic,aggressive,strategic,triumphant,awe",
+    "avg_energy:7.3",
+    "scenes:15",
+    "music_genre:orchestral hybrid",
+    "bpm:120",
+    "dominant_moods:epic,mysterious,dramatic,aggressive,awe",
+    "avg_energy:7.8",
+    "avg_quality:8.7",
+    "dominant_moods:epic,mysterious,aggressive,awe",
+    "avg_energy:8.1",
+    "dominant_moods:epic,mysterious,aggressive,awe,informative",
+    "source_quality:9",
+    "clips_found:7",
+    "rejected:7",
+    "avoid: Too serene and less 'dark fantasy' or 'epic battle' focused. Lacks a clear, dramatic event.",
+    "avoid: Too static and lacks dynamic action or power display for a fast-paced trailer.",
+    "avoid: While a character reveal, it's a bit slow and less dramatic compared to other options.",
+    "avoid: The scenes with the whale skeleton and the character falling/sitting are too melancholic and slow for the desired 'powerful' and 'clashing' brand vibe.",
+    "avoid: Black screen, no visual content.",
+    "avoid: Boss materializing, but the longer clip from 0:02.8-0:08.5 captures the full dramatic reveal better for a hook.",
+    "avoid: Quick weapon impact, but less visually dramatic and unique compared to other chosen impact clips.",
+    "avoid: Another weapon impact, similar to others and not distinct enough for a limited selection.",
+    "avoid: Boss charging up, but the subsequent spell cast at 1:10.5 is more visually impactful and dynamic for the trailer.",
+    "source_quality:8",
+    "clips_found:8",
+    "rejected:11",
+    "avoid: Too generic, doesn't stand out enough for a 'dramatic event' compared to others.",
+    "avoid: While dramatic, the visual quality and specific action aren't as 'epic celestial battle' as others. More horror-esque.",
+    "avoid: Good for character introduction, but not a 'dramatic visual event' as requested.",
+    "avoid: Too short and abstract for a main event clip.",
+    "avoid: Good, but the transformation is a bit slow and the angel reveal is better in later clips.",
+    "score:85",
+    "best_use:hook",
+    "visual_impact:18",
+    "brand_fit:19",
+    "clips_found:6",
+    "rejected:6",
+    "avoid: Initial ground shake is less impactful as a standalone clip; better integrated into the full Titan emergence.",
+    "avoid: While an impact, it's less visually grand and unique compared to other magical attacks or creature actions.",
+    "avoid: Redundant with the earlier ice attack on Titan (Clip 4), which captures a similar powerful moment effectively.",
+    "avoid: The ice wall formation is more of an environmental effect than a direct 'hit' or 'detonation' with visible force.",
+    "avoid: Cid falling is less visually impactful than Clive being directly struck by a large rock.",
+    "score:27",
+    "best_use:None for 'Demons & Deities'",
+    "visual_impact:10",
+    "brand_fit:0",
+    "rejected:8",
+    "avoid: The whale scene feels more serene and fantasy-like, not aligning with the 'dark cosmic fantasy' battle theme.",
+    "avoid: The cliff scene is too bright and lacks the dark, mysterious aesthetic of the brand.",
+    "avoid: While visually interesting, the later shatter/transformation clip (0:26.5) is more impactful and fits the brand better.",
+    "avoid: The bright white light burst is too stark and loses the dark aesthetic desired for the brand.",
+    "avoid: This sequence is too slow, melancholic, and lacks the action and power needed for the trailer.",
+    "rejected:33",
+    "avoid: Too generic, not enough magical/divine element, focuses on human characters reacting.",
+    "avoid: Focuses on human characters, not Eikons.",
+    "avoid: While large, it's still just a hand and very dusty, not as clear or 'cosmic' as other Eikon shots.",
+    "avoid: Similar to above, too much dust, not visually distinct enough for the brand.",
+    "avoid: Good, but the full reveal of Titan (1:23.5) is more impactful."
+  ],
+  "entries": [
+    {
+      "timestamp": "2026-03-31T01:13:13.436Z",
+      "command": "analyze",
+      "sourceFile": "auto-dungeon-trailer.mp4",
+      "summary": "16 scenes, avg Q:8.0, 1 standalone",
+      "techniques": [
+        "Stylized purple outline",
+        "Pixelated text",
+        "Grid-based combat",
+        "Pixelated text",
+        "Card-based gameplay",
+        "Card-based gameplay",
+        "Pixelated text",
+        "Dialogue interaction",
+        "Card-based gameplay",
+        "Grid-based combat"
+      ],
+      "patterns": [
+        "avg_energy:5.4",
+        "avg_quality:8.0",
+        "scenes:16",
+        "standalone_ratio:0.06"
+      ]
+    },
+    {
+      "timestamp": "2026-03-31T01:19:30.750Z",
+      "command": "analyze",
+      "sourceFile": "gods-unchained-trailer.mp4",
+      "summary": "9 scenes, avg Q:8.2, 2 standalone",
+      "techniques": [
+        "establishing shot",
+        "the combination of card game visuals with epic cinematic effects",
+        "visual metaphor",
+        "the visual metaphor of breaking chains",
+        "minimalist design",
+        "the presentation of cards as floating objects",
+        "transition shot",
+        "nothing particularly unique",
+        "text overlay",
+        "nothing particularly unique",
+        "transition shot",
+        "nothing particularly unique",
+        "text overlay",
+        "nothing particularly unique",
+        "transition shot",
+        "nothing particularly unique",
+        "text overlay",
+        "nothing particularly unique"
+      ],
+      "patterns": [
+        "avg_energy:4.8",
+        "avg_quality:8.2",
+        "scenes:9",
+        "standalone_ratio:0.22"
+      ]
+    },
+    {
+      "timestamp": "2026-03-31T01:30:20.990Z",
+      "command": "analyze",
+      "sourceFile": "mechabellum-trailer.mp4",
+      "summary": "23 scenes, avg Q:8.9, 23 standalone -- This video is a highly effective and visually stunning trailer for Mechabellum. It expertly blends strategic gameplay with intense, large-scale combat, showcasing a wide variety of units, customization options, and game modes. The audio design is powerful, with impactful sound effects and a driving hybrid score that perfectly complements the on-screen action. The use of review quotes adds credibility, and the climactic triple nuclear explosion is an unforgettable moment. The pacing is excellent, building from strategic deployment to overwhelming destruction, making it highly engaging and effective for attracting new players.",
+      "techniques": [
+        "Strong branding and impactful audio-visual synchronization.",
+        "The combination of a strong logo, gritty UI, and background action creates an immediate sense of the game's theme.",
+        "Top-down strategic view.",
+        "Clearly demonstrates the unit placement mechanic from an overhead perspective.",
+        "Repetitive action to reinforce core mechanic.",
+        "Shows unit placement on a different map, indicating variety.",
+        "Wide shot for scale, dynamic camera movement.",
+        "The sheer number of units and explosions creates a sense of overwhelming power.",
+        "UI integration for immediate feedback.",
+        "Directly shows the impact of attacks on the player's objective with clear UI feedback.",
+        "Highlighting unique unit abilities.",
+        "Highlights specific unit abilities like shields and showcases dynamic laser combat.",
+        "Wide shot for scale, dynamic action.",
+        "Showcases the game's ability to handle massive numbers of units and effects simultaneously.",
+        "Explosive climax, direct visual feedback.",
+        "The sudden, powerful destruction of a large structure provides a strong visual and auditory climax.",
+        "Panning shot to reveal scale.",
+        "The panning camera reveals the vastness of the battlefield and the sheer number of units involved.",
+        "Multi-point destruction, glitch transition.",
+        "The simultaneous destruction of multiple objectives provides a powerful and decisive climax."
+      ],
+      "patterns": [
+        "avg_energy:7.5",
+        "avg_quality:8.9",
+        "scenes:23",
+        "standalone_ratio:1.00",
+        "music_genre:hybrid",
+        "bpm:130",
+        "dominant_moods:epic,aggressive,strategic,triumphant,awe"
+      ]
+    },
+    {
+      "timestamp": "2026-03-31T16:37:45.493Z",
+      "command": "analyze",
+      "sourceFile": "dd-trailer-v7-war.mp4",
+      "summary": "15 scenes, avg Q:8.9, 15 standalone -- This video is a high-quality, action-packed trailer effectively showcasing a rich, cosmic fantasy world. It uses a diverse range of visual styles, from grand establishing shots to intense close-up action, and integrates clear text overlays to convey narrative and marketing points. The orchestral hybrid music perfectly complements the visuals, building tension and excitement. The voiceover is clear and compelling, guiding the viewer through the lore and features. The video successfully creates a sense of epic scale, ancient powers, and personal involvement, culminating in a strong call to action for its NFT-based game.",
+      "techniques": [
+        "Split composition, high contrast lighting",
+        "The split-screen cosmic battle concept with contrasting colors and the central energy core is visually striking.",
+        "Shallow depth of field, high contrast lighting",
+        "The abstract, dark imagery with hints of monstrous forms creates a sense of unknown horror.",
+        "Tracking shot, dynamic editing",
+        "Dynamic camera movement combined with detailed character models and impactful SFX creates a visceral battle experience.",
+        "Explosion VFX, centered composition",
+        "The sudden, powerful explosion around a symbolic glowing sword creates a strong visual metaphor for ongoing conflict.",
+        "Symbolic imagery, high detail rendering",
+        "The intricate design of the celestial eye, reminiscent of biblical angels, combined with the vast cloudscape, creates a powerful sense of divinity.",
+        "Cultural fusion, symbolic props",
+        "The blend of Egyptian mythology with a cosmic narrative through the Anubis figure and scales.",
+        "Ethereal VFX, close-up portrait",
+        "The blend of human beauty with ethereal, flowing energy for hair creates a distinct and captivating visual.",
+        "Juxtaposition, symbolic imagery",
+        "The juxtaposition of a seemingly dark army with the concept of 'The Ascended' and spiritual figures, then transitioning to the ethereal eye, creates a powerful thematic contrast.",
+        "God rays, silhouette, crane shot",
+        "The dramatic lighting revealing the massive winged figure on the castle creates a powerful and ominous visual.",
+        "Rapid editing, visceral VFX",
+        "The rapid cuts between different monstrous entities and the visceral depiction of combat create a sense of overwhelming threat."
+      ],
+      "patterns": [
+        "avg_energy:7.3",
+        "avg_quality:8.9",
+        "scenes:15",
+        "standalone_ratio:1.00",
+        "music_genre:orchestral hybrid",
+        "bpm:120",
+        "dominant_moods:epic,mysterious,dramatic,aggressive,awe"
+      ]
+    },
+    {
+      "timestamp": "2026-03-31T18:02:12.937Z",
+      "command": "analyze",
+      "sourceFile": "dd-trailer-v9-hybrid.mp4",
+      "summary": "15 scenes, avg Q:8.7, 15 standalone -- This video is a high-quality, action-packed trailer that effectively blends cinematic lore with gameplay and NFT mechanics. The visual design is consistently strong, featuring dramatic lighting, vibrant colors, and dynamic camera work. The audio complements the visuals well, with epic orchestral music, impactful sound effects, and clear voiceovers. The trailer successfully builds excitement for the game's universe, characters, and play-to-earn model, making it highly effective for attracting a crypto-gaming audience.",
+      "techniques": [
+        "establishing shot, symmetrical composition",
+        "The symmetrical composition of opposing forces and the cosmic background create a grand, mythological feel.",
+        "shallow depth of field, dramatic lighting",
+        "The dark, fiery aesthetic combined with the mysterious creature's movement creates a strong sense of danger.",
+        "impact shot, dynamic lighting",
+        "The sudden, bright explosion from a single sword creates a dramatic and impactful visual.",
+        "symbolic imagery, scale contrast",
+        "The biblical 'Ophanim' angel design is visually striking and unique, contrasting with typical angel depictions.",
+        "juxtaposition (visual/audio), army shot",
+        "The visual of a demonic army paired with dialogue about spiritual masters creates an intriguing paradox, hinting at complex lore.",
+        "ethereal lighting, symbolic character design",
+        "The glowing, ethereal nature of the figures and their large wings create a powerful, divine presence.",
+        "handheld camera, fast cuts, gore effects",
+        "The dynamic camera work and visceral effects create a highly engaging and brutal combat sequence.",
+        "symbolic character, text overlay",
+        "The combination of a powerful, angelic figure with names of ancient, mythical places creates a strong sense of deep lore.",
+        "top-down perspective, UI integration",
+        "Clearly demonstrates the core gameplay loop and visual style of the auto-battler genre.",
+        "gameplay showcase, text overlay",
+        "Showcases a different game board environment and explicitly highlights the NFT integration."
+      ],
+      "patterns": [
+        "avg_energy:7.8",
+        "avg_quality:8.7",
+        "scenes:15",
+        "standalone_ratio:1.00",
+        "music_genre:orchestral hybrid",
+        "bpm:120",
+        "dominant_moods:epic,mysterious,aggressive,awe"
+      ]
+    },
+    {
+      "timestamp": "2026-04-01T15:01:52.343Z",
+      "command": "analyze",
+      "sourceFile": "dd-trailer-v10c.mp4",
+      "summary": "15 scenes, avg Q:8.7, 15 standalone -- This video effectively blends cinematic storytelling with game and NFT feature showcases. The use of strong visual contrasts (light/dark, fire/ice) and a powerful orchestral score creates an epic and engaging atmosphere. The transitions between different art styles (realistic CGI, anime, game UI) are handled well, maintaining a cohesive narrative. The voiceover adds gravitas and guides the viewer through the lore and features, culminating in a clear call to action. The production value is consistently high, making it a compelling watch.",
+      "techniques": [
+        "split composition, thematic color grading",
+        "Strong visual dichotomy representing the game's theme.",
+        "quick cuts, handheld camera simulation",
+        "Quick cuts between different perspectives of conflict.",
+        "impact framing, large-scale VFX",
+        "The scale of destruction and the glowing sword as a focal point.",
+        "symbolic imagery, text overlay",
+        "Depiction of a Biblically accurate angel as a cosmic entity.",
+        "slow pan, close-up for detail",
+        "Blend of Egyptian mythology with cosmic themes.",
+        "soft focus, glowing effects",
+        "Ethereal and organic design, conveying ancient power and wisdom.",
+        "detailed CGI, halo effect",
+        "Rich golden textures and powerful, ancient design.",
+        "tracking shot, crowd simulation",
+        "Massive scale of the demon army, creating a sense of overwhelming force.",
+        "crane shot, volumetric lighting",
+        "The sheer scale of the angelic figure and the destruction it causes.",
+        "anime style animation, dynamic camera",
+        "Dynamic anime-style action, contrasting with the CGI scenes."
+      ],
+      "patterns": [
+        "avg_energy:8.1",
+        "avg_quality:8.7",
+        "scenes:15",
+        "standalone_ratio:1.00",
+        "music_genre:orchestral hybrid",
+        "bpm:130",
+        "dominant_moods:epic,mysterious,aggressive,awe,informative"
+      ]
+    },
+    {
+      "timestamp": "2026-04-01T23:00:00.000Z",
+      "command": "post-mortem",
+      "sourceFile": "v1-through-v11-audit",
+      "summary": "Complete production audit across 11 trailer versions. Established definitive workflow, banned tools/techniques that failed, codified audio levels, text overlay method, and approval process.",
+      "techniques": [
+        "ffmpeg drawtext for text overlays (not Shotstack HTML)",
+        "Post-render text application prevents black bars and allows adjustment",
+        "Shotstack HTML overlays create black bars -- banned",
+        "Shotstack title presets create black backgrounds -- banned",
+        "Screen recordings all failed (broken pages, loading states) -- banned",
+        "Ken Burns zoom looks amateur -- banned, use Segmind P2V",
+        "Photo overlays (character portraits, logos) look scattered -- banned",
+        "Dark overlay tracks dim the whole screen -- banned",
+        "Write VO script AFTER assembling clips, not before",
+        "Scene-matched VO: voice describes what is on screen",
+        "Hard cuts between scenes (no fade transitions)",
+        "VO voice nZ5WsS2E2UAALki8m2V6 at 0.85x speed",
+        "Sparse VO: 12-14 lines for 90s",
+        "Clip audio at 0.05 (subtle ambient, not muted)",
+        "Timestamp cascade: changing one clip requires recalculating ALL subsequent elements",
+        "Never trim clips beyond source duration (causes freeze frames)",
+        "Never cut frames from rendered video (breaks audio sync)",
+        "Music trim must match video shift exactly",
+        "VO starts ON the scene cut, not 0.5s after",
+        "Dark blood red Copperplate text (#8b0000)",
+        "Founder approval required before production render",
+        "Frame-by-frame verification at 0.25x before showing"
+      ],
+      "patterns": [
+        "workflow:clips-first-then-vo",
+        "text_method:ffmpeg-drawtext-post-render",
+        "banned:screen-recordings",
+        "banned:ken-burns-zoom",
+        "banned:shotstack-html-overlays",
+        "banned:shotstack-title-presets",
+        "banned:photo-overlays",
+        "banned:dark-overlay-tracks",
+        "banned:fade-transitions",
+        "audio:vo-1.0-to-1.3",
+        "audio:sfx-0.3",
+        "audio:soundtrack-0.4",
+        "audio:clip-0.05",
+        "audio:max-2-sources-simultaneous",
+        "approval:founder-before-production-render",
+        "verification:frame-by-frame-0.25x"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T18:17:31.017Z",
+      "command": "find-clips",
+      "sourceFile": "genshin-skirk-trailer.mp4",
+      "summary": "7 clips for \"Find 4 clips with dramatic visual EVENTS like ability activations, character reveals, environmental destruction. Each clip should have a clear peak action moment. Tell me the exact second the event happens within each clip.\", source Q:9/10",
+      "patterns": [
+        "source_quality:9",
+        "clips_found:7",
+        "rejected:7",
+        "avoid: Too serene and less 'dark fantasy' or 'epic battle' focused. Lacks a clear, dramatic event.",
+        "avoid: Too static and lacks dynamic action or power display for a fast-paced trailer.",
+        "avoid: Too static and lacks dynamic action or power display for a fast-paced trailer.",
+        "avoid: While a character reveal, it's a bit slow and less dramatic compared to other options.",
+        "avoid: The scenes with the whale skeleton and the character falling/sitting are too melancholic and slow for the desired 'powerful' and 'clashing' brand vibe."
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T18:18:44.776Z",
+      "command": "find-clips",
+      "sourceFile": "elden-ring-artorias.mp4",
+      "summary": "7 clips for \"Find 5 clips with dramatic visual EVENTS like weapon impacts, dodge rolls, spell casts, boss transformations. Each clip should have a clear peak action moment. Tell me the exact second the event happens within each clip.\", source Q:9/10",
+      "patterns": [
+        "source_quality:9",
+        "clips_found:7",
+        "rejected:7",
+        "avoid: Black screen, no visual content.",
+        "avoid: Boss materializing, but the longer clip from 0:02.8-0:08.5 captures the full dramatic reveal better for a hook.",
+        "avoid: Quick weapon impact, but less visually dramatic and unique compared to other chosen impact clips.",
+        "avoid: Another weapon impact, similar to others and not distinct enough for a limited selection.",
+        "avoid: Boss charging up, but the subsequent spell cast at 1:10.5 is more visually impactful and dynamic for the trailer."
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T18:19:05.362Z",
+      "command": "find-clips",
+      "sourceFile": "devil-vs-god-2025.mp4",
+      "summary": "8 clips for \"Find 5 clips with dramatic visual EVENTS like explosions, sword impacts, divine power bursts, army charges. Each clip should have a clear peak action moment. Tell me the exact second the event happens within each clip.\", source Q:8/10",
+      "patterns": [
+        "source_quality:8",
+        "clips_found:8",
+        "rejected:11",
+        "avoid: Too generic, doesn't stand out enough for a 'dramatic event' compared to others.",
+        "avoid: While dramatic, the visual quality and specific action aren't as 'epic celestial battle' as others. More horror-esque.",
+        "avoid: Good for character introduction, but not a 'dramatic visual event' as requested.",
+        "avoid: Too short and abstract for a main event clip.",
+        "avoid: Good, but the transformation is a bit slow and the angel reveal is better in later clips."
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T18:24:03.090Z",
+      "command": "rate",
+      "sourceFile": "elden-ring-artorias-clip-001.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects and color palette (gold/purple)",
+        "Strong brand fit with dark cosmic fantasy and divine beings",
+        "Dramatic reveal of a powerful entity"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T18:24:06.285Z",
+      "command": "rate",
+      "sourceFile": "genshin-skirk-trailer-clip-004.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects and glowing trails",
+        "Dynamic camera movement and character pose",
+        "Excellent color palette (purple, blue, gold) that matches brand"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T18:24:07.648Z",
+      "command": "rate",
+      "sourceFile": "devil-vs-god-2025-clip-004.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:02:29.269Z",
+      "command": "find-clips",
+      "sourceFile": "ff16-shiva-vs-titan.mp4",
+      "summary": "6 clips for \"Find 5 clips that each contain a SINGLE dramatic visual impact event \u2014 a punch landing, an explosion detonating, a beam firing, a titan falling. For each clip, tell me the EXACT SECOND within the clip where the impact/event happens. I need to sync these impacts to music beats. Priority: moments where something HITS something else with visible force.\", source Q:8/10",
+      "patterns": [
+        "source_quality:8",
+        "clips_found:6",
+        "rejected:6",
+        "avoid: Initial ground shake is less impactful as a standalone clip; better integrated into the full Titan emergence.",
+        "avoid: While an impact, it's less visually grand and unique compared to other magical attacks or creature actions.",
+        "avoid: Redundant with the earlier ice attack on Titan (Clip 4), which captures a similar powerful moment effectively.",
+        "avoid: The ice wall formation is more of an environmental effect than a direct 'hit' or 'detonation' with visible force.",
+        "avoid: Cid falling is less visually impactful than Clive being directly struck by a large rock."
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:31:47.734Z",
+      "command": "rate",
+      "sourceFile": "ff16-ice-orb-explode.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects and visual spectacle",
+        "Dynamic and professional camera work",
+        "Excellent brand fit with the described 'Demons & Deities' theme and color palette"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:32:18.750Z",
+      "command": "rate",
+      "sourceFile": "ff16-titan-emerge.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:32:47.369Z",
+      "command": "rate",
+      "sourceFile": "ff16-titan-smash.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects and environmental destruction",
+        "Dynamic camera movement and epic scale",
+        "Strong thematic alignment with dark cosmic fantasy"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:33:11.579Z",
+      "command": "rate",
+      "sourceFile": "ff16-shiva-crystal.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement",
+        "Strong thematic alignment"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:33:36.787Z",
+      "command": "rate",
+      "sourceFile": "ff16-shiva-hit-titan.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:33:58.187Z",
+      "command": "rate",
+      "sourceFile": "elden-boss-reveal.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:34:27.476Z",
+      "command": "rate",
+      "sourceFile": "elden-sword-impact.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement",
+        "Excellent brand alignment with dark cosmic fantasy"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:34:51.126Z",
+      "command": "rate",
+      "sourceFile": "elden-spell-cast.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement",
+        "Excellent thematic and color palette alignment"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:35:19.077Z",
+      "command": "rate",
+      "sourceFile": "elden-dodge-strike.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement",
+        "Strong thematic alignment"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:35:48.783Z",
+      "command": "rate",
+      "sourceFile": "genshin-power-burst.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects and lighting",
+        "Dynamic camera movement and action sequences",
+        "Excellent brand alignment with color palette and theme"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:36:25.951Z",
+      "command": "rate",
+      "sourceFile": "genshin-combat-clash.mp4",
+      "summary": "Score 27/100, best use: None for 'Demons & Deities'",
+      "techniques": [
+        "Clean and professional logo animation (for its own brand)"
+      ],
+      "patterns": [
+        "score:27",
+        "best_use:None for 'Demons & Deities'",
+        "visual_impact:10",
+        "brand_fit:0"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:36:51.896Z",
+      "command": "rate",
+      "sourceFile": "wukong-staff-strike.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement",
+        "Epic scale and dramatic composition",
+        "Strong brand alignment"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T20:37:21.330Z",
+      "command": "rate",
+      "sourceFile": "wukong-spell-burst.mp4",
+      "summary": "Score 85/100, best use: hook",
+      "techniques": [
+        "Stunning particle effects",
+        "Dynamic camera movement"
+      ],
+      "patterns": [
+        "score:85",
+        "best_use:hook",
+        "visual_impact:18",
+        "brand_fit:19"
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T21:05:33.724Z",
+      "command": "find-clips",
+      "sourceFile": "genshin-skirk-trailer.mp4",
+      "summary": "7 clips for \"Watch this entire video carefully. I need a COMPLETE LIST of every visual IMPACT EVENT \u2014 explosions, strikes connecting, magic bursts, transformations, ground impacts, energy releases, reveals. For EACH event tell me: 1) The EXACT timestamp to 0.1s precision where the event PEAKS (maximum visual intensity), 2) What the event IS (e.g. 'sword strikes ground with debris explosion'), 3) How BIG the event is on a 1-10 scale (10 = fills entire screen with energy, 1 = subtle flash). I need ALL events, not just the top 5. List every single one.\", source Q:8/10",
+      "patterns": [
+        "source_quality:8",
+        "clips_found:7",
+        "rejected:8",
+        "avoid: The whale scene feels more serene and fantasy-like, not aligning with the 'dark cosmic fantasy' battle theme.",
+        "avoid: The cliff scene is too bright and lacks the dark, mysterious aesthetic of the brand.",
+        "avoid: While visually interesting, the later shatter/transformation clip (0:26.5) is more impactful and fits the brand better.",
+        "avoid: The bright white light burst is too stark and loses the dark aesthetic desired for the brand.",
+        "avoid: This sequence is too slow, melancholic, and lacks the action and power needed for the trailer."
+      ]
+    },
+    {
+      "timestamp": "2026-04-02T21:07:28.194Z",
+      "command": "find-clips",
+      "sourceFile": "ff16-shiva-vs-titan.mp4",
+      "summary": "8 clips for \"Watch this entire video carefully. I need a COMPLETE LIST of every visual IMPACT EVENT \u2014 explosions, strikes connecting, magic bursts, transformations, ground impacts, energy releases, reveals. For EACH event tell me: 1) The EXACT timestamp to 0.1s precision where the event PEAKS (maximum visual intensity), 2) What the event IS (e.g. 'sword strikes ground with debris explosion'), 3) How BIG the event is on a 1-10 scale (10 = fills entire screen with energy, 1 = subtle flash). I need ALL events, not just the top 5. List every single one.\", source Q:9/10",
+      "patterns": [
+        "source_quality:9",
+        "clips_found:8",
+        "rejected:33",
+        "avoid: Too generic, not enough magical/divine element, focuses on human characters reacting.",
+        "avoid: Focuses on human characters, not Eikons.",
+        "avoid: While large, it's still just a hand and very dusty, not as clear or 'cosmic' as other Eikon shots.",
+        "avoid: Similar to above, too much dust, not visually distinct enough for the brand.",
+        "avoid: Good, but the full reveal of Titan (1:23.5) is more impactful."
+      ]
+    }
+  ],
+  "lastUpdated": "2026-04-02T21:07:28.194Z",
+  "aggregatedSfxTimelines": [
+    {
+      "sourceVideo": "mechabellum-trailer.mp4",
+      "analyzedAt": "2026-03-31T01:30:20.991Z",
+      "sfxTimeline": [
+        {
+          "time": 0,
+          "type": "bass-impact"
+        },
+        {
+          "time": 2.5,
+          "type": "electronic clicks"
+        },
+        {
+          "time": 11,
+          "type": "explosions"
+        },
+        {
+          "time": 14.8,
+          "type": "energy impacts"
+        },
+        {
+          "time": 17,
+          "type": "shield activation"
+        },
+        {
+          "time": 23.9,
+          "type": "massive explosion"
+        },
+        {
+          "time": 32,
+          "type": "glitch effect"
+        },
+        {
+          "time": 39,
+          "type": "missile launches"
+        },
+        {
+          "time": 48.7,
+          "type": "UI sounds"
+        },
+        {
+          "time": 57.8,
+          "type": "UI clicks"
+        },
+        {
+          "time": 100.5,
+          "type": "electronic pulses"
+        },
+        {
+          "time": 109.5,
+          "type": "heavy weapon fire"
+        },
+        {
+          "time": 113.5,
+          "type": "massive explosion"
+        },
+        {
+          "time": 121,
+          "type": "nuclear explosions"
+        },
+        {
+          "time": 131,
+          "type": "final impact"
+        }
+      ]
+    },
+    {
+      "sourceVideo": "dd-trailer-v7-war.mp4",
+      "analyzedAt": "2026-03-31T16:37:45.495Z",
+      "sfxTimeline": [
+        {
+          "time": 0,
+          "type": "deep rumble"
+        },
+        {
+          "time": 0.5,
+          "type": "whoosh"
+        },
+        {
+          "time": 9,
+          "type": "sword clash"
+        },
+        {
+          "time": 10.5,
+          "type": "impact"
+        },
+        {
+          "time": 11.5,
+          "type": "whoosh"
+        },
+        {
+          "time": 12.5,
+          "type": "explosion"
+        },
+        {
+          "time": 14.5,
+          "type": "chime"
+        },
+        {
+          "time": 17.5,
+          "type": "chime"
+        },
+        {
+          "time": 20.5,
+          "type": "chime"
+        },
+        {
+          "time": 26,
+          "type": "whoosh"
+        },
+        {
+          "time": 26.5,
+          "type": "chime"
+        },
+        {
+          "time": 30.5,
+          "type": "lightning"
+        },
+        {
+          "time": 33.5,
+          "type": "growl"
+        },
+        {
+          "time": 35.5,
+          "type": "impact"
+        },
+        {
+          "time": 36.5,
+          "type": "squish"
+        },
+        {
+          "time": 38.5,
+          "type": "whoosh"
+        },
+        {
+          "time": 44.5,
+          "type": "fire roar"
+        },
+        {
+          "time": 45.5,
+          "type": "explosion"
+        },
+        {
+          "time": 53.5,
+          "type": "energy beam"
+        },
+        {
+          "time": 54.5,
+          "type": "explosion"
+        },
+        {
+          "time": 59.5,
+          "type": "whoosh"
+        },
+        {
+          "time": 102.5,
+          "type": "water splash"
+        },
+        {
+          "time": 103.5,
+          "type": "roar"
+        },
+        {
+          "time": 105.5,
+          "type": "chime"
+        },
+        {
+          "time": 109.5,
+          "type": "roar"
+        },
+        {
+          "time": 112.5,
+          "type": "impact"
+        },
+        {
+          "time": 118.5,
+          "type": "thunder"
+        },
+        {
+          "time": 120.5,
+          "type": "whoosh"
+        }
+      ]
+    },
+    {
+      "sourceVideo": "dd-trailer-v9-hybrid.mp4",
+      "analyzedAt": "2026-03-31T18:02:12.940Z",
+      "sfxTimeline": [
+        {
+          "time": 0,
+          "type": "bass-impact"
+        },
+        {
+          "time": 5,
+          "type": "growl"
+        },
+        {
+          "time": 12.3,
+          "type": "explosion"
+        },
+        {
+          "time": 23.5,
+          "type": "war drums"
+        },
+        {
+          "time": 35.5,
+          "type": "blood splatter"
+        },
+        {
+          "time": 47.5,
+          "type": "spell cast"
+        },
+        {
+          "time": 59.5,
+          "type": "pack opening"
+        },
+        {
+          "time": 78.5,
+          "type": "footsteps"
+        },
+        {
+          "time": 86.5,
+          "type": "dragon roar"
+        }
+      ]
+    },
+    {
+      "sourceVideo": "dd-trailer-v10c.mp4",
+      "analyzedAt": "2026-04-01T15:01:52.344Z",
+      "sfxTimeline": [
+        {
+          "time": 0,
+          "type": "bass-impact"
+        },
+        {
+          "time": 3.5,
+          "type": "growl"
+        },
+        {
+          "time": 9.5,
+          "type": "explosion"
+        },
+        {
+          "time": 25,
+          "type": "war drums"
+        },
+        {
+          "time": 28.5,
+          "type": "crumbling"
+        },
+        {
+          "time": 34.5,
+          "type": "roar"
+        },
+        {
+          "time": 50,
+          "type": "lightning"
+        },
+        {
+          "time": 58.5,
+          "type": "pack-opening-whoosh"
+        },
+        {
+          "time": 126,
+          "type": "roar"
+        }
+      ]
+    }
+  ],
+  "aggregatedBeatDrops": [
+    {
+      "sourceVideo": "mechabellum-trailer.mp4",
+      "analyzedAt": "2026-03-31T01:30:20.991Z",
+      "beatDropTimestamps": [
+        0,
+        11,
+        23.9,
+        113.5,
+        121
+      ],
+      "buildUpTimestamps": [
+        10,
+        19,
+        21.5,
+        25,
+        29,
+        39,
+        46.8,
+        100.5,
+        109.5,
+        120.5
+      ],
+      "genre": "hybrid",
+      "bpm_estimate": 130
+    },
+    {
+      "sourceVideo": "dd-trailer-v7-war.mp4",
+      "analyzedAt": "2026-03-31T16:37:45.495Z",
+      "beatDropTimestamps": [
+        12.5,
+        54.5,
+        120.5
+      ],
+      "buildUpTimestamps": [
+        0,
+        8.5,
+        29.5,
+        44.5,
+        53.5,
+        105.5
+      ],
+      "genre": "orchestral hybrid",
+      "bpm_estimate": 120
+    },
+    {
+      "sourceVideo": "dd-trailer-v9-hybrid.mp4",
+      "analyzedAt": "2026-03-31T18:02:12.940Z",
+      "beatDropTimestamps": [
+        12.3,
+        35,
+        86
+      ],
+      "buildUpTimestamps": [
+        0,
+        23,
+        78
+      ],
+      "genre": "orchestral hybrid",
+      "bpm_estimate": 120
+    },
+    {
+      "sourceVideo": "dd-trailer-v10c.mp4",
+      "analyzedAt": "2026-04-01T15:01:52.344Z",
+      "beatDropTimestamps": [
+        9,
+        24.9,
+        38.1,
+        45.9,
+        103.9
+      ],
+      "buildUpTimestamps": [
+        0,
+        22,
+        27.9,
+        42.9,
+        103.9
+      ],
+      "genre": "orchestral hybrid",
+      "bpm_estimate": 130
+    }
+  ],
+  "aggregatedTechniques": [
+    {
+      "sourceVideo": "mechabellum-trailer.mp4",
+      "analyzedAt": "2026-03-31T01:30:20.991Z",
+      "techniques": [
+        {
+          "name": "audio-visual synchronization",
+          "timestamp": 0,
+          "effectiveness": 9
+        },
+        {
+          "name": "top-down strategic view",
+          "timestamp": 2.3,
+          "effectiveness": 8
+        },
+        {
+          "name": "UI integration for feedback",
+          "timestamp": 14.5,
+          "effectiveness": 8
+        },
+        {
+          "name": "glitch transition for text reveal",
+          "timestamp": 34,
+          "effectiveness": 9
+        },
+        {
+          "name": "extreme wide shot for scale",
+          "timestamp": 46.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "text overlay for feature emphasis",
+          "timestamp": 48.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "ultimate destructive climax",
+          "timestamp": 120,
+          "effectiveness": 10
+        }
+      ]
+    },
+    {
+      "sourceVideo": "dd-trailer-v7-war.mp4",
+      "analyzedAt": "2026-03-31T16:37:45.495Z",
+      "techniques": [
+        {
+          "name": "Split composition",
+          "timestamp": 0,
+          "effectiveness": 9
+        },
+        {
+          "name": "High contrast lighting",
+          "timestamp": 4.5,
+          "effectiveness": 8
+        },
+        {
+          "name": "Dynamic camera movement (tracking)",
+          "timestamp": 8.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Beat-synced VFX (explosion)",
+          "timestamp": 12.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Symbolic imagery (celestial eye)",
+          "timestamp": 14.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Cultural fusion (Anubis)",
+          "timestamp": 17.5,
+          "effectiveness": 8
+        },
+        {
+          "name": "Ethereal VFX",
+          "timestamp": 20.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Juxtaposition (Ascended army vs. eye)",
+          "timestamp": 23.5,
+          "effectiveness": 8
+        },
+        {
+          "name": "God rays / Silhouette",
+          "timestamp": 29.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Rapid editing / Visceral VFX",
+          "timestamp": 32.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Ethereal lighting",
+          "timestamp": 38.5,
+          "effectiveness": 8
+        },
+        {
+          "name": "Fire VFX",
+          "timestamp": 44.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Match cut (thematic)",
+          "timestamp": 50.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Character showcase / Split screen",
+          "timestamp": 102.5,
+          "effectiveness": 9
+        },
+        {
+          "name": "Montage with direct call to action",
+          "timestamp": 105.5,
+          "effectiveness": 10
+        }
+      ]
+    },
+    {
+      "sourceVideo": "dd-trailer-v9-hybrid.mp4",
+      "analyzedAt": "2026-03-31T18:02:12.940Z",
+      "techniques": [
+        {
+          "name": "establishing shot",
+          "timestamp": 0,
+          "effectiveness": 9
+        },
+        {
+          "name": "juxtaposition (visual/audio)",
+          "timestamp": 23,
+          "effectiveness": 9
+        },
+        {
+          "name": "impact shot",
+          "timestamp": 10.8,
+          "effectiveness": 9
+        },
+        {
+          "name": "handheld camera for action",
+          "timestamp": 35,
+          "effectiveness": 9
+        },
+        {
+          "name": "UI showcase with CTA",
+          "timestamp": 70,
+          "effectiveness": 8
+        }
+      ]
+    },
+    {
+      "sourceVideo": "dd-trailer-v10c.mp4",
+      "analyzedAt": "2026-04-01T15:01:52.344Z",
+      "techniques": [
+        {
+          "name": "split composition",
+          "timestamp": 0,
+          "effectiveness": 9
+        },
+        {
+          "name": "quick cuts for action",
+          "timestamp": 5,
+          "effectiveness": 8
+        },
+        {
+          "name": "crane shot for scale",
+          "timestamp": 28,
+          "effectiveness": 9
+        },
+        {
+          "name": "slow zoom for reveal",
+          "timestamp": 19,
+          "effectiveness": 8
+        },
+        {
+          "name": "UI integration with cinematic",
+          "timestamp": 103.9,
+          "effectiveness": 8
+        }
+      ]
+    }
+  ],
+  "lessonsLearned": [
+    "Synchronize strong audio impacts with visual climaxes for maximum emotional effect.",
+    "Use top-down views to clearly demonstrate strategic gameplay mechanics like unit deployment and positioning.",
+    "Integrate UI elements directly into gameplay footage to provide immediate feedback and highlight game features.",
+    "Employ dynamic camera movements (pans, dollies) and extreme wide shots to convey the massive scale of battles and armies.",
+    "Utilize text overlays and glitch effects for testimonials and feature highlights to add modern flair and convey information effectively.",
+    "Build towards an ultimate, visually spectacular climax (e.g., nuclear explosions) to leave a lasting impression on the viewer.",
+    "Effective use of split-screen and contrasting color palettes to represent opposing forces.",
+    "Strategic placement of text overlays to convey key information without distracting from visuals.",
+    "Synchronization of music swells, beat drops, and SFX with visual climaxes enhances emotional impact.",
+    "Blending diverse art styles (realistic CGI, anime, stylized fantasy) can create a unique and expansive world feel.",
+    "A strong voiceover can effectively narrate complex lore and guide the viewer through a fast-paced trailer.",
+    "Effective use of contrasting visuals and dialogue can create intrigue and depth in lore.",
+    "Syncing powerful sound effects (like explosions and roars) with visual climaxes significantly enhances impact.",
+    "Clear UI showcases are crucial for communicating game mechanics and economic models in blockchain games.",
+    "The use of symbolic, grand imagery for factions and ancient powers builds a rich, epic atmosphere.",
+    "Integrating direct calls to action (like 'Mint Now' and website URLs) within visually appealing scenes is highly effective.",
+    "Effective use of voiceover to narrate complex lore quickly and add gravitas.",
+    "Seamless integration of diverse visual styles (CGI, anime, UI) within a single narrative, maintaining thematic consistency.",
+    "Strategic placement of high-energy action sequences and impactful reveals to maintain viewer engagement and excitement.",
+    "Clear call-to-action at the end, reinforced by visual and audio cues, to drive user interaction."
+  ],
+  "aggregatedLearning": {
+    "aggregatedAt": "2026-03-31T01:30:32.493Z",
+    "sourcesAnalyzed": 3,
+    "totalScenes": 49,
+    "avgEnergy": 1.8,
+    "avgQuality": 2.6,
+    "topMoods": [
+      [
+        "mysterious",
+        9
+      ],
+      [
+        "tense",
+        3
+      ],
+      [
+        "playful",
+        3
+      ],
+      [
+        "aggressive",
+        1
+      ]
+    ],
+    "topBestUses": [
+      [
+        "action",
+        7
+      ],
+      [
+        "hook",
+        5
+      ],
+      [
+        "reveal",
+        2
+      ],
+      [
+        "atmosphere",
+        1
+      ],
+      [
+        "cta-backdrop",
+        1
+      ]
+    ],
+    "topColorPalette": [
+      {
+        "color": "#ffffff",
+        "count": 14
+      },
+      {
+        "color": "#000080",
+        "count": 13
+      },
+      {
+        "color": "#800080",
+        "count": 11
+      },
+      {
+        "color": "#808080",
+        "count": 5
+      },
+      {
+        "color": "#008000",
+        "count": 2
+      },
+      {
+        "color": "#555555",
+        "count": 1
+      },
+      {
+        "color": "#000000",
+        "count": 1
+      },
+      {
+        "color": "#ff0000",
+        "count": 1
+      }
+    ],
+    "bestHookShots": [
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 2.8,
+        "end": 3.5,
+        "quality": 8,
+        "description": "Text overlay 'FIGHT FEARSOME FOES' on a brick wall background with purple effects."
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 10.9,
+        "end": 11.6,
+        "quality": 8,
+        "description": "Text overlay 'COLLECT RARE CARDS' on a brick wall background with purple effects."
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 19.8,
+        "end": 20.5,
+        "quality": 8,
+        "description": "Text overlay 'ACQUIRE NEW UNITS' on a brick wall background with purple effects."
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 28.1,
+        "end": 28.9,
+        "quality": 8,
+        "description": "Text overlay 'BUILD THE ULTIMATE TEAM' on a brick wall background with purple effects."
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 33.7,
+        "end": 34.5,
+        "quality": 8,
+        "description": "Text overlay 'AND RECLAIM YOUR RINGS' on a brick wall background with purple effects."
+      }
+    ],
+    "bestClimaxShots": [],
+    "avoidPatterns": [
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "gods-unchained-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality",
+      "mechabellum-trailer-analysis.json: [undefined-undefineds] Q:undefined - low quality"
+    ],
+    "topQualityScenes": [
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 0,
+        "end": 2.8,
+        "quality": 8,
+        "description": "Low-angle view of a stylized castle with purple outlines against a dark sky.",
+        "bestUse": "atmosphere"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 2.8,
+        "end": 3.5,
+        "quality": 8,
+        "description": "Text overlay 'FIGHT FEARSOME FOES' on a brick wall background with purple effects.",
+        "bestUse": "hook"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 3.5,
+        "end": 10.9,
+        "quality": 8,
+        "description": "Top-down view of a battle scene with various characters fighting on a grid-based map.",
+        "bestUse": "action"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 10.9,
+        "end": 11.6,
+        "quality": 8,
+        "description": "Text overlay 'COLLECT RARE CARDS' on a brick wall background with purple effects.",
+        "bestUse": "hook"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 11.6,
+        "end": 14.9,
+        "quality": 8,
+        "description": "Top-down view of a level with characters and barrels. Cards appear showing weapon and armor.",
+        "bestUse": "action"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 14.9,
+        "end": 19.8,
+        "quality": 8,
+        "description": "Close-up view of various cards with different stats and abilities.",
+        "bestUse": "reveal"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 19.8,
+        "end": 20.5,
+        "quality": 8,
+        "description": "Text overlay 'ACQUIRE NEW UNITS' on a brick wall background with purple effects.",
+        "bestUse": "hook"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 20.5,
+        "end": 23.1,
+        "quality": 8,
+        "description": "Character interacting with another character in a room.",
+        "bestUse": "action"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 23.1,
+        "end": 25.7,
+        "quality": 8,
+        "description": "Card showing stats and abilities.",
+        "bestUse": "reveal"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 25.7,
+        "end": 28.1,
+        "quality": 8,
+        "description": "Top-down view of a level with characters and items.",
+        "bestUse": "action"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 28.1,
+        "end": 28.9,
+        "quality": 8,
+        "description": "Text overlay 'BUILD THE ULTIMATE TEAM' on a brick wall background with purple effects.",
+        "bestUse": "hook"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 28.9,
+        "end": 33.7,
+        "quality": 8,
+        "description": "Top-down view of a level with various characters.",
+        "bestUse": "action"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 33.7,
+        "end": 34.5,
+        "quality": 8,
+        "description": "Text overlay 'AND RECLAIM YOUR RINGS' on a brick wall background with purple effects.",
+        "bestUse": "hook"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 34.5,
+        "end": 37.9,
+        "quality": 8,
+        "description": "Character interacting with another character in a room.",
+        "bestUse": "action"
+      },
+      {
+        "source": "auto-dungeon-trailer-analysis.json",
+        "start": 37.9,
+        "end": 41.9,
+        "quality": 8,
+        "description": "Top-down view of a battle scene with various characters fighting in a room.",
+        "bestUse": "action"
+      }
+    ]
+  },
+  "failurePatterns": [
+    {
+      "version": "wave-v2",
+      "date": "2026-04-03",
+      "failure": "Random clip montage \u2014 no visual story coherence",
+      "cause": "Clips from 3 different games (FF16, FF7, Genshin) with different art styles, characters, and worlds. Prioritized spike alignment over storytelling.",
+      "fix": "Design visual story BEFORE hunting clips. Use ONE visual world. Write a shot list.",
+      "rule": 41
+    },
+    {
+      "version": "wave-v2",
+      "date": "2026-04-03",
+      "failure": "Gemini event timestamps were wrong \u2014 dialogue scenes where combat was reported",
+      "cause": "Gemini said 'Titan punches' at 143.5s but actual content was dialogue with subtitles. Trusted AI text descriptions without visual verification.",
+      "fix": "ALWAYS extract frames at multiple timepoints and visually inspect BEFORE using any clip.",
+      "rule": 47
+    },
+    {
+      "version": "wave-v2",
+      "date": "2026-04-03",
+      "failure": "4 clips had burned-in subtitles or game UI \u2014 found only during QC after render",
+      "cause": "Only checked one frame per clip at the expected event moment. Subtitles appeared at other points.",
+      "fix": "QC every clip at 4+ timepoints (0.5s, 1.5s, 2.5s, 3.5s). Check the ENTIRE clip, not just the event frame.",
+      "rule": 48
+    },
+    {
+      "version": "wave-v2",
+      "date": "2026-04-03",
+      "failure": "Genshin Impact logo visible in energy-beam clip at 27s",
+      "cause": "Extracted from end of Genshin trailer (142.5-146.5s) which includes the game's logo splash.",
+      "fix": "Map 'clean zones' for every source. Know where logos/credits appear and avoid those sections.",
+      "rule": 50
+    },
+    {
+      "version": "wave-v2",
+      "date": "2026-04-03",
+      "failure": "No visual faction distinction \u2014 both 'gods' and 'demons' scenes looked the same",
+      "cause": "All clips were just 'epic moments' without visual contrast. No light-vs-dark palette separation.",
+      "fix": "Define visual palettes for each faction BEFORE clip selection. Light/crystal = divine, dark/fire = demonic.",
+      "rule": 44
+    },
+    {
+      "version": "crypto-v1",
+      "date": "2026-04-03",
+      "failure": "Static text on flat dark backgrounds \u2014 dead air with zero motion",
+      "cause": "Used empty dark color backgrounds for text sections instead of animated backgrounds",
+      "fix": "Always use animated backgrounds (blockchain nodes, cosmic nebula, neon tunnels) behind text. Never flat dark.",
+      "rule": 54
+    },
+    {
+      "version": "crypto-v1",
+      "date": "2026-04-03",
+      "failure": "Loading spinner and Disconnected badge visible in screen recording",
+      "cause": "Used raw screen recordings without QC \u2014 dev UI state was captured",
+      "fix": "Never use raw screen recordings of dev/staging UI. QC at 4+ timepoints before inclusion.",
+      "rule": 52
+    },
+    {
+      "version": "crypto-v2",
+      "date": "2026-04-03",
+      "failure": "Mouse cursor and browser URL bar visible in zoomed UI recordings",
+      "cause": "Zoomed into screen recordings but cursors and URL bars were still in the crop area",
+      "fix": "Abandoned screen recordings entirely. Used YouTube clips from same-genre games instead.",
+      "rule": 53
+    },
+    {
+      "version": "crypto-v3",
+      "date": "2026-04-03",
+      "failure": "Reused blockchain-bg clip 3 times \u2014 felt lazy and repetitive",
+      "cause": "Only had 6 clips for 11 segments, padded with reuse",
+      "fix": "Source enough unique clips BEFORE building. 11 segments = 11 unique clips minimum.",
+      "rule": 55
+    },
+    {
+      "version": "crypto-v3",
+      "date": "2026-04-03",
+      "failure": "Music too loud (0.45 volume) drowning the VO",
+      "cause": "Applied cinematic music levels (0.4) to a promo where VO carries the information",
+      "fix": "Crypto promo music at 0.25-0.35. VO must be clearly dominant.",
+      "rule": 58
+    },
+    {
+      "version": "crypto-v1",
+      "date": "2026-04-03",
+      "failure": "Low bitrate (660kbps) made all text overlays blurry and unreadable",
+      "cause": "Default ffmpeg encoding without specifying bitrate",
+      "fix": "Minimum 4000kbps (-b:v 4000k) when text overlays are present.",
+      "rule": 61
+    }
+  ],
+  "sourceCleanZones": {
+    "ff16-shiva-vs-titan.mp4": {
+      "clean_cinematic": "27-62s (Eikon-scale Shiva vs Titan battle)",
+      "avoid": "0-26s (human-scale setup), 63-140s (mixed gameplay/dialogue with subtitles), 140+ (heavy subtitles and game UI)",
+      "notes": "Eikon content is concentrated in first ~65 seconds only"
+    },
+    "genshin-skirk-trailer.mp4": {
+      "clean_cinematic": "27-135s (combat and energy effects)",
+      "avoid": "0-26s (opening credits), 136-142s (transitions), 142-157s (logo splash and credits)",
+      "notes": "Best brand-fit (purple/blue cosmic palette matches D&D). Logo appears around 145s."
+    },
+    "ff7-advent-children.mp4": {
+      "clean_cinematic": "4-60s (various action sequences)",
+      "avoid": "Unknown \u2014 needs full mapping",
+      "notes": "Multiple disconnected action scenes. Some have strong fire/destruction visuals."
+    }
+  },
+  "contentFormats": {
+    "cinematic-trailer": {
+      "description": "Epic cinematic game trailers using AAA game footage, orchestral music, and dramatic VO",
+      "duration": "45-90s",
+      "platform": "YouTube, website hero",
+      "music": "Orchestral hybrid, cinematic builds, 120-130 BPM",
+      "voice": "Slow, dramatic, authoritative narrator",
+      "visuals": "Game cinematics, AAA clips, single visual world, event-to-spike alignment",
+      "text": "Sparse overlay via ffmpeg drawtext, only during VO, not during climax",
+      "techniques": [
+        "event-to-spike sync",
+        "wave methodology",
+        "visual story coherence",
+        "scale escalation",
+        "faction duality"
+      ],
+      "tools": [
+        "Shotstack",
+        "ffmpeg drawtext",
+        "ElevenLabs",
+        "yt-dlp",
+        "Gemini analysis"
+      ],
+      "knownFailures": [
+        "multi-game mashups",
+        "Gemini timestamp errors",
+        "subtitle/branding in clips",
+        "static images pretending to be video"
+      ],
+      "rulesRange": "1-50"
+    },
+    "crypto-promo": {
+      "description": "Fast-paced crypto/NFT/web3 hype explainer for Twitter/TikTok scroll-stopping",
+      "duration": "30-45s",
+      "platform": "Twitter, TikTok, Instagram Reels",
+      "music": "Electronic/trap beat, high energy from second 1, 140-160 BPM",
+      "voice": "Fast, energetic, young, hype \u2014 like a crypto YouTuber, NOT a movie narrator",
+      "visuals": "Screen recordings of OUR product zoomed/cropped, kinetic typography, motion graphics, NO static images",
+      "text": "Kinetic typography is the PRIMARY visual. Text animates in/out with SFX. Captions required for mute viewing",
+      "techniques": [
+        "zoom into UI elements",
+        "whoosh/impact SFX on every text hit",
+        "screen recording behind ALL text (no dead dark frames)",
+        "staggered text reveal",
+        "beat-synced text drops",
+        "multi-aspect-ratio (16:9 + 9:16 + 1:1)"
+      ],
+      "tools": [
+        "ffmpeg (full local build)",
+        "ElevenLabs (energetic voice)",
+        "screen capture"
+      ],
+      "knownFailures": [
+        "loading spinners in screen recordings",
+        "mouse cursors visible",
+        "Disconnected/error states",
+        "browser URL bars",
+        "empty inventory (0 cards)",
+        "static text on flat dark bg = dead air",
+        "music too quiet",
+        "no SFX",
+        "low bitrate"
+      ],
+      "knownSuccesses": [
+        "tokenomics page scroll looks professional",
+        "game home page hero art is beautiful",
+        "3D model rotation has real motion",
+        "cyan/gold color accents work well"
+      ],
+      "rulesRange": "TBD \u2014 needs own rules",
+      "lessonsFromV1": [
+        "Screen recordings must be QC'd frame-by-frame for loading states, errors, cursors, URL bars",
+        "Every text appearance needs a whoosh/impact SFX",
+        "Text-on-dark is dead air \u2014 always have screen recording or motion behind text",
+        "Music must be genre-appropriate (electronic/trap, NOT cinematic orchestral)",
+        "Music volume should be 0.4-0.5, not 0.25 \u2014 the beat drives energy",
+        "VO should be 1.2-1.3x speed for hype pacing",
+        "Zoom into specific UI elements instead of showing full-page scrolls",
+        "Logo/branding in first 3 seconds",
+        "Captions/subtitles required \u2014 85% of Twitter videos watched on mute",
+        "Minimum bitrate 3000kbps for readable text/UI",
+        "Show populated states (cards owned, progress made), not empty inventories",
+        "Include social proof and urgency (presale dates, holder counts)",
+        "Add Polygon/ERC-721/ERC-20 badges for crypto credibility",
+        "CTA must be specific action (Mint Now, Join Discord), not just URL",
+        "Deliver in multiple aspect ratios: 16:9, 9:16, 1:1"
+      ],
+      "provenClipSources": [
+        "Illuvium auto-battler gameplay (hex grid combat, creature abilities, board setup)",
+        "Abstract blockchain node network animation (dark bg, no branding)",
+        "Cosmic nebula space footage (purple/gold, matches D&D brand)",
+        "Neon tunnel/abstract tech animations (for AI/tech sections)",
+        "NFT card reveal animations (cropped to remove branding)"
+      ],
+      "provenVoice": {
+        "voiceId": "bVMeCyTHy58xNoL34h3p",
+        "name": "Jeremy",
+        "style": "excited",
+        "speed": "1.25x",
+        "settings": {
+          "stability": 0.5,
+          "similarity_boost": 0.75,
+          "style": 0.4
+        }
+      },
+      "provenColors": {
+        "gold": "#FFD700 \u2014 key stats, scarcity (500M DDT, ONLY 200)",
+        "cyan": "#00DDFF \u2014 tech/blockchain text (AUTO-BATTLER x BLOCKCHAIN, AI-POWERED)",
+        "white": "general text, readable over any background"
+      },
+      "v4Score": "10/10 \u2014 founder approved"
+    },
+    "product-demo": {
+      "description": "Walkthrough of the actual game/product features for interested users",
+      "duration": "60-120s",
+      "platform": "YouTube, Discord, website",
+      "music": "Lo-fi or ambient electronic, low volume",
+      "voice": "Conversational, clear, tutorial-style",
+      "visuals": "Clean screen recordings with zoom/highlight annotations",
+      "text": "Feature labels, callout arrows, step numbers",
+      "techniques": [
+        "cursor highlight",
+        "zoom-to-feature",
+        "before/after comparisons"
+      ],
+      "tools": [
+        "screen recording",
+        "ffmpeg"
+      ],
+      "knownFailures": [],
+      "rulesRange": "TBD"
+    },
+    "social-clip": {
+      "description": "5-15 second micro-clips for engagement farming on Twitter/TikTok",
+      "duration": "5-15s",
+      "platform": "Twitter, TikTok, Instagram Stories",
+      "music": "Trending audio or punchy beat drop",
+      "voice": "None or single punchy line",
+      "visuals": "Single wow moment \u2014 card reveal, 3D model, combat clip",
+      "text": "1-2 lines max, large, centered",
+      "techniques": [
+        "loop-friendly ending",
+        "vertical format priority",
+        "trending audio sync"
+      ],
+      "tools": [
+        "ffmpeg"
+      ],
+      "knownFailures": [],
+      "rulesRange": "TBD"
+    }
+  }
+}

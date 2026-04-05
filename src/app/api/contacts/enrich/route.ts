@@ -9,12 +9,10 @@
  */
 
 import { type NextRequest } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase";
+import { SHEET, findRowBy, updateRow } from "@/lib/sheets";
 
 interface EnrichPayload {
-  /** Required — used as the lookup key */
   email: string;
-  /** Optional enrichment fields — null/missing values are skipped */
   name?: string;
   whatsapp?: string;
   bio?: string;
@@ -23,9 +21,12 @@ interface EnrichPayload {
   socials?: string;
   skills?: string[];
   status?: "pending" | "approved" | "rejected";
-  /** If true, overwrite existing non-null values with new data (default: false) */
   force?: boolean;
 }
+
+const ENRICHABLE_FIELDS = [
+  "name", "whatsapp", "bio", "business_niche", "website", "socials", "skills", "status",
+] as const;
 
 export async function POST(request: NextRequest) {
   const secret = request.headers.get("x-admin-secret");
@@ -41,60 +42,29 @@ export async function POST(request: NextRequest) {
 
   const email = body.email.trim().toLowerCase();
 
-  // Fetch existing contact
-  const { data: existing } = await supabaseAdmin
-    .from("contacts")
-    .select("*")
-    .eq("email", email)
-    .single();
-
+  const existing = await findRowBy(SHEET.contacts, "email", email);
   if (!existing) {
     return Response.json({ error: "Contact not found" }, { status: 404 });
   }
 
   // Build update patch — only overwrite if field is blank or force=true
-  const enrichableFields = [
-    "name",
-    "whatsapp",
-    "bio",
-    "business_niche",
-    "website",
-    "socials",
-    "skills",
-    "status",
-  ] as const;
-
   const patch: Record<string, unknown> = {};
-  for (const field of enrichableFields) {
+  for (const field of ENRICHABLE_FIELDS) {
     const incoming = body[field as keyof EnrichPayload];
     if (incoming === undefined || incoming === null) continue;
-    // Only update if existing value is blank, or force flag is set
-    const current = existing[field];
-    const isBlank =
-      current === null ||
-      current === undefined ||
-      current === "" ||
-      (Array.isArray(current) && current.length === 0);
+    const current = existing.row[field];
+    const isBlank = !current || current === "" || current === "[]";
     if (isBlank || body.force) {
-      patch[field] = incoming;
+      patch[field] = Array.isArray(incoming) ? JSON.stringify(incoming) : incoming;
     }
   }
 
   if (Object.keys(patch).length === 0) {
-    return Response.json({ contact: existing, enriched: false });
+    return Response.json({ contact: existing.row, enriched: false });
   }
 
-  const { data: updated, error } = await supabaseAdmin
-    .from("contacts")
-    .update(patch)
-    .eq("email", email)
-    .select()
-    .single();
+  await updateRow(SHEET.contacts, existing.rowIndex, patch);
 
-  if (error || !updated) {
-    console.error("[POST /api/contacts/enrich]", error);
-    return Response.json({ error: "Failed to enrich contact" }, { status: 500 });
-  }
-
+  const updated = { ...existing.row, ...patch };
   return Response.json({ contact: updated, enriched: true, fields: Object.keys(patch) });
 }

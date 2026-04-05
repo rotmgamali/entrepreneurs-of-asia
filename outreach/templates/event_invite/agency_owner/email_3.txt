@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last one from me on the CM Founders invite — not going to keep nudging.
+
+If the timing isn't right or you're not in Chiang Mai right now, no worries. Just reply anytime and I'll get you in for the next one.

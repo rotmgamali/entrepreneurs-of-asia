@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last message on the speaker invite. If the timing's not right, totally fine — just reply "later" and I'll circle back.
+
+Hope to have you at CM Founders as an attendee in the meantime.

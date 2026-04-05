@@ -1,0 +1,97 @@
+{
+  "campaign": "Sponsor Acquisition",
+  "description": "Pitch coworking spaces, SaaS tools, and founder-adjacent services as event sponsors. Position sponsorship as brand access to 30-50 verified CM founders per event.",
+  "target_segment": "Coworking spaces, productivity/business SaaS, remote work services, financial/legal services for expats, health/wellness for nomads — any brand whose customer is a CM-based founder or digital nomad",
+  "personalization_variables": [
+    "{{first_name}}",
+    "{{company_name}}",
+    "{{business_type}}",
+    "{{mutual_connection}}",
+    "{{their_target_customer}}"
+  ],
+  "sponsor_packages": [
+    {
+      "tier": "Community Sponsor",
+      "investment": "5,000 THB/month (~$140 USD)",
+      "benefits": [
+        "Logo on event landing page",
+        "Verbal mention at each event",
+        "Social media tag in weekly recap post"
+      ]
+    },
+    {
+      "tier": "Presenting Sponsor",
+      "investment": "15,000 THB/month (~$420 USD)",
+      "benefits": [
+        "Named event sponsor (\"CM Founders, presented by [Brand]\")",
+        "2-minute brand intro at each event (live or video)",
+        "Logo on all event clips and content",
+        "Booth/table at event for product demo",
+        "Featured in RSVP confirmation emails (sent to 300+ active members)"
+      ]
+    },
+    {
+      "tier": "In-Kind Sponsor",
+      "investment": "Product/service provided at cost",
+      "benefits": [
+        "Verbal mention + logo at events you sponsor",
+        "Direct access to attendees during networking",
+        "Community Sponsor perks"
+      ]
+    }
+  ],
+  "sequences": [
+    {
+      "name": "Cold Sponsor Pitch — Coworking Spaces",
+      "channel": "email",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_email",
+          "subject": "Partnership opportunity — 40 verified CM founders every week",
+          "body": "Hi {{first_name}},\n\nI run CM Founders — a weekly event in Nimman that brings together 30-50 verified founders, digital nomads, and creators every Thursday.\n\nEvery attendee is vetted: they fill out an application with their business, website, and revenue stage. These are your actual customers.\n\nWe're looking for a community sponsor for Q2. In exchange for [PACKAGE_DETAILS], your brand gets:\n- Live mention at each event\n- Placement in our RSVP confirmation emails (300+ active members)\n- Clips from events where your brand is featured\n\n{{company_name}} felt like a natural fit given your focus on {{their_target_customer}}.\n\nWould you be open to a quick call this week to see if it makes sense?"
+        },
+        {
+          "day": 5,
+          "type": "followup_1",
+          "subject": "Re: Partnership opportunity — 40 verified CM founders every week",
+          "body": "Hey {{first_name}} — following up on this.\n\nWe just had [LAST_WEEK_ATTENDEE_COUNT] people through the doors last Thursday. Founders working in ecom, SaaS, agencies, content — exactly the crowd that needs what {{company_name}} offers.\n\nHappy to share our recent attendee breakdown if helpful. Or if sponsorship isn't the right angle, I'm open to other ideas.\n\nWorth a quick chat?"
+        },
+        {
+          "day": 12,
+          "type": "followup_2",
+          "subject": "Last note on CM Founders sponsorship",
+          "body": "Hey {{first_name}},\n\nFinal follow-up. I know inbound pitches are noise — totally get it if it's not a fit.\n\nIf the timing or budget changes, feel free to reach back out. We run year-round and always have room for partners who want direct access to CM's founder community.\n\nEither way, hope to see you at an event sometime."
+        }
+      ]
+    },
+    {
+      "name": "Cold Sponsor Pitch — SaaS / Tools",
+      "channel": "linkedin_dm",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_dm",
+          "body": "Hey {{first_name}} — I run a weekly founders event in Chiang Mai (40+ vetted founders/Thursday). We're building out our sponsor roster for Q2.\n\n{{company_name}} kept coming up when I asked our community what tools they use or want to learn more about.\n\nWould a community sponsorship make sense for you? Happy to send over a one-pager if useful."
+        },
+        {
+          "day": 4,
+          "type": "followup_1",
+          "body": "Hey {{first_name}} — just bumping this. The audience is genuinely strong: founders actively spending on tools, in a room together every week.\n\nLet me know if you'd like the details."
+        }
+      ]
+    },
+    {
+      "name": "Inbound Sponsor Onboarding",
+      "channel": "email",
+      "steps": [
+        {
+          "day": 0,
+          "type": "confirmation",
+          "subject": "Welcome aboard — CM Founders x {{company_name}}",
+          "body": "{{first_name}},\n\nExcited to have {{company_name}} on board as a [TIER_NAME] sponsor.\n\nHere's what happens next:\n\n1. **Payment:** [PAYMENT_LINK or invoice details]\n2. **Assets needed from you:**\n   - Logo (PNG, transparent bg preferred)\n   - 1-2 sentence brand description\n   - Website URL\n   - Contact for event coordination\n\n3. **First event coverage:** Your sponsorship goes live starting [START_DATE]\n\nI'll confirm the setup before your first event and send a recap after with attendance numbers and any clips that featured your brand.\n\nReply with your assets whenever you're ready."
+        }
+      ]
+    }
+  ]
+}

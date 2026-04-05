@@ -1,0 +1,71 @@
+{
+  "title": "Entrepreneurs of Asia — Event Recap",
+  "duration": 45,
+  "theme": "professional-inspiring",
+  "angle": "event-recap",
+  "searchQueries": [
+    "entrepreneur keynote speech highlights",
+    "startup founder presentation stage",
+    "business conference networking crowd",
+    "motivational speaker audience reaction"
+  ],
+  "sections": {
+    "hook": { "start": 0, "end": 5, "mood": "high-energy", "note": "Best crowd moment or speaker power quote" },
+    "title": { "start": 5, "end": 8, "mood": "professional", "note": "Event name + date overlay" },
+    "speakers": { "start": 8, "end": 22, "mood": "inspiring", "note": "Speaker clips with name overlays, key quotes" },
+    "community": { "start": 22, "end": 32, "mood": "warm", "note": "Networking moments, group shots, conversations" },
+    "testimonial": { "start": 32, "end": 40, "mood": "authentic", "note": "Attendee reactions or speaker soundbite" },
+    "cta": { "start": 40, "end": 45, "mood": "urgent", "note": "Next event date + registration URL" }
+  },
+  "textCards": [
+    {
+      "text": "ENTREPRENEURS OF ASIA",
+      "timing": "title",
+      "style": "modern-bold",
+      "size": "xx-large",
+      "color": "#ffffff"
+    },
+    {
+      "text": "Chiang Mai | Every Thursday",
+      "timing": "title",
+      "style": "modern",
+      "size": "large",
+      "color": "#cccccc"
+    },
+    {
+      "text": "[SPEAKER NAME]",
+      "timing": "speakers",
+      "style": "modern",
+      "size": "large",
+      "color": "#ffffff"
+    },
+    {
+      "text": "[KEY QUOTE]",
+      "timing": "speakers",
+      "style": "italic",
+      "size": "medium",
+      "color": "#e0e0e0"
+    },
+    {
+      "text": "NEXT EVENT: [DATE]",
+      "timing": "cta",
+      "style": "modern-bold",
+      "size": "x-large",
+      "color": "#ff6b35"
+    },
+    {
+      "text": "entrepreneursofasia.com",
+      "timing": "cta",
+      "style": "modern",
+      "size": "large",
+      "color": "#ffffff"
+    }
+  ],
+  "audioMix": {
+    "voiceover": { "volume": 1.2, "note": "Speaker audio dominates" },
+    "music": { "volume": 0.2, "note": "Subtle background, corporate/uplifting" },
+    "sfx": { "volume": 0.3, "note": "Transition whooshes only" },
+    "clipAudio": { "volume": 0.8, "note": "Keep speaker audio from clips" }
+  },
+  "targetScore": 85
+}

@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Just following up on the CM Founders invite. We had a great room last Thursday — practical talk, good energy, people actually connecting.
+
+If you're in Chiang Mai: [RSVP_URL]

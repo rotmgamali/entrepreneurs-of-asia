@@ -1,0 +1,700 @@
+{
+  "spikes": [
+    {
+      "time": 1.12,
+      "energy": 2.2,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 2.0,
+      "energy": 1.17,
+      "category": "SMALL"
+    },
+    {
+      "time": 2.5,
+      "energy": 1.05,
+      "category": "SMALL"
+    },
+    {
+      "time": 3.5,
+      "energy": 0.54,
+      "category": "minor"
+    },
+    {
+      "time": 5.0,
+      "energy": 1.46,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 5.5,
+      "energy": 1.09,
+      "category": "SMALL"
+    },
+    {
+      "time": 6.37,
+      "energy": 1.07,
+      "category": "SMALL"
+    },
+    {
+      "time": 7.0,
+      "energy": 0.64,
+      "category": "minor"
+    },
+    {
+      "time": 7.5,
+      "energy": 0.58,
+      "category": "minor"
+    },
+    {
+      "time": 9.0,
+      "energy": 1.65,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 9.5,
+      "energy": 1.27,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 10.0,
+      "energy": 0.9,
+      "category": "minor"
+    },
+    {
+      "time": 10.5,
+      "energy": 0.81,
+      "category": "minor"
+    },
+    {
+      "time": 11.37,
+      "energy": 0.57,
+      "category": "minor"
+    },
+    {
+      "time": 11.87,
+      "energy": 0.72,
+      "category": "minor"
+    },
+    {
+      "time": 12.25,
+      "energy": 0.51,
+      "category": "minor"
+    },
+    {
+      "time": 13.0,
+      "energy": 1.12,
+      "category": "SMALL"
+    },
+    {
+      "time": 14.0,
+      "energy": 1.03,
+      "category": "SMALL"
+    },
+    {
+      "time": 14.5,
+      "energy": 0.69,
+      "category": "minor"
+    },
+    {
+      "time": 15.0,
+      "energy": 0.79,
+      "category": "minor"
+    },
+    {
+      "time": 15.75,
+      "energy": 0.53,
+      "category": "minor"
+    },
+    {
+      "time": 16.37,
+      "energy": 0.53,
+      "category": "minor"
+    },
+    {
+      "time": 16.87,
+      "energy": 0.58,
+      "category": "minor"
+    },
+    {
+      "time": 18.37,
+      "energy": 1.5,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 19.12,
+      "energy": 2.21,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 19.5,
+      "energy": 1.74,
+      "category": "BIG"
+    },
+    {
+      "time": 20.37,
+      "energy": 1.52,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 21.0,
+      "energy": 1.82,
+      "category": "BIG"
+    },
+    {
+      "time": 22.0,
+      "energy": 1.35,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 22.5,
+      "energy": 1.46,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 23.0,
+      "energy": 1.8,
+      "category": "BIG"
+    },
+    {
+      "time": 23.62,
+      "energy": 0.95,
+      "category": "minor"
+    },
+    {
+      "time": 24.12,
+      "energy": 0.57,
+      "category": "minor"
+    },
+    {
+      "time": 25.0,
+      "energy": 1.45,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 26.25,
+      "energy": 1.62,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 27.25,
+      "energy": 2.48,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 28.37,
+      "energy": 1.71,
+      "category": "BIG"
+    },
+    {
+      "time": 29.0,
+      "energy": 2.04,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 29.5,
+      "energy": 1.53,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 30.0,
+      "energy": 1.89,
+      "category": "BIG"
+    },
+    {
+      "time": 30.5,
+      "energy": 2.08,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 31.12,
+      "energy": 1.91,
+      "category": "BIG"
+    },
+    {
+      "time": 31.5,
+      "energy": 1.43,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 32.12,
+      "energy": 0.8,
+      "category": "minor"
+    },
+    {
+      "time": 32.62,
+      "energy": 0.6,
+      "category": "minor"
+    },
+    {
+      "time": 33.37,
+      "energy": 1.49,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 33.75,
+      "energy": 1.39,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 34.25,
+      "energy": 1.71,
+      "category": "BIG"
+    },
+    {
+      "time": 35.0,
+      "energy": 1.8,
+      "category": "BIG"
+    },
+    {
+      "time": 35.62,
+      "energy": 1.2,
+      "category": "SMALL"
+    },
+    {
+      "time": 36.12,
+      "energy": 1.07,
+      "category": "SMALL"
+    },
+    {
+      "time": 38.12,
+      "energy": 1.46,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 39.25,
+      "energy": 2.3,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 40.37,
+      "energy": 1.92,
+      "category": "BIG"
+    },
+    {
+      "time": 41.0,
+      "energy": 1.96,
+      "category": "BIG"
+    },
+    {
+      "time": 42.5,
+      "energy": 2.15,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 43.12,
+      "energy": 2.35,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 43.62,
+      "energy": 1.95,
+      "category": "BIG"
+    },
+    {
+      "time": 44.12,
+      "energy": 1.82,
+      "category": "BIG"
+    },
+    {
+      "time": 45.12,
+      "energy": 1.83,
+      "category": "BIG"
+    },
+    {
+      "time": 45.5,
+      "energy": 1.08,
+      "category": "SMALL"
+    },
+    {
+      "time": 46.12,
+      "energy": 1.83,
+      "category": "BIG"
+    },
+    {
+      "time": 46.87,
+      "energy": 1.88,
+      "category": "BIG"
+    },
+    {
+      "time": 47.75,
+      "energy": 0.59,
+      "category": "minor"
+    },
+    {
+      "time": 50.12,
+      "energy": 1.44,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 51.12,
+      "energy": 1.88,
+      "category": "BIG"
+    },
+    {
+      "time": 51.5,
+      "energy": 1.82,
+      "category": "BIG"
+    }
+  ],
+  "all_spikes": [
+    {
+      "time": 1.12,
+      "energy": 2.2,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 2.0,
+      "energy": 1.17,
+      "category": "SMALL"
+    },
+    {
+      "time": 2.5,
+      "energy": 1.05,
+      "category": "SMALL"
+    },
+    {
+      "time": 3.5,
+      "energy": 0.54,
+      "category": "minor"
+    },
+    {
+      "time": 5.0,
+      "energy": 1.46,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 5.5,
+      "energy": 1.09,
+      "category": "SMALL"
+    },
+    {
+      "time": 6.37,
+      "energy": 1.07,
+      "category": "SMALL"
+    },
+    {
+      "time": 7.0,
+      "energy": 0.64,
+      "category": "minor"
+    },
+    {
+      "time": 7.5,
+      "energy": 0.58,
+      "category": "minor"
+    },
+    {
+      "time": 9.0,
+      "energy": 1.65,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 9.5,
+      "energy": 1.27,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 10.0,
+      "energy": 0.9,
+      "category": "minor"
+    },
+    {
+      "time": 10.5,
+      "energy": 0.81,
+      "category": "minor"
+    },
+    {
+      "time": 11.37,
+      "energy": 0.57,
+      "category": "minor"
+    },
+    {
+      "time": 11.87,
+      "energy": 0.72,
+      "category": "minor"
+    },
+    {
+      "time": 12.25,
+      "energy": 0.51,
+      "category": "minor"
+    },
+    {
+      "time": 13.0,
+      "energy": 1.12,
+      "category": "SMALL"
+    },
+    {
+      "time": 14.0,
+      "energy": 1.03,
+      "category": "SMALL"
+    },
+    {
+      "time": 14.5,
+      "energy": 0.69,
+      "category": "minor"
+    },
+    {
+      "time": 15.0,
+      "energy": 0.79,
+      "category": "minor"
+    },
+    {
+      "time": 15.75,
+      "energy": 0.53,
+      "category": "minor"
+    },
+    {
+      "time": 16.37,
+      "energy": 0.53,
+      "category": "minor"
+    },
+    {
+      "time": 16.87,
+      "energy": 0.58,
+      "category": "minor"
+    },
+    {
+      "time": 18.37,
+      "energy": 1.5,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 19.12,
+      "energy": 2.21,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 19.5,
+      "energy": 1.74,
+      "category": "BIG"
+    },
+    {
+      "time": 20.37,
+      "energy": 1.52,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 21.0,
+      "energy": 1.82,
+      "category": "BIG"
+    },
+    {
+      "time": 22.0,
+      "energy": 1.35,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 22.5,
+      "energy": 1.46,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 23.0,
+      "energy": 1.8,
+      "category": "BIG"
+    },
+    {
+      "time": 23.62,
+      "energy": 0.95,
+      "category": "minor"
+    },
+    {
+      "time": 24.12,
+      "energy": 0.57,
+      "category": "minor"
+    },
+    {
+      "time": 25.0,
+      "energy": 1.45,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 26.25,
+      "energy": 1.62,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 27.25,
+      "energy": 2.48,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 28.37,
+      "energy": 1.71,
+      "category": "BIG"
+    },
+    {
+      "time": 29.0,
+      "energy": 2.04,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 29.5,
+      "energy": 1.53,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 30.0,
+      "energy": 1.89,
+      "category": "BIG"
+    },
+    {
+      "time": 30.5,
+      "energy": 2.08,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 31.12,
+      "energy": 1.91,
+      "category": "BIG"
+    },
+    {
+      "time": 31.5,
+      "energy": 1.43,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 32.12,
+      "energy": 0.8,
+      "category": "minor"
+    },
+    {
+      "time": 32.62,
+      "energy": 0.6,
+      "category": "minor"
+    },
+    {
+      "time": 33.37,
+      "energy": 1.49,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 33.75,
+      "energy": 1.39,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 34.25,
+      "energy": 1.71,
+      "category": "BIG"
+    },
+    {
+      "time": 35.0,
+      "energy": 1.8,
+      "category": "BIG"
+    },
+    {
+      "time": 35.62,
+      "energy": 1.2,
+      "category": "SMALL"
+    },
+    {
+      "time": 36.12,
+      "energy": 1.07,
+      "category": "SMALL"
+    },
+    {
+      "time": 38.12,
+      "energy": 1.46,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 39.25,
+      "energy": 2.3,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 40.37,
+      "energy": 1.92,
+      "category": "BIG"
+    },
+    {
+      "time": 41.0,
+      "energy": 1.96,
+      "category": "BIG"
+    },
+    {
+      "time": 42.5,
+      "energy": 2.15,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 43.12,
+      "energy": 2.35,
+      "category": "MASSIVE"
+    },
+    {
+      "time": 43.62,
+      "energy": 1.95,
+      "category": "BIG"
+    },
+    {
+      "time": 44.12,
+      "energy": 1.82,
+      "category": "BIG"
+    },
+    {
+      "time": 45.12,
+      "energy": 1.83,
+      "category": "BIG"
+    },
+    {
+      "time": 45.5,
+      "energy": 1.08,
+      "category": "SMALL"
+    },
+    {
+      "time": 46.12,
+      "energy": 1.83,
+      "category": "BIG"
+    },
+    {
+      "time": 46.87,
+      "energy": 1.88,
+      "category": "BIG"
+    },
+    {
+      "time": 47.75,
+      "energy": 0.59,
+      "category": "minor"
+    },
+    {
+      "time": 50.12,
+      "energy": 1.44,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 51.12,
+      "energy": 1.88,
+      "category": "BIG"
+    },
+    {
+      "time": 51.5,
+      "energy": 1.82,
+      "category": "BIG"
+    },
+    {
+      "time": 52.12,
+      "energy": 1.37,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 52.5,
+      "energy": 1.56,
+      "category": "MEDIUM"
+    },
+    {
+      "time": 53.12,
+      "energy": 1.19,
+      "category": "SMALL"
+    },
+    {
+      "time": 54.37,
+      "energy": 0.56,
+      "category": "minor"
+    }
+  ],
+  "duration": 57.05142857142857,
+  "window_ms": 125,
+  "mean_rms": 0.1766741362183529,
+  "normalization": "mean_rms"
+}

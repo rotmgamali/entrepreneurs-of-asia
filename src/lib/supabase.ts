@@ -78,6 +78,112 @@ export interface EventAttendee {
   created_at: string;
 }
 
+// ── Outbound leads / DM campaign tracking ────────────────────
+
+export type LeadPlatform = "facebook" | "instagram" | "linkedin" | "twitter" | "whatsapp" | "other";
+export type LeadOutreachStatus =
+  | "identified" | "dm_sent" | "follow_up_1_sent" | "follow_up_2_sent"
+  | "replied" | "positive" | "negative" | "rsvp_submitted" | "approved" | "attended" | "cold";
+export type LeadCampaign = "attendee_recruitment" | "speaker_pipeline" | "sponsor_pipeline";
+
+export interface Lead {
+  id: string;
+  name: string;
+  platform: LeadPlatform;
+  profile_url: string | null;
+  business_niche: string | null;
+  location: string | null;
+  outreach_status: LeadOutreachStatus;
+  dm_sent_at: string | null;
+  follow_up_1_at: string | null;
+  follow_up_2_at: string | null;
+  last_reply_at: string | null;
+  message_body: string | null;
+  notes: string | null;
+  source: string;
+  campaign: LeadCampaign;
+  event_id: string | null;
+  contact_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// ── Nomad profile types ───────────────────────────────────────
+
+export type EnrichmentStatus = "raw" | "partial" | "enriched" | "verified";
+export type StayPattern = "permanent" | "long-term" | "seasonal" | "transient";
+export type CommunityRole = "organizer" | "speaker" | "regular" | "occasional" | "lurker";
+export type NomadOutreachStatus = "not_contacted" | "contacted" | "responded" | "member" | "inactive";
+
+export interface NomadProfile {
+  id: string;
+  contact_id: string | null;
+  slug: string | null;
+  full_name: string;
+  first_name: string | null;
+  last_name: string | null;
+  nationality: string | null;
+  languages: string[];
+  profession: string | null;
+  skills: string[];
+  company_name: string | null;
+  company_url: string | null;
+  current_projects: string | null;
+  email_primary: string | null;
+  email_secondary: string | null;
+  phone_whatsapp: string | null;
+  website: string | null;
+  linkedin_url: string | null;
+  twitter_x_handle: string | null;
+  instagram_handle: string | null;
+  facebook_profile_url: string | null;
+  youtube_channel_url: string | null;
+  tiktok_handle: string | null;
+  github_url: string | null;
+  coworking_spaces: string[];
+  neighborhoods: string[];
+  stay_pattern: StayPattern | null;
+  cm_first_seen_date: string | null;
+  cm_last_active_date: string | null;
+  event_history: Array<{ event_id: string; event_name: string; date: string; role: string }>;
+  facebook_groups: string[];
+  community_role: CommunityRole | null;
+  crm_contact_id: string | null;
+  outreach_status: NomadOutreachStatus;
+  relationship_strength: number;
+  data_sources: Record<string, unknown>;
+  enrichment_status: EnrichmentStatus;
+  confidence_score: number;
+  verified_at: string | null;
+  tags: string[];
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export type CmEventCategory = "networking" | "workshop" | "social" | "coworking" | "conference" | "other";
+export type CmEventFrequency = "one-off" | "weekly" | "bi-weekly" | "monthly" | "quarterly" | "other";
+
+export interface CmEvent {
+  id: string;
+  name: string;
+  organizer_name: string | null;
+  organizer_id: string | null;
+  category: CmEventCategory | null;
+  frequency: CmEventFrequency | null;
+  venue: string | null;
+  typical_size: number | null;
+  cost_thb: number;
+  facebook_url: string | null;
+  meetup_url: string | null;
+  eventbrite_url: string | null;
+  luma_url: string | null;
+  notes: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 // ── Relationship tracking types ───────────────────────────────
 
 export type PartnerType = "sponsor" | "venue" | "speaker" | "collaborator";

@@ -1,0 +1,198 @@
+{
+  "name": "EOA – RSVP Intake & Qualification",
+  "description": "Main intake workflow triggered by the Next.js /api/rsvp webhook. Scores incoming leads, auto-approves qualified ones, updates Supabase contact status, triggers the welcome sequence, and sends WhatsApp invites with niche-matched subgroup links.",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "RSVP Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-rsvp",
+        "responseMode": "onReceived"
+      },
+      "notes": "This URL is set as N8N_WEBHOOK_URL in Next.js. Receives: name, email, whatsapp, businessNiche, website, socials, source, submittedAt."
+    },
+    {
+      "id": "score-lead",
+      "name": "Calculate Qualification Score",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "const d = $input.first().json;\n\nlet score = 0;\nif (d.website && d.website.trim().length > 0) score += 1;\nif (d.socials && d.socials.trim().length > 0) score += 1;\nif (d.businessNiche && d.businessNiche.trim().length > 20) score += 1;\n\n// Niche → subgroup matching (aligned with whatsapp-groups.ts)\nconst niche = (d.businessNiche || '').toLowerCase();\nconst subgroupMap = [\n  { key: 'tech',       envVar: 'WA_GROUP_TECH_INVITE',       keywords: ['saas','software','developer','tech','coding','app','startup','api','engineer','devops','ai','ml'] },\n  { key: 'marketing',  envVar: 'WA_GROUP_MARKETING_INVITE',  keywords: ['marketing','growth','seo','ads','facebook ads','google ads','funnel','copywriting','branding','pr','influencer'] },\n  { key: 'ecommerce',  envVar: 'WA_GROUP_ECOMMERCE_INVITE',  keywords: ['ecommerce','e-commerce','shopify','amazon','dropship','fba','product','dtc','physical product','wholesale','retail'] },\n  { key: 'media',      envVar: 'WA_GROUP_MEDIA_INVITE',      keywords: ['content','youtube','podcast','creator','newsletter','writer','blogger','video','media','tiktok','instagram'] },\n  { key: 'agency',     envVar: 'WA_GROUP_AGENCY_INVITE',     keywords: ['agency','freelance','consulting','service','coach','coaching','done for you','outsource'] },\n  { key: 'finance',    envVar: 'WA_GROUP_FINANCE_INVITE',    keywords: ['investor','investing','finance','fund','fintech','crypto','trading','venture','angel','wealth'] },\n];\n\nconst matchedSubgroups = subgroupMap.filter(g => g.keywords.some(kw => niche.includes(kw)));\n\nreturn [{ json: { ...d, qualificationScore: score, autoApprove: score >= 2, matchedSubgroups } }];"
+      }
+    },
+    {
+      "id": "route-lead",
+      "name": "Route: Auto-Approve or Manual Review",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [680, 300],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "leftValue": "={{$json.autoApprove}}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "sheets-approve",
+      "name": "Google Sheets – Set Contact Approved",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [900, 180],
+      "parameters": {
+        "operation": "update",
+        "documentId": "={{$env.GOOGLE_SPREADSHEET_ID}}",
+        "sheetName": "Contacts",
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "email",
+              "lookupValue": "={{$node['score-lead'].json.email}}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "values": [
+            { "column": "status", "fieldValue": "approved" }
+          ]
+        }
+      },
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "google-sheets-oauth2",
+          "name": "EOA Google Sheets"
+        }
+      },
+      "notes": "Updates the Contacts sheet row matching the submitted email. Credential must be set up in N8N: Credentials → Google Sheets OAuth2 API, named 'EOA Google Sheets'."
+    },
+    {
+      "id": "trigger-welcome-sequence",
+      "name": "Trigger Welcome Email Sequence",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1100, 180],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.N8N_WELCOME_SEQUENCE_URL}}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"name\":\"{{$node['score-lead'].json.name}}\",\"email\":\"{{$node['score-lead'].json.email}}\",\"whatsapp\":\"{{$node['score-lead'].json.whatsapp}}\",\"businessNiche\":\"{{$node['score-lead'].json.businessNiche}}\",\"website\":\"{{$node['score-lead'].json.website}}\",\"socials\":\"{{$node['score-lead'].json.socials}}\",\"matchedSubgroups\":{{JSON.stringify($node['score-lead'].json.matchedSubgroups)}},\"approvedAt\":\"{{new Date().toISOString()}}\"}"
+      },
+      "notes": "Fires the email drip sequence. N8N_WELCOME_SEQUENCE_URL = webhook URL of eoa-welcome-sequence workflow."
+    },
+    {
+      "id": "whatsapp-main-invite",
+      "name": "WhatsApp – Send Main Group Invite",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1100, 320],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$env.WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{$env.WHATSAPP_ACCESS_TOKEN}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"messaging_product\":\"whatsapp\",\"to\":\"{{$node['score-lead'].json.whatsapp.replace(/[^\\d]/g,'')}}\",\"type\":\"template\",\"template\":{\"name\":\"invite_community\",\"language\":{\"code\":\"en\"},\"components\":[{\"type\":\"body\",\"parameters\":[{\"type\":\"text\",\"text\":\"{{$node['score-lead'].json.name}}\"},{\"type\":\"text\",\"text\":\"{{$env.WA_GROUP_MAIN_INVITE}}\"}]}]}}"
+      }
+    },
+    {
+      "id": "subgroup-loop",
+      "name": "Loop – Subgroup WhatsApp Invites",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [1300, 320],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "notes": "Iterates over matchedSubgroups. Each batch sends one subgroup invite."
+    },
+    {
+      "id": "whatsapp-subgroup-invite",
+      "name": "WhatsApp – Send Subgroup Invite",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1500, 320],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$env.WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Authorization", "value": "=Bearer {{$env.WHATSAPP_ACCESS_TOKEN}}" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"messaging_product\":\"whatsapp\",\"to\":\"{{$node['score-lead'].json.whatsapp.replace(/[^\\d]/g,'')}}\",\"type\":\"template\",\"template\":{\"name\":\"invite_subgroup\",\"language\":{\"code\":\"en\"},\"components\":[{\"type\":\"body\",\"parameters\":[{\"type\":\"text\",\"text\":\"{{$node['score-lead'].json.businessNiche}}\"},{\"type\":\"text\",\"text\":\"{{$json.key}}\"},{\"type\":\"text\",\"text\":\"{{$env[$json.envVar]}}\"}]}]}}"
+      }
+    },
+    {
+      "id": "manual-review-alert",
+      "name": "Alert – Manual Review Required",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 2,
+      "position": [900, 440],
+      "parameters": {
+        "fromEmail": "={{$env.EMAIL_FROM}}",
+        "toEmail": "={{$env.BOARD_EMAIL}}",
+        "subject": "=[EOA] Manual review needed: {{$json.name}} (score {{$json.qualificationScore}}/3)",
+        "emailType": "html",
+        "message": "=<h2>New RSVP – Manual Review Required</h2><p>A new RSVP came in with a qualification score below the auto-approve threshold.</p><table style=\"border-collapse:collapse;width:100%\"><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Name</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.name}}</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Email</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.email}}</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>WhatsApp</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.whatsapp}}</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Business Niche</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.businessNiche}}</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Website</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.website || 'Not provided'}}</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Socials</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.socials || 'Not provided'}}</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Score</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.qualificationScore}}/3</td></tr><tr><td style=\"padding:8px;border:1px solid #ddd\"><strong>Submitted</strong></td><td style=\"padding:8px;border:1px solid #ddd\">{{$json.submittedAt}}</td></tr></table><p>To approve, go to the EOA admin panel and set this contact to 'approved', then manually trigger the welcome sequence.</p>"
+      },
+      "credentials": {
+        "smtp": { "id": "1", "name": "EOA SMTP" }
+      }
+    }
+  ],
+  "connections": {
+    "trigger": { "main": [[{ "node": "score-lead", "type": "main", "index": 0 }]] },
+    "score-lead": { "main": [[{ "node": "route-lead", "type": "main", "index": 0 }]] },
+    "route-lead": {
+      "main": [
+        [{ "node": "sheets-approve", "type": "main", "index": 0 }],
+        [{ "node": "manual-review-alert", "type": "main", "index": 0 }]
+      ]
+    },
+    "sheets-approve": { "main": [[{ "node": "trigger-welcome-sequence", "type": "main", "index": 0 }]] },
+    "trigger-welcome-sequence": { "main": [[{ "node": "whatsapp-main-invite", "type": "main", "index": 0 }]] },
+    "whatsapp-main-invite": { "main": [[{ "node": "subgroup-loop", "type": "main", "index": 0 }]] },
+    "subgroup-loop": { "main": [[{ "node": "whatsapp-subgroup-invite", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "requiredEnvVars": [
+    "GOOGLE_SPREADSHEET_ID",
+    "N8N_WELCOME_SEQUENCE_URL",
+    "WHATSAPP_PHONE_NUMBER_ID",
+    "WHATSAPP_ACCESS_TOKEN",
+    "WA_GROUP_MAIN_INVITE",
+    "WA_GROUP_TECH_INVITE",
+    "WA_GROUP_MARKETING_INVITE",
+    "WA_GROUP_ECOMMERCE_INVITE",
+    "WA_GROUP_MEDIA_INVITE",
+    "WA_GROUP_AGENCY_INVITE",
+    "WA_GROUP_FINANCE_INVITE",
+    "EMAIL_FROM",
+    "BOARD_EMAIL"
+  ],
+  "notes": "Primary RSVP intake workflow. Set webhook path to 'eoa-rsvp' (this URL is N8N_RSVP_WEBHOOK_URL in Next.js). Google Sheets CRM is the single source of truth — no Supabase. Requires: (1) SMTP credential 'EOA SMTP' in N8N, (2) Google Sheets OAuth2 credential 'EOA Google Sheets' in N8N (authorize via Google OAuth consent screen with sheets scope), (3) GOOGLE_SPREADSHEET_ID env var set to the EOA master spreadsheet ID."
+}

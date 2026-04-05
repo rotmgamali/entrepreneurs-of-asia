@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run a weekly founders event in Chiang Mai — CM Founders, every Thursday in Nimman. About 40 verified founders and agency owners per event. 20-min talk from someone in the trenches, then real networking.
+
+The room is heavy on people running client work, agencies, and service businesses in CM. Figured it might be relevant to you.
+
+It's free and curated — RSVP here: [RSVP_URL]

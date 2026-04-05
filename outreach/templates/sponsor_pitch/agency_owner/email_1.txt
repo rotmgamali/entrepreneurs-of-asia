@@ -1,0 +1,14 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run CM Founders — a weekly event in Chiang Mai that brings together 30-50 verified founders, digital nomads, and creators every Thursday. Every attendee is vetted: they apply with their business, website, and what they're building. These are real customers, not random people.
+
+We're building out our sponsor roster and {{ company_name }} came to mind. In exchange for a community sponsorship, your brand gets:
+- Live mention at each Thursday event
+- Placement in our RSVP confirmation emails (sent to 300+ active members)
+- Short-form content clips featuring your brand
+
+Given that your audience is {{ their_target_customer }}, the room is a direct match.
+
+Would you be open to a quick call this week to see if it makes sense?

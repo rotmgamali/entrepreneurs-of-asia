@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Just following up on the speaker invite. We have a spot open in the next 2 weeks that would be a great fit for someone covering {{ business_niche }}.
+
+The format is 20 minutes — share what's working, what's not, something the room can actually use. The audience is 40 curated founders who show up and act on what they hear. You get a produced content clip from it.
+
+Still interested?

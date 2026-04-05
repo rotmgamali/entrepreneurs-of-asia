@@ -1,0 +1,121 @@
+{
+  "name": "EOA – WhatsApp RSVP Invite",
+  "description": "Triggered by the EOA RSVP webhook. Sends the main WhatsApp community invite and matches topic subgroups from the applicant's business niche, then sends targeted subgroup invites.",
+  "nodes": [
+    {
+      "id": "trigger",
+      "name": "RSVP Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "eoa-rsvp",
+        "responseMode": "onReceived"
+      },
+      "notes": "This is the main N8N_WEBHOOK_URL called by /api/rsvp. Receives: name, email, whatsapp, businessNiche, website, socials."
+    },
+    {
+      "id": "match-subgroups",
+      "name": "Match Subgroups from Niche",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300],
+      "parameters": {
+        "jsCode": "const niche = ($input.first().json.businessNiche || '').toLowerCase();\n\nconst subgroups = [\n  { key: 'tech', name: 'EOA CM – Tech & SaaS', envVar: 'WA_GROUP_TECH_INVITE', keywords: ['saas','software','developer','tech','coding','app','api','engineer','ai','ml'] },\n  { key: 'marketing', name: 'EOA CM – Marketing & Growth', envVar: 'WA_GROUP_MARKETING_INVITE', keywords: ['marketing','growth','seo','ads','funnel','copywriting','branding'] },\n  { key: 'ecommerce', name: 'EOA CM – E-commerce', envVar: 'WA_GROUP_ECOMMERCE_INVITE', keywords: ['ecommerce','e-commerce','shopify','amazon','dropship','fba','product','dtc'] },\n  { key: 'media', name: 'EOA CM – Media & Content', envVar: 'WA_GROUP_MEDIA_INVITE', keywords: ['content','youtube','podcast','creator','newsletter','writer','video','media'] },\n  { key: 'agency', name: 'EOA CM – Agency & Services', envVar: 'WA_GROUP_AGENCY_INVITE', keywords: ['agency','freelance','consulting','service','coach','outsource'] },\n  { key: 'finance', name: 'EOA CM – Investors & Finance', envVar: 'WA_GROUP_FINANCE_INVITE', keywords: ['investor','investing','finance','fund','fintech','crypto','trading','venture'] },\n];\n\nconst matched = subgroups.filter(g => g.keywords.some(kw => niche.includes(kw)));\nconst data = $input.first().json;\n\nreturn [{ json: { ...data, matchedSubgroups: matched } }];"
+      }
+    },
+    {
+      "id": "send-main-invite",
+      "name": "WhatsApp – Send Main Invite",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$env.WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"messaging_product\":\"whatsapp\",\"to\":\"{{$json.whatsapp.replace(/[^\\d]/g,'')}}\",\"type\":\"template\",\"template\":{\"name\":\"invite_community\",\"language\":{\"code\":\"en\"},\"components\":[{\"type\":\"body\",\"parameters\":[{\"type\":\"text\",\"text\":\"{{$json.name}}\"},{\"type\":\"text\",\"text\":\"{{$env.WA_GROUP_MAIN_INVITE}}\"}]}]}}"
+      }
+    },
+    {
+      "id": "crm-upsert",
+      "name": "CRM – Upsert Contact",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [680, 340],
+      "parameters": {
+        "method": "POST",
+        "url": "={{$env.N8N_CRM_WEBHOOK_URL}}",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            { "name": "source", "value": "rsvp_form" },
+            { "name": "name", "value": "={{$json.name}}" },
+            { "name": "email", "value": "={{$json.email}}" },
+            { "name": "phone", "value": "={{$json.whatsapp}}" },
+            { "name": "business_niche", "value": "={{$json.businessNiche}}" },
+            { "name": "website", "value": "={{$json.website}}" },
+            { "name": "socials", "value": "={{$json.socials}}" },
+            { "name": "tags", "value": "=rsvp,whatsapp_invited,{{$json.matchedSubgroups.map(g => g.key).join(',')}}" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "subgroups-loop",
+      "name": "Loop – Subgroup Invites",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [900, 200],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      },
+      "notes": "Iterates over matchedSubgroups array and sends one invite per subgroup."
+    },
+    {
+      "id": "send-subgroup-invite",
+      "name": "WhatsApp – Send Subgroup Invite",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [1120, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$env.WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"messaging_product\":\"whatsapp\",\"to\":\"{{$node['match-subgroups'].json.whatsapp.replace(/[^\\d]/g,'')}}\",\"type\":\"template\",\"template\":{\"name\":\"invite_subgroup\",\"language\":{\"code\":\"en\"},\"components\":[{\"type\":\"body\",\"parameters\":[{\"type\":\"text\",\"text\":\"{{$node['match-subgroups'].json.businessNiche}}\"},{\"type\":\"text\",\"text\":\"{{$json.name}}\"},{\"type\":\"text\",\"text\":\"{{$env[$json.envVar]}}\"}]}]}}"
+      }
+    }
+  ],
+  "connections": {
+    "trigger": { "main": [[{ "node": "match-subgroups", "type": "main", "index": 0 }]] },
+    "match-subgroups": {
+      "main": [
+        [{ "node": "send-main-invite", "type": "main", "index": 0 }],
+        [{ "node": "crm-upsert", "type": "main", "index": 0 }],
+        [{ "node": "subgroups-loop", "type": "main", "index": 0 }]
+      ]
+    },
+    "subgroups-loop": { "main": [[{ "node": "send-subgroup-invite", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "requiredEnvVars": [
+    "WHATSAPP_PHONE_NUMBER_ID",
+    "WHATSAPP_ACCESS_TOKEN",
+    "WA_GROUP_MAIN_INVITE",
+    "WA_GROUP_TECH_INVITE",
+    "WA_GROUP_MARKETING_INVITE",
+    "WA_GROUP_ECOMMERCE_INVITE",
+    "WA_GROUP_MEDIA_INVITE",
+    "WA_GROUP_AGENCY_INVITE",
+    "WA_GROUP_FINANCE_INVITE",
+    "N8N_CRM_WEBHOOK_URL"
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "name": "EOA – WhatsApp Event Reminders (24h + 2h)",
+  "description": "Sends WhatsApp reminders to all confirmed RSVP attendees. Run as a scheduled N8N workflow: 24h before and 2h before each event.",
+  "nodes": [
+    {
+      "id": "trigger-24h",
+      "name": "Schedule – 24h Before Event",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 200],
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 10 * * 3" }]
+        }
+      },
+      "notes": "Runs every Wednesday at 10 AM ICT (24h before Thursday 6 PM event). Adjust cron for your event schedule."
+    },
+    {
+      "id": "trigger-2h",
+      "name": "Schedule – 2h Before Event",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [240, 400],
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 16 * * 4" }]
+        }
+      },
+      "notes": "Runs every Thursday at 4 PM ICT (2h before 6 PM event)."
+    },
+    {
+      "id": "fetch-attendees",
+      "name": "Supabase – Fetch Confirmed RSVPs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [460, 300],
+      "parameters": {
+        "method": "GET",
+        "url": "={{$env.NEXT_PUBLIC_SUPABASE_URL}}/rest/v1/rsvps",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "status", "value": "eq.confirmed" },
+            { "name": "select", "value": "name,whatsapp_number,email" }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "apikey", "value": "={{$env.SUPABASE_SERVICE_ROLE_KEY}}" },
+            { "name": "Authorization", "value": "=Bearer {{$env.SUPABASE_SERVICE_ROLE_KEY}}" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "split-attendees",
+      "name": "Loop – Per Attendee",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [680, 300],
+      "parameters": { "batchSize": 1, "options": {} }
+    },
+    {
+      "id": "send-24h-reminder",
+      "name": "WhatsApp – 24h Reminder",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 200],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$env.WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"messaging_product\":\"whatsapp\",\"to\":\"{{$json.whatsapp_number.replace(/[^\\d]/g,'')}}\",\"type\":\"template\",\"template\":{\"name\":\"event_reminder_24h\",\"language\":{\"code\":\"en\"},\"components\":[{\"type\":\"body\",\"parameters\":[{\"type\":\"text\",\"text\":\"{{$json.name}}\"},{\"type\":\"text\",\"text\":\"Thursday\"},{\"type\":\"text\",\"text\":\"Secret venue in Nimman — revealed 2h before start\"}]}]}}"
+      }
+    },
+    {
+      "id": "send-2h-reminder",
+      "name": "WhatsApp – 2h Reminder with Venue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [900, 400],
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{$env.WHATSAPP_PHONE_NUMBER_ID}}/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\"messaging_product\":\"whatsapp\",\"to\":\"{{$json.whatsapp_number.replace(/[^\\d]/g,'')}}\",\"type\":\"template\",\"template\":{\"name\":\"event_reminder_2h\",\"language\":{\"code\":\"en\"},\"components\":[{\"type\":\"body\",\"parameters\":[{\"type\":\"text\",\"text\":\"{{$env.CURRENT_EVENT_VENUE}}\"}]}]}}"
+      },
+      "notes": "Set CURRENT_EVENT_VENUE env var before the 2h trigger runs."
+    }
+  ],
+  "connections": {
+    "trigger-24h": { "main": [[{ "node": "fetch-attendees", "type": "main", "index": 0 }]] },
+    "trigger-2h": { "main": [[{ "node": "fetch-attendees", "type": "main", "index": 0 }]] },
+    "fetch-attendees": { "main": [[{ "node": "split-attendees", "type": "main", "index": 0 }]] },
+    "split-attendees": {
+      "main": [
+        [{ "node": "send-24h-reminder", "type": "main", "index": 0 }],
+        [{ "node": "send-2h-reminder", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" },
+  "notes": "The split-attendees node sends to the right reminder based on which trigger fired. In practice, create two separate workflow copies (one per trigger) or add a routing IF node.",
+  "requiredEnvVars": [
+    "WHATSAPP_PHONE_NUMBER_ID",
+    "WHATSAPP_ACCESS_TOKEN",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "CURRENT_EVENT_VENUE"
+  ]
+}

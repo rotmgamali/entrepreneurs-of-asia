@@ -1,25 +1,27 @@
 import { type NextRequest } from "next/server";
-import { supabase, supabaseAdmin } from "@/lib/supabase";
+import { SHEET, findRowBy, updateRow } from "@/lib/sheets";
 
-// GET /api/events/[id] — single event (venue revealed only to approved contacts via service role)
+// GET /api/events/[id] — single public event
 export async function GET(
   _req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
 
-  const { data, error } = await supabase
-    .from("events")
-    .select("id, title, description, event_date, speakers, rsvp_count")
-    .eq("id", id)
-    .eq("is_public", true)
-    .single();
-
-  if (error || !data) {
+  const found = await findRowBy(SHEET.events, "id", id);
+  if (!found || found.row.is_public !== "true") {
     return Response.json({ error: "Event not found" }, { status: 404 });
   }
 
-  return Response.json(data);
+  const { row } = found;
+  return Response.json({
+    id: row.id,
+    title: row.title,
+    description: row.description,
+    event_date: row.event_date,
+    speakers: row.speakers,
+    rsvp_count: row.rsvp_count,
+  });
 }
 
 // PATCH /api/events/[id] — update an event (admin only)
@@ -35,35 +37,23 @@ export async function PATCH(
   const { id } = await params;
   const body = await request.json();
 
-  const allowedFields = [
-    "title",
-    "description",
-    "event_date",
-    "venue",
-    "speakers",
-    "is_public",
-  ] as const;
-
+  const allowedFields = ["title", "description", "event_date", "venue", "speakers", "is_public"] as const;
   const updates: Record<string, unknown> = {};
   for (const field of allowedFields) {
-    if (field in body) updates[field] = body[field];
+    if (field in body) {
+      updates[field] = field === "is_public" ? String(body[field]) : body[field];
+    }
   }
 
   if (Object.keys(updates).length === 0) {
     return Response.json({ error: "No valid fields to update" }, { status: 400 });
   }
 
-  const { data, error } = await supabaseAdmin
-    .from("events")
-    .update(updates)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error || !data) {
-    console.error("[PATCH /api/events/[id]]", error);
-    return Response.json({ error: "Failed to update event" }, { status: 500 });
+  const found = await findRowBy(SHEET.events, "id", id);
+  if (!found) {
+    return Response.json({ error: "Event not found" }, { status: 404 });
   }
 
-  return Response.json(data);
+  await updateRow(SHEET.events, found.rowIndex, updates);
+  return Response.json({ ...found.row, ...updates });
 }

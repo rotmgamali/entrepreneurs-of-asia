@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Just following up on the CM Founders invite — we had a solid room last Thursday. Founder running a 7-fig ecom brand gave a 20-min talk on what actually moved the needle for them. The Q&A ran long.
+
+If you're in CM and want in, grab a spot here: [RSVP_URL]
+
+Or reply and I'll add you to the WhatsApp group — that's the easier path.

@@ -1,0 +1,168 @@
+{
+  "campaign": "Community Member Acquisition",
+  "description": "Systematic outreach to CM digital nomads and founders not yet in the network. Sources: Facebook groups, LinkedIn, coworking spaces. Goal: invite to events, WhatsApp/Telegram groups, and newsletter. Track all conversions in CRM.",
+  "target_segment": "Digital nomads and founders currently in Chiang Mai or frequently visiting. Not yet in our WhatsApp/Telegram groups or on our RSVP list.",
+  "personalization_variables": [
+    "{{first_name}}",
+    "{{business_niche}}",
+    "{{home_country}}",
+    "{{shared_group}}",
+    "{{mutual_connection}}",
+    "{{coworking_space}}",
+    "{{linkedin_headline}}"
+  ],
+  "acquisition_sources": [
+    {
+      "source": "Facebook Groups",
+      "target_groups": [
+        "Digital Nomads Chiang Mai",
+        "Chiang Mai Expats",
+        "Entrepreneurs in Thailand",
+        "Remote Workers Thailand",
+        "Chiang Mai Founders & Entrepreneurs"
+      ],
+      "targeting_criteria": "Recent posts/comments showing they are active in CM, mention of running a business, freelancing, or remote work",
+      "crm_tag": "source:facebook-group"
+    },
+    {
+      "source": "LinkedIn",
+      "targeting_criteria": "Location: Chiang Mai (current) OR recent posts geotagged CM. Title contains: founder, CEO, freelancer, consultant, creator, nomad. Connection degree: 2nd preferred",
+      "crm_tag": "source:linkedin-search"
+    },
+    {
+      "source": "Coworking Spaces",
+      "target_spaces": [
+        "CAMP (Maya Mall)",
+        "Punspace (Nimman)",
+        "Alt_Co",
+        "MANA Co-working",
+        "Yellow (Nimman)"
+      ],
+      "method": "Partnership with venue staff to mention event / leave flyers, or direct approach to members working there",
+      "crm_tag": "source:coworking"
+    },
+    {
+      "source": "Event Attendee Referrals",
+      "method": "After each event, ask attendees to invite 1-2 people they know in CM. Track via referral code.",
+      "crm_tag": "source:referral"
+    }
+  ],
+  "sequences": [
+    {
+      "name": "Facebook Group — Cold DM",
+      "channel": "facebook_dm",
+      "notes": "Send from personal/founder account. Keep brief. No mass spam — max 10-15 DMs/day per account.",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_dm",
+          "body": "Hey {{first_name}} — saw you in {{shared_group}}, looks like you're based in CM right now.\n\nI run a weekly founders event here on Thursdays — ~40 vetted founders, 20-min expert talks, curated networking. It's free, happens at a rotating secret venue in Nimman.\n\nThought you might be into it. RSVP here if you want in: [RSVP_URL]\n\nAlso happy to add you to the WhatsApp group if you prefer — it's where the community lives between events."
+        },
+        {
+          "day": 4,
+          "type": "followup_1",
+          "body": "Hey {{first_name}} — just following up on the invite. We had [COUNT] founders last Thursday — solid room.\n\nIf you're in CM and want in, just reply here or grab a spot at [RSVP_URL]. Or I can just add you to the WhatsApp group directly."
+        }
+      ]
+    },
+    {
+      "name": "LinkedIn — CM Nomad/Founder Cold",
+      "channel": "linkedin_dm",
+      "steps": [
+        {
+          "day": 0,
+          "type": "connection_request_note",
+          "body": "Hey {{first_name}} — looks like we're both in CM. I run a weekly founders event here (Thursdays, verified crowd). Would be good to connect."
+        },
+        {
+          "day": 2,
+          "type": "follow_up_after_connect",
+          "body": "Thanks for connecting, {{first_name}}.\n\nIn case it's useful — I run CM Founders, a weekly Thursday event for founders and digital nomads here. About 40 vetted people per event, 20-min expert talks, curated networking.\n\nIt's free and open to the right people. You can grab a spot at [RSVP_URL] or I can add you to our WhatsApp group directly.\n\nWhat are you working on while you're in CM?"
+        },
+        {
+          "day": 6,
+          "type": "followup_2",
+          "body": "Hey {{first_name}} — just wanted to make sure this didn't get lost. If the event timing works, we'd love to have you. If not, no worries — happy to stay in touch regardless.\n\nEither way, looking forward to crossing paths in CM."
+        }
+      ]
+    },
+    {
+      "name": "Coworking Space — In-Person / Follow-Up",
+      "channel": "whatsapp_or_email",
+      "notes": "Use after meeting someone at a coworking space. Follow up via WhatsApp (preferred in CM) or email if you have it.",
+      "steps": [
+        {
+          "day": 0,
+          "type": "same_day_followup",
+          "body": "Hey {{first_name}}, great meeting you at {{coworking_space}} today.\n\nAs mentioned — I run a weekly founders event on Thursdays in Nimman. ~40 vetted people, free to attend, rotating secret venue. RSVP here: [RSVP_URL]\n\nAlso sending you a WhatsApp invite to the community group — it's where we stay connected between events."
+        }
+      ]
+    },
+    {
+      "name": "Referral Invite",
+      "channel": "whatsapp_or_email",
+      "notes": "Sent to contacts referred by existing community members. Warmer tone, reference the referrer.",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_message",
+          "body": "Hey {{first_name}} — {{mutual_connection}} suggested I reach out.\n\nI run CM Founders — a weekly Thursday event for founders and nomads in Chiang Mai. We vet everyone who attends so the room stays high-signal. {{mutual_connection}} thought you'd fit right in.\n\nGrab a spot here: [RSVP_URL] — or just reply and I'll manually add you."
+        }
+      ]
+    },
+    {
+      "name": "Post-RSVP Nurture (Newsletter + Group Invite)",
+      "channel": "email",
+      "notes": "Triggered automatically when someone submits the RSVP form. Handled by N8N (already partially set up via rsvp/route.ts webhook).",
+      "steps": [
+        {
+          "day": 0,
+          "type": "rsvp_confirmation",
+          "subject": "You're in — here's what happens next",
+          "body": "Hey {{first_name}},\n\nYou're on the list. Here's what to expect:\n\n1. Our team reviews RSVPs within 24 hours\n2. If approved, you'll get access to the private WhatsApp + Telegram groups with the weekly venue\n3. Events run every Thursday, 6:00 PM (presentations at 6:30 PM sharp)\n\nIn the meantime, follow us on Instagram/LinkedIn for event previews and content clips: [SOCIAL_LINKS]\n\nSee you Thursday."
+        },
+        {
+          "day": 1,
+          "type": "approval_and_group_invite",
+          "subject": "Approved — join the WhatsApp group",
+          "body": "Hey {{first_name}},\n\nYou're approved for CM Founders.\n\nJoin the community here:\n- WhatsApp: [WHATSAPP_INVITE_LINK]\n- Telegram: [TELEGRAM_INVITE_LINK]\n\nVenue for this Thursday will be posted in the group by Wednesday evening.\n\nWelcome."
+        },
+        {
+          "day": 7,
+          "type": "first_week_checkin",
+          "subject": "How was your first CM Founders event?",
+          "body": "Hey {{first_name}},\n\nHope you made it out Thursday — would love your honest take.\n\nTwo questions:\n1. What did you think of the event?\n2. Is there anyone in CM you think should be in the room?\n\nIf you want to bring someone, just forward them this link: [RSVP_URL]\n\nSee you next Thursday."
+        }
+      ]
+    }
+  ],
+  "crm_tracking": {
+    "pipeline_stages": [
+      "identified",
+      "contacted",
+      "replied",
+      "rsvp_submitted",
+      "approved",
+      "attended_first_event",
+      "recurring_attendee"
+    ],
+    "conversion_events_to_track": [
+      "DM sent",
+      "DM reply received",
+      "RSVP form submitted",
+      "RSVP approved",
+      "WhatsApp group joined",
+      "First event attended",
+      "Second+ event attended",
+      "Speaker conversion",
+      "Referral made"
+    ],
+    "n8n_webhook_fields": {
+      "source": "acquisition source (facebook-group, linkedin, coworking, referral)",
+      "referrer": "name of community member who referred",
+      "initial_contact_date": "ISO timestamp",
+      "channel": "channel of first contact",
+      "status": "current pipeline stage"
+    }
+  }
+}

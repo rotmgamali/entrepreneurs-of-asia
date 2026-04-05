@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Last note on CM Founders — not going to keep following up.
+
+If you're ever in Chiang Mai and want to connect with the technical founder crowd here, just reply. Happy to get you in.

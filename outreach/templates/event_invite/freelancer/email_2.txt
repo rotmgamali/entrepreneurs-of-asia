@@ -1,0 +1,7 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+Just bumping the CM Founders invite. Last Thursday we had a freelance consultant talk through how she scaled from $3k to $20k/month retainers. Tactical, no fluff. The room was full of people in similar positions.
+
+If you're in Chiang Mai, worth coming once: [RSVP_URL]

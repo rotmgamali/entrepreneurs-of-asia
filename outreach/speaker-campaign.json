@@ -1,0 +1,82 @@
+{
+  "campaign": "Speaker Recruitment",
+  "description": "Recruit speakers from the Chiang Mai nomad/founder community for weekly Thursday events. Personalize using nomad database profiles.",
+  "target_segment": "Founders and digital nomads in CM with verifiable expertise (7-fig revenue, niche authority, or unique operational insight)",
+  "personalization_variables": [
+    "{{first_name}}",
+    "{{business_niche}}",
+    "{{website}}",
+    "{{social_handle}}",
+    "{{recent_content_topic}}",
+    "{{mutual_connection}}",
+    "{{revenue_tier}}"
+  ],
+  "sequences": [
+    {
+      "name": "Cold Speaker Invite",
+      "channel": "linkedin_dm",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_dm",
+          "subject": null,
+          "body": "Hey {{first_name}} — I run a weekly founders event in Nimman (Thursdays, ~40 verified founders). We focus on actionable 20-min talks from people actually building here in CM.\n\nYour work in {{business_niche}} is exactly the kind of thing our room would want to hear. Would you be open to presenting sometime in the next few weeks?\n\nNo slides required — just raw insight from what's working for you right now."
+        },
+        {
+          "day": 3,
+          "type": "followup_1",
+          "subject": null,
+          "body": "Just a quick follow-up, {{first_name}}. Our community is ~40 vetted founders/creators — the kind of people who actually act on what they hear.\n\nWe also clip every talk into short-form content for you to use. Zero extra effort on your end.\n\nStill interested?"
+        },
+        {
+          "day": 7,
+          "type": "followup_2",
+          "subject": null,
+          "body": "Last nudge, {{first_name}} — totally understand if timing's off.\n\nIf not now, happy to circle back when you're next in CM. Just reply with 'later' and I'll remove you from this thread."
+        }
+      ]
+    },
+    {
+      "name": "Warm Speaker Invite (RSVP attendee or community member)",
+      "channel": "email",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_email",
+          "subject": "You should be presenting, not just attending",
+          "body": "Hey {{first_name}},\n\nYou've been a part of the CM Founders community for a while now — and based on what you've shared about {{business_niche}}, I genuinely think the room would benefit from hearing your perspective.\n\nWe do a 20-minute format: no slides required, just honest insight from someone operating at your level. The audience is ~40 curated founders, all vetted, all active.\n\nWe also produce a short-form content clip of your talk — fully edited, ready to post.\n\nWant to claim a Thursday in the next 30 days?\n\nJust reply and I'll send over the details."
+        },
+        {
+          "day": 4,
+          "type": "followup_1",
+          "subject": "Re: You should be presenting, not just attending",
+          "body": "Hey {{first_name}} — bumping this in case it got buried.\n\nWe have a spot open on [NEXT_THURSDAY_DATE] that would be perfect for someone covering {{business_niche}}.\n\nTakes about 20 minutes to share what you know. You get a fully produced content clip from it. The audience is the kind of people who show up and actually do things.\n\nInterested?"
+        },
+        {
+          "day": 10,
+          "type": "followup_2",
+          "subject": "Closing the loop",
+          "body": "Hey {{first_name}},\n\nNot going to keep nudging — I know you're busy. If the timing just isn't right, totally fine.\n\nIf you'd ever want to speak at a future event, just reply and I'll put you on the list for next time you're ready.\n\nEither way, hope to see you Thursday."
+        }
+      ]
+    },
+    {
+      "name": "Inbound Speaker Confirmation",
+      "channel": "email",
+      "steps": [
+        {
+          "day": 0,
+          "type": "confirmation",
+          "subject": "You're confirmed — Thursday [DATE] @ 6:30 PM",
+          "body": "{{first_name}},\n\nYou're locked in. Here's everything you need:\n\n**Date:** Thursday [DATE]\n**Time:** Arrive by 6:00 PM, present at 6:30 PM\n**Format:** 20-minute talk, no slides required (slides welcome if you want)\n**Venue:** [VENUE_ADDRESS] (revealed to attendees day-of)\n\n**What we handle:**\n- Professional video recording\n- Short-form content clips (we'll send within 48 hours)\n- Intro/bio read to the room\n\n**What we need from you:**\n- Your talk title (1 line)\n- A 2-sentence bio\n- Headshot (optional)\n\nReply with those 3 things and you're all set.\n\nSee you Thursday."
+        },
+        {
+          "day": -1,
+          "type": "reminder",
+          "subject": "Tomorrow — final details for your talk",
+          "body": "Hey {{first_name}},\n\nJust a reminder — your talk is tomorrow (Thursday) at 6:30 PM.\n\nVenue: [VENUE_ADDRESS]\nArrive by: 6:00 PM\n\nWe'll handle setup and recording. Just show up ready to share.\n\nIf anything changes, reply here ASAP so we can adjust the lineup.\n\nLooking forward to it."
+        }
+      ]
+    }
+  ]
+}

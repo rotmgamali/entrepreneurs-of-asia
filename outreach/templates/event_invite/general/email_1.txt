@@ -1,0 +1,9 @@
+Subject: {{ subject }}
+
+{{ personalized_opening }}
+
+I run CM Founders — a weekly Thursday event in Chiang Mai for founders, digital nomads, and builders. About 40 vetted people per event, 20-min expert talk, and focused networking. Everyone's building something.
+
+It's free and invite-only. RSVP here: [RSVP_URL]
+
+Or reply and I'll add you to the WhatsApp group — venue is revealed there on the day.

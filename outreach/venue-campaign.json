@@ -1,0 +1,89 @@
+{
+  "campaign": "Venue Partnership",
+  "description": "Secure free or subsidized weekly venue for Thursday events (6:00–9:30 PM). Target Nimman-area venues that benefit from bringing in 30-50 high-spending founders weekly.",
+  "target_segment": "Bars, restaurants, rooftops, coworking event spaces, and private clubs in Nimman and nearby CM areas that have capacity for 40-60 people and benefit from recurring evening foot traffic",
+  "personalization_variables": [
+    "{{contact_name}}",
+    "{{venue_name}}",
+    "{{venue_type}}",
+    "{{capacity_estimate}}",
+    "{{mutual_connection}}"
+  ],
+  "value_proposition": {
+    "for_venue": [
+      "Guaranteed 30-50 people every Thursday evening (6:00–9:30 PM)",
+      "High-earning, internationally mobile crowd (avg spend above typical walk-in)",
+      "Regular recurring reservation — no uncertainty on Thursday nights",
+      "Brand association with a curated professional community",
+      "Optional: venue mention in RSVP confirmations to 300+ members"
+    ],
+    "what_we_ask": [
+      "Dedicated space for 40-60 people (standing or seated for presentations)",
+      "Basic AV: projector or screen, or we bring our own",
+      "No venue hire fee — revenue comes from food/drink sales",
+      "Exclusivity during event hours (6:00–9:30 PM)"
+    ]
+  },
+  "sequences": [
+    {
+      "name": "Cold Venue Outreach — Bar / Restaurant",
+      "channel": "email",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_email",
+          "subject": "40 founders every Thursday — venue partnership inquiry",
+          "body": "Hi {{contact_name}},\n\nI run CM Founders — a weekly event for Chiang Mai's founder and digital nomad community. Every Thursday evening we bring together 30-50 vetted attendees: founders, creators, and remote entrepreneurs.\n\nWe're currently rotating venues across Nimman and looking to settle into a consistent weekly home.\n\nHere's what the partnership looks like:\n- We bring 40-50 people, every Thursday, 6:00–9:30 PM\n- No venue hire fee — all revenue is yours (food, drinks, bar)\n- We list {{venue_name}} in our communications to 300+ community members\n- It becomes a regular standing reservation, no uncertainty on your Thursday nights\n\nIs {{venue_name}} open to hosting recurring events? Happy to come by and walk through the space this week."
+        },
+        {
+          "day": 4,
+          "type": "followup_1",
+          "subject": "Re: 40 founders every Thursday — venue partnership",
+          "body": "Hey {{contact_name}} — just following up on the venue inquiry.\n\nLast Thursday we had [COUNT] attendees — mix of SaaS founders, agency owners, and content creators, most living here long-term or staying 1-3 months.\n\nIf it helps to see the space in person before deciding, I'm happy to meet at {{venue_name}} any afternoon this week.\n\nWould that work?"
+        },
+        {
+          "day": 9,
+          "type": "followup_2",
+          "subject": "Closing the loop on venue partnership",
+          "body": "Hey {{contact_name}},\n\nLast message on this — totally understand if the timing or layout isn't a fit.\n\nIf things change or you'd like to revisit this for a future season, feel free to reach out. We're always looking for the right venue home.\n\nHope to see you at an event sometime."
+        }
+      ]
+    },
+    {
+      "name": "Cold Venue Outreach — Coworking Space",
+      "channel": "email",
+      "steps": [
+        {
+          "day": 0,
+          "type": "initial_email",
+          "subject": "Weekly event partnership — CM Founders",
+          "body": "Hi {{contact_name}},\n\nI run CM Founders, a weekly curated event for Chiang Mai's founder community. We're looking for a regular Thursday evening venue (6:00–9:30 PM, 40-50 attendees).\n\nCoworking spaces are an ideal fit — you already serve our audience, and hosting our events puts your space in front of 300+ active community members who are constantly looking for a workspace home.\n\nWhat we offer:\n- Direct exposure to vetted founders who may become long-term members\n- Recurring Thursday evening booking (no uncertainty in your calendar)\n- Community listing in RSVP confirmations\n\nWhat we need:\n- Event space for 40-60 people\n- No hire fee (we're happy to promote your membership options to attendees)\n- Access 5:30 PM–10:00 PM\n\nIs this something {{venue_name}} would be open to exploring?"
+        },
+        {
+          "day": 5,
+          "type": "followup_1",
+          "subject": "Re: Weekly event partnership — CM Founders",
+          "body": "Hey {{contact_name}} — following up on the event partnership.\n\nWe currently rotate between a few spaces in Nimman but are looking to lock in a consistent home for Q2 and beyond.\n\n{{venue_name}} has come up positively in our community — a few of our members work here already.\n\nWould a quick call or walkthrough this week make sense?"
+        }
+      ]
+    },
+    {
+      "name": "Venue Confirmation & Onboarding",
+      "channel": "email",
+      "steps": [
+        {
+          "day": 0,
+          "type": "confirmation",
+          "subject": "Confirmed — CM Founders at {{venue_name}} starting [DATE]",
+          "body": "{{contact_name}},\n\nGreat — we're locked in. Here's the standing agreement summary:\n\n**Venue:** {{venue_name}}\n**Day/Time:** Every Thursday, 6:00–9:30 PM\n**Start date:** [DATE]\n**Expected attendance:** 30-50 per event\n\n**Our setup needs:**\n- Space cleared/ready by 5:30 PM for setup\n- [AV requirements: projector/screen, or we BYO]\n- Dedicated area for presentations + networking\n\n**What we'll do:**\n- List {{venue_name}} in RSVP confirmations (300+ members)\n- Tag you in event social posts\n- Encourage attendees to order food/drinks\n\nI'll be in touch the week before the first event to coordinate setup logistics.\n\nLooking forward to making this a regular thing."
+        },
+        {
+          "day": -2,
+          "type": "pre_event_check",
+          "subject": "Thursday setup — quick confirm for this week",
+          "body": "Hey {{contact_name}},\n\nJust confirming we're all set for Thursday:\n\n- Arrival: 5:30 PM for setup\n- Event: 6:00–9:30 PM\n- Expected count: ~[RSVP_COUNT] confirmed\n\nAnything I should know or coordinate on your end before we arrive?\n\nSee you Thursday."
+        }
+      ]
+    }
+  ]
+}
