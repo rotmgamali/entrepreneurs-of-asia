@@ -77,7 +77,7 @@ export default function Home() {
       <section
         className="relative w-full min-h-[90vh] flex items-center justify-center"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1595872018818-97555653a011?w=1920&q=80')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1512553353614-82a7370096dc?w=1920&q=80')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -141,7 +141,7 @@ export default function Home() {
       <section
         className="relative w-full py-24"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=1920&q=80')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1738625263678-a3c9b400707f?w=1920&q=80')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
@@ -201,7 +201,7 @@ export default function Home() {
         className="relative w-full py-24"
         id="rsvp"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1528181304800-259b08848526?w=1920&q=80')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1763818693963-bac021e7b739?w=1920&q=80')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundAttachment: "fixed",
